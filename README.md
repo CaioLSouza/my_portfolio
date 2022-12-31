@@ -1,6 +1,6 @@
 # Portfólio
 
-Olá! Meu nome é Caio e eu sou um estudante de economia pela Universidade de São Paulo (USP). Minhas principais áreas de interesse estão relacionadas com ciência de dados, programação, machhine learing e mercado financeiro. 
+Olá! Meu nome é Caio e eu sou um estudante de economia pela Universidade de São Paulo (USP). Minhas principais áreas de interesse estão relacionadas com ciência de dados, programação, machine learning e mercado financeiro. 
 
 Por aqui você pode ter acesso a alguns projetos já realizados por mim até aqui. 
 

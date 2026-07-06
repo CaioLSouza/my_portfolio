@@ -21,16 +21,18 @@ from datetime import date
 from pathlib import Path
 
 import pandas as pd
-import requests
 
-CVM_BASE_URL = "http://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS"
+from http_cvm import PAGINA_DATASET_INF_DIARIO, SESSAO, aquecer_sessao
+
+CVM_BASE_URL = "https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS"
 DATA_DIR = Path(__file__).parent / "data"
 FILTRO_PADRAO = Path(__file__).parent / "fundos_acompanhados.txt"
 
 
 def baixar_informe_mensal(ano: int, mes: int) -> pd.DataFrame:
+    aquecer_sessao(PAGINA_DATASET_INF_DIARIO)
     url = f"{CVM_BASE_URL}/inf_diario_fi_{ano}{mes:02d}.csv"
-    resposta = requests.get(url, timeout=60)
+    resposta = SESSAO.get(url, timeout=60)
     resposta.raise_for_status()
     return pd.read_csv(io.BytesIO(resposta.content), sep=";", encoding="latin-1")
 

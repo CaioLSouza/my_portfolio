@@ -19,10 +19,11 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
-import requests
 
-CAD_FI_URL = "http://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv"
-REGISTRO_CLASSE_ZIP_URL = "http://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
+from http_cvm import PAGINA_DATASET_CADASTRO, SESSAO, aquecer_sessao, resumo_erro
+
+CAD_FI_URL = "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv"
+REGISTRO_CLASSE_ZIP_URL = "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
 CADASTRO_DIR = Path(__file__).parent / "cadastro"
 CLASSIFICACAO_CSV = CADASTRO_DIR / "classificacao_fundos.csv"
 
@@ -59,7 +60,7 @@ def classificar_acoes_nivel2(classe_anbima: str) -> str:
 
 
 def _baixar_cad_fi() -> pd.DataFrame:
-    resposta = requests.get(CAD_FI_URL, timeout=180)
+    resposta = SESSAO.get(CAD_FI_URL, timeout=180)
     resposta.raise_for_status()
     df = pd.read_csv(io.BytesIO(resposta.content), sep=";", encoding="latin-1", low_memory=False)
     coluna_classe = "CLASSE_ANBIMA" if "CLASSE_ANBIMA" in df.columns else "CLASSE"
@@ -73,7 +74,7 @@ def _baixar_cad_fi() -> pd.DataFrame:
 
 
 def _baixar_registro_classe() -> pd.DataFrame:
-    resposta = requests.get(REGISTRO_CLASSE_ZIP_URL, timeout=180)
+    resposta = SESSAO.get(REGISTRO_CLASSE_ZIP_URL, timeout=180)
     resposta.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(resposta.content)) as zf:
         nome = next(n for n in zf.namelist() if "registro_classe" in n.lower())
@@ -89,12 +90,13 @@ def _baixar_registro_classe() -> pd.DataFrame:
 
 
 def construir_classificacao() -> pd.DataFrame:
+    aquecer_sessao(PAGINA_DATASET_CADASTRO)
     partes = []
     for baixar in (_baixar_cad_fi, _baixar_registro_classe):
         try:
             partes.append(baixar())
         except Exception as exc:
-            print(f"Aviso: falha ao baixar cadastro via {baixar.__name__} ({exc})")
+            print(f"Aviso: falha ao baixar cadastro via {baixar.__name__} ({resumo_erro(exc)})")
 
     if not partes:
         raise RuntimeError("Não foi possível baixar nenhum cadastro de fundos da CVM")

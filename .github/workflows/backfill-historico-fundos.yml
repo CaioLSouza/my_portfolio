@@ -1,15 +1,18 @@
-name: Download dados de fundos ANBIMA/CVM
+name: Backfill historico de fundos ANBIMA/CVM
 
 on:
-  schedule:
-    - cron: "0 12 * * *"
   workflow_dispatch:
+    inputs:
+      meses:
+        description: "Quantidade de meses (incluindo o atual) para backfill"
+        required: false
+        default: "12"
 
 permissions:
   contents: write
 
 jobs:
-  baixar-dados:
+  backfill:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,13 +24,13 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r boletim_fundos_anbima/requirements.txt
 
-      - name: Baixar dados do mes corrente
-        run: python boletim_fundos_anbima/download_fundos.py
+      - name: Baixar historico de N meses
+        run: python boletim_fundos_anbima/baixar_historico.py --meses "${{ github.event.inputs.meses }}"
 
       - name: Atualizar classificacao ANBIMA dos fundos
         run: python boletim_fundos_anbima/cadastro.py
 
-      - name: Atualizar series de AuM e captacao por classe
+      - name: Gerar series de AuM e captacao por classe
         run: python boletim_fundos_anbima/analise_classes.py
 
       - name: Commitar resultados atualizados
@@ -35,5 +38,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add boletim_fundos_anbima/resultados/ boletim_fundos_anbima/cadastro/
-          git diff --cached --quiet || git commit -m "Atualiza series de AuM e captacao por classe (CVM/ANBIMA)"
+          git diff --cached --quiet || git commit -m "Backfill do historico de AuM e captacao por classe (CVM/ANBIMA)"
           git push

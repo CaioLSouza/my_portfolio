@@ -1,0 +1,33 @@
+name: Download dados de fundos ANBIMA/CVM
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  baixar-dados:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r boletim_fundos_anbima/requirements.txt
+
+      - name: Baixar dados do mes corrente
+        run: python boletim_fundos_anbima/download_fundos.py
+
+      - name: Commitar dados atualizados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add boletim_fundos_anbima/data/
+          git diff --cached --quiet || git commit -m "Atualiza dados diarios de fundos (CVM/ANBIMA)"
+          git push

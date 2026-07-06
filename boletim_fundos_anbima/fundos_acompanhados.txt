@@ -1,0 +1,2 @@
+# Um CNPJ de fundo por linha (formato igual ao da coluna CNPJ_FUNDO da CVM).
+# Linhas comecando com # sao ignoradas. Deixe vazio para baixar todos os fundos.

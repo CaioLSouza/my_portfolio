@@ -19,10 +19,11 @@ import zipfile
 from pathlib import Path
 
 import pandas as pd
-import requests
 
-CAD_FI_URL = "http://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv"
-REGISTRO_CLASSE_ZIP_URL = "http://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
+from http_cvm import PAGINA_DATASET_CADASTRO, SESSAO, aquecer_sessao, normalizar_cnpj, resumo_erro
+
+CAD_FI_URL = "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv"
+REGISTRO_CLASSE_ZIP_URL = "https://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip"
 CADASTRO_DIR = Path(__file__).parent / "cadastro"
 CLASSIFICACAO_CSV = CADASTRO_DIR / "classificacao_fundos.csv"
 
@@ -59,13 +60,19 @@ def classificar_acoes_nivel2(classe_anbima: str) -> str:
 
 
 def _baixar_cad_fi() -> pd.DataFrame:
-    resposta = requests.get(CAD_FI_URL, timeout=180)
+    resposta = SESSAO.get(CAD_FI_URL, timeout=180)
     resposta.raise_for_status()
-    df = pd.read_csv(io.BytesIO(resposta.content), sep=";", encoding="latin-1", low_memory=False)
+    df = pd.read_csv(
+        io.BytesIO(resposta.content),
+        sep=";",
+        encoding="latin-1",
+        low_memory=False,
+        dtype={"CNPJ_FUNDO": str},
+    )
     coluna_classe = "CLASSE_ANBIMA" if "CLASSE_ANBIMA" in df.columns else "CLASSE"
     return pd.DataFrame(
         {
-            "fund_id": df["CNPJ_FUNDO"],
+            "fund_id": df["CNPJ_FUNDO"].apply(normalizar_cnpj),
             "denominacao_social": df.get("DENOM_SOCIAL"),
             "classe_anbima_raw": df[coluna_classe],
         }
@@ -73,15 +80,21 @@ def _baixar_cad_fi() -> pd.DataFrame:
 
 
 def _baixar_registro_classe() -> pd.DataFrame:
-    resposta = requests.get(REGISTRO_CLASSE_ZIP_URL, timeout=180)
+    resposta = SESSAO.get(REGISTRO_CLASSE_ZIP_URL, timeout=180)
     resposta.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(resposta.content)) as zf:
         nome = next(n for n in zf.namelist() if "registro_classe" in n.lower())
-        df = pd.read_csv(zf.open(nome), sep=";", encoding="latin-1", low_memory=False)
+        df = pd.read_csv(
+            zf.open(nome),
+            sep=";",
+            encoding="latin-1",
+            low_memory=False,
+            dtype={"CNPJ_Classe": str},
+        )
     coluna_classe = "Classificacao_Anbima" if "Classificacao_Anbima" in df.columns else "Classificacao"
     return pd.DataFrame(
         {
-            "fund_id": df["CNPJ_Classe"],
+            "fund_id": df["CNPJ_Classe"].apply(normalizar_cnpj),
             "denominacao_social": df.get("Denominacao_Social"),
             "classe_anbima_raw": df[coluna_classe],
         }
@@ -89,18 +102,19 @@ def _baixar_registro_classe() -> pd.DataFrame:
 
 
 def construir_classificacao() -> pd.DataFrame:
+    aquecer_sessao(PAGINA_DATASET_CADASTRO)
     partes = []
     for baixar in (_baixar_cad_fi, _baixar_registro_classe):
         try:
             partes.append(baixar())
         except Exception as exc:
-            print(f"Aviso: falha ao baixar cadastro via {baixar.__name__} ({exc})")
+            print(f"Aviso: falha ao baixar cadastro via {baixar.__name__} ({resumo_erro(exc)})")
 
     if not partes:
         raise RuntimeError("Não foi possível baixar nenhum cadastro de fundos da CVM")
 
     df = pd.concat(partes, ignore_index=True)
-    df = df.dropna(subset=["fund_id"]).drop_duplicates(subset=["fund_id"], keep="last")
+    df = df[df["fund_id"] != ""].drop_duplicates(subset=["fund_id"], keep="last")
     df["nivel1"] = df["classe_anbima_raw"].apply(classificar_nivel1)
     df["nivel2_acoes"] = df.apply(
         lambda linha: classificar_acoes_nivel2(linha["classe_anbima_raw"]) if linha["nivel1"] == "Ações" else "",

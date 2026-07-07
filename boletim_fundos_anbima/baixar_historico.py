@@ -8,6 +8,7 @@ Uso:
     python baixar_historico.py --meses 6       # ultimos 6 meses
 """
 import argparse
+import time
 from datetime import date
 
 from download_fundos import (
@@ -17,6 +18,7 @@ from download_fundos import (
     filtrar_por_cnpj,
     salvar,
 )
+from http_cvm import resumo_erro
 
 
 def meses_anteriores(referencia: date, quantidade: int) -> list[tuple[int, int]]:
@@ -42,11 +44,12 @@ def main() -> None:
         try:
             df = baixar_informe_mensal(ano, mes)
         except Exception as exc:
-            print(f"Aviso: falha ao baixar {ano}-{mes:02d} ({exc})")
+            print(f"Aviso: falha ao baixar {ano}-{mes:02d} ({resumo_erro(exc)})")
             continue
         df = filtrar_por_cnpj(df, cnpjs)
         destino = salvar(df, ano, mes)
         print(f"{destino} ({len(df)} linhas)")
+        time.sleep(1)  # evita disparar limites de requisicoes do portal
 
 
 if __name__ == "__main__":

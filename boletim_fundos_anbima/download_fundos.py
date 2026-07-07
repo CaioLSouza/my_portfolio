@@ -17,22 +17,38 @@ Uso:
 """
 import argparse
 import io
+import zipfile
 from datetime import date
 from pathlib import Path
 
 import pandas as pd
 import requests
 
-CVM_BASE_URL = "http://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS"
+from http_cvm import PAGINA_DATASET_INF_DIARIO, SESSAO, aquecer_sessao, normalizar_cnpj
+
+CVM_BASE_URL = "https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS"
 DATA_DIR = Path(__file__).parent / "data"
 FILTRO_PADRAO = Path(__file__).parent / "fundos_acompanhados.txt"
 
 
 def baixar_informe_mensal(ano: int, mes: int) -> pd.DataFrame:
-    url = f"{CVM_BASE_URL}/inf_diario_fi_{ano}{mes:02d}.csv"
-    resposta = requests.get(url, timeout=60)
-    resposta.raise_for_status()
-    return pd.read_csv(io.BytesIO(resposta.content), sep=";", encoding="latin-1")
+    aquecer_sessao(PAGINA_DATASET_INF_DIARIO)
+    url_base = f"{CVM_BASE_URL}/inf_diario_fi_{ano}{mes:02d}"
+    dtype_cnpj = {"CNPJ_FUNDO_CLASSE": str, "CNPJ_FUNDO": str}
+    try:
+        # A CVM passou a publicar o informe diario compactado em .zip.
+        resposta = SESSAO.get(f"{url_base}.zip", timeout=60)
+        resposta.raise_for_status()
+        with zipfile.ZipFile(io.BytesIO(resposta.content)) as zf:
+            nome_csv = next(n for n in zf.namelist() if n.lower().endswith(".csv"))
+            return pd.read_csv(zf.open(nome_csv), sep=";", encoding="latin-1", low_memory=False, dtype=dtype_cnpj)
+    except requests.exceptions.HTTPError:
+        # Fallback: alguns meses/portais ainda servem o .csv direto.
+        resposta = SESSAO.get(f"{url_base}.csv", timeout=60)
+        resposta.raise_for_status()
+        return pd.read_csv(
+            io.BytesIO(resposta.content), sep=";", encoding="latin-1", low_memory=False, dtype=dtype_cnpj
+        )
 
 
 def carregar_filtro_cnpjs(caminho: Path) -> list[str]:
@@ -45,7 +61,9 @@ def carregar_filtro_cnpjs(caminho: Path) -> list[str]:
 def filtrar_por_cnpj(df: pd.DataFrame, cnpjs: list[str]) -> pd.DataFrame:
     if not cnpjs:
         return df
-    return df[df["CNPJ_FUNDO"].isin(cnpjs)]
+    coluna = "CNPJ_FUNDO_CLASSE" if "CNPJ_FUNDO_CLASSE" in df.columns else "CNPJ_FUNDO"
+    cnpjs_normalizados = {normalizar_cnpj(c) for c in cnpjs}
+    return df[df[coluna].apply(normalizar_cnpj).isin(cnpjs_normalizados)]
 
 
 def salvar(df: pd.DataFrame, ano: int, mes: int) -> Path:

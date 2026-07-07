@@ -20,6 +20,7 @@ from pathlib import Path
 import pandas as pd
 
 from cadastro import carregar_ou_construir
+from http_cvm import normalizar_cnpj
 
 DATA_DIR = Path(__file__).parent / "data"
 RESULTADOS_DIR = Path(__file__).parent / "resultados"
@@ -43,12 +44,20 @@ def carregar_informes_diarios() -> pd.DataFrame:
         )
     partes = []
     for arquivo in arquivos:
-        df = pd.read_csv(arquivo, low_memory=False)
+        df = pd.read_csv(
+            arquivo,
+            low_memory=False,
+            dtype={"CNPJ_FUNDO_CLASSE": str, "CNPJ_FUNDO": str},
+        )
         col_fundo = _coluna_ou(df, "CNPJ_FUNDO_CLASSE", "CNPJ_FUNDO")
         partes.append(
             pd.DataFrame(
                 {
-                    "fund_id": df[col_fundo].astype(str),
+                    # Normaliza para so digitos: o cadastro (cadastro.py) usa
+                    # essa mesma normalizacao, mas o informe diario da CVM
+                    # costuma vir pontuado (00.017.024/0001-53) — sem isso o
+                    # cruzamento com a classificacao falha silenciosamente.
+                    "fund_id": df[col_fundo].apply(normalizar_cnpj),
                     "dt_comptc": pd.to_datetime(df["DT_COMPTC"]),
                     "vl_patrim_liq": df["VL_PATRIM_LIQ"],
                     "captc_dia": df["CAPTC_DIA"],
@@ -91,7 +100,9 @@ def _upsert(df_novo: pd.DataFrame, caminho: Path, chaves: list) -> None:
 
 def gerar_tabelas() -> None:
     classificacao = carregar_ou_construir()
-    classificacao["fund_id"] = classificacao["fund_id"].astype(str)
+    # Re-normaliza defensivamente: se ja existir um classificacao_fundos.csv
+    # em cache gerado antes desta correcao, garante a mesma chave de join.
+    classificacao["fund_id"] = classificacao["fund_id"].apply(normalizar_cnpj)
 
     informes = carregar_informes_diarios()
     por_fundo_mes = agregar_mensal_por_fundo(informes)

@@ -4,6 +4,8 @@ navegador e, em alguns casos, sem uma visita previa a pagina do dataset
 (Referer/cookies de sessao) — por isso todo download deste projeto passa por
 esta sessao em vez de `requests.get` direto.
 """
+import re
+
 import requests
 
 PAGINA_DATASET_INF_DIARIO = "https://dados.cvm.gov.br/dataset/fi-doc-inf_diario"
@@ -36,6 +38,20 @@ def aquecer_sessao(pagina_referencia: str) -> None:
         pass  # se a pagina falhar, tenta baixar o arquivo mesmo assim
     SESSAO.headers.update({"Referer": pagina_referencia})
     _paginas_visitadas.add(pagina_referencia)
+
+
+def normalizar_cnpj(valor) -> str:
+    """Mantem so os digitos do CNPJ. Os arquivos da CVM usam formatacoes
+    diferentes para o mesmo fundo — o cadastro (cad_fi.csv/registro_classe)
+    costuma vir so com digitos, enquanto o informe diario vem pontuado
+    (00.017.024/0001-53). Sem essa normalizacao, o cruzamento entre os dois
+    falha silenciosamente e a maioria dos fundos cai em "Não classificado"."""
+    if valor is None:
+        return ""
+    texto = str(valor)
+    if texto.strip().lower() in ("", "nan", "none"):
+        return ""
+    return re.sub(r"\D", "", texto)
 
 
 def resumo_erro(exc: Exception) -> str:

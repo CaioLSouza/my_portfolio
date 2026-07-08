@@ -354,30 +354,29 @@ PLANILHA_PADRAO = rf"{DIR_BASE}\Charts Lâmina Carteiras.xlsm"
 SAIDA_PADRAO = rf"{DIR_BASE}\Lãmina Completa\Top Ações XP.pptx"
 
 
-def main():
-    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--template", default=TEMPLATE_PADRAO,
-                    help=f"PPTX de template (padrão: {TEMPLATE_PADRAO})")
-    ap.add_argument("--planilha", default=PLANILHA_PADRAO,
-                    help=f"XLSM/XLSX com os gráficos (padrão: {PLANILHA_PADRAO})")
-    ap.add_argument("--saida", default=SAIDA_PADRAO,
-                    help=f"PPTX de saída (padrão: {SAIDA_PADRAO})")
-    ap.add_argument("--carteira", choices=sorted(CARTEIRAS), default="top_acoes",
-                    help="qual carteira define as abas de origem das tabelas")
-    ap.add_argument("--data", default=None, metavar="DD/MM/AAAA",
-                    help="data exibida nos slides (padrão: hoje)")
-    args = ap.parse_args()
+def gerar_lamina(template=TEMPLATE_PADRAO, planilha=PLANILHA_PADRAO,
+                 saida=SAIDA_PADRAO, carteira="top_acoes", data=None):
+    """Gera a lâmina. Chamável direto de um notebook/interactive window:
 
-    data = (dt.datetime.strptime(args.data, "%d/%m/%Y").date()
-            if args.data else dt.date.today())
-    abas = CARTEIRAS[args.carteira]
+        from gerar_ppt import gerar_lamina
+        gerar_lamina()                      # caminhos padrão da rede
+        gerar_lamina(data="04/08/2026")     # data específica
 
-    print(f"Lendo planilha: {args.planilha}")
+    `data` aceita "DD/MM/AAAA" ou um datetime.date (padrão: hoje).
+    Devolve o número de gráficos/tabelas atualizados.
+    """
+    if data is None:
+        data = dt.date.today()
+    elif isinstance(data, str):
+        data = dt.datetime.strptime(data, "%d/%m/%Y").date()
+    abas = CARTEIRAS[carteira]
+
+    print(f"Lendo planilha: {planilha}")
     # data_only=True devolve os valores calculados salvos pelo Excel
-    wb = openpyxl.load_workbook(args.planilha, data_only=True, read_only=False)
+    wb = openpyxl.load_workbook(planilha, data_only=True, read_only=False)
 
-    print(f"Lendo template: {args.template}")
-    prs = Presentation(args.template)
+    print(f"Lendo template: {template}")
+    prs = Presentation(template)
 
     updated = 0
     for slide_idx, slide in enumerate(prs.slides, start=1):
@@ -391,12 +390,36 @@ def main():
     update_datas(prs, data)
 
     if updated == 0:
-        print("Nenhum gráfico ou tabela atualizado — verifique se o template "
-              "corresponde à planilha.", file=sys.stderr)
-        sys.exit(1)
+        raise RuntimeError("Nenhum gráfico ou tabela atualizado — verifique "
+                           "se o template corresponde à planilha.")
 
-    prs.save(args.saida)
-    print(f"OK: {updated} objeto(s) atualizado(s) -> {args.saida}")
+    prs.save(saida)
+    print(f"OK: {updated} objeto(s) atualizado(s) -> {saida}")
+    return updated
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--template", default=TEMPLATE_PADRAO,
+                    help=f"PPTX de template (padrão: {TEMPLATE_PADRAO})")
+    ap.add_argument("--planilha", default=PLANILHA_PADRAO,
+                    help=f"XLSM/XLSX com os gráficos (padrão: {PLANILHA_PADRAO})")
+    ap.add_argument("--saida", default=SAIDA_PADRAO,
+                    help=f"PPTX de saída (padrão: {SAIDA_PADRAO})")
+    ap.add_argument("--carteira", choices=sorted(CARTEIRAS), default="top_acoes",
+                    help="qual carteira define as abas de origem das tabelas")
+    ap.add_argument("--data", default=None, metavar="DD/MM/AAAA",
+                    help="data exibida nos slides (padrão: hoje)")
+    # parse_known_args ignora argumentos extras injetados por notebooks e
+    # interactive windows (ex. --f=kernel.json do Jupyter)
+    args, _ = ap.parse_known_args()
+
+    try:
+        gerar_lamina(args.template, args.planilha, args.saida,
+                     args.carteira, args.data)
+    except RuntimeError as e:
+        print(str(e), file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

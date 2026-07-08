@@ -347,11 +347,21 @@ def update_datas(prs, data: dt.date):
 
 # ---------------------------------------------------------------------------
 
+# Caminhos padrão na rede (sobrescreva com --template/--planilha/--saida)
+DIR_BASE = r"\\xpdocs\Research\Equities\Estrategia\Carteiras\Carteiras de Ações XP"
+TEMPLATE_PADRAO = rf"{DIR_BASE}\Templates\Carteira Top Ações.pptx"
+PLANILHA_PADRAO = rf"{DIR_BASE}\Charts Lâmina Carteiras.xlsm"
+SAIDA_PADRAO = rf"{DIR_BASE}\Lãmina Completa\Top Ações XP.pptx"
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--template", required=True, help="PPTX de template")
-    ap.add_argument("--planilha", required=True, help="XLSM/XLSX com os gráficos")
-    ap.add_argument("--saida", required=True, help="PPTX de saída")
+    ap.add_argument("--template", default=TEMPLATE_PADRAO,
+                    help=f"PPTX de template (padrão: {TEMPLATE_PADRAO})")
+    ap.add_argument("--planilha", default=PLANILHA_PADRAO,
+                    help=f"XLSM/XLSX com os gráficos (padrão: {PLANILHA_PADRAO})")
+    ap.add_argument("--saida", default=SAIDA_PADRAO,
+                    help=f"PPTX de saída (padrão: {SAIDA_PADRAO})")
     ap.add_argument("--carteira", choices=sorted(CARTEIRAS), default="top_acoes",
                     help="qual carteira define as abas de origem das tabelas")
     ap.add_argument("--data", default=None, metavar="DD/MM/AAAA",

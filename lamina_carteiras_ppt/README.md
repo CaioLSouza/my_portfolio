@@ -42,6 +42,15 @@ editadas à mão — o script as detecta e não mexe nelas.
 ```bash
 pip install -r requirements.txt
 
+# usa os caminhos padrão da rede (\\xpdocs\...\Carteiras de Ações XP)
+python gerar_ppt.py
+```
+
+Os caminhos padrão (template, planilha e saída) estão definidos no topo do
+`main()` em `gerar_ppt.py` (constantes `TEMPLATE_PADRAO`, `PLANILHA_PADRAO`
+e `SAIDA_PADRAO`) e podem ser sobrescritos por argumento:
+
+```bash
 python gerar_ppt.py \
     --template "Carteira Top Ações - Julho 2026.pptx" \
     --planilha "Charts Lâmina Carteiras.xlsm" \

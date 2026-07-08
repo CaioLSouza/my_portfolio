@@ -63,6 +63,24 @@ python gerar_ppt.py \
 script serve para as três lâminas, mudando apenas as abas de origem das
 tabelas. `--data` é opcional (padrão: data de hoje).
 
+### Em notebook / interactive window (VS Code, Jupyter)
+
+Importe a função `gerar_lamina` e chame direto de uma célula:
+
+```python
+from gerar_ppt import gerar_lamina
+
+gerar_lamina()                        # caminhos padrão da rede
+gerar_lamina(data="04/08/2026")       # data específica
+gerar_lamina(carteira="top_div",      # outra carteira, outros caminhos
+             template=r"C:\lâminas\Carteira Top Dividendos.pptx",
+             saida=r"C:\lâminas\Top Dividendos XP.pptx")
+```
+
+Rodar o arquivo inteiro na interactive window também funciona: o `main()`
+usa `parse_known_args`, que ignora os argumentos extras injetados pelo
+kernel do Jupyter (ex. `--f=kernel.json`).
+
 Saída esperada:
 
 ```

@@ -14,7 +14,7 @@ calcula os insumos.
 |---|---|
 | Tabela "Desempenho" 3×4 (mês de ref. / acumulado no ano / 12 meses) | `df_port` (base 100) |
 | Gráfico de linha base 100 (carteira vs. benchmark) | `df_port` |
-| Gráfico de colunas — decomposição do retorno por papel | `df_dec` (`decomposicao_retorno`) |
+| Gráfico **waterfall** — decomposição do retorno por papel (barra final = retorno da carteira) | `df_dec` (`decomposicao_retorno`) |
 | Tabela de composição (Setor \| Companhia \| Ticker \| Peso) | `df_comp` (`montar_df_composicao_compacta`) |
 | Datas dos slides (mês de referência e mês da carteira) | parâmetros `ano_ref`/`mes_ref` |
 
@@ -29,10 +29,16 @@ texto de "Alterações na Carteira".
 * **Composição** — a coluna Setor é **mesclada por grupo**: setores iguais
   consecutivos viram uma célula mesclada; a tabela cresce/encolhe conforme o
   número de papéis.
-* **Gráfico de decomposição** — o template traz esse gráfico de colunas
-  vazio (e apontando para uma fonte externa), então o `replace_data` do
-  python-pptx não funciona. O módulo escreve os caches de categorias
-  (tickers) e valores (contribuição) direto no XML da série.
+* **Gráfico de decomposição (waterfall)** — o template traz esse gráfico de
+  colunas vazio (e apontando para uma fonte externa), então o `replace_data`
+  do python-pptx não funciona. Como o python-pptx também não escreve
+  waterfall nativo, o módulo monta o waterfall com **colunas empilhadas**:
+  uma série "base" invisível flutua cada barra até o acumulado, séries de
+  alta (verde) e baixa (vermelho) desenham a variação de cada papel, e a
+  última barra (azul) é o retorno total da carteira. Para a base não cruzar
+  o zero, as contribuições são ordenadas de modo que o caminho acumulado
+  fique sempre do mesmo lado (positivas primeiro em mês de alta; negativas
+  primeiro em mês de baixa).
 * **Gráfico de linha** — usa `replace_data`, preservando estilo e os nomes
   originais das séries.
 * **Datas** — mês de referência = mês fechado; mês da carteira = referência +

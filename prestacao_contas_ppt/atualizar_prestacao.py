@@ -191,36 +191,101 @@ def _atualiza_grafico_linha(shape, df_port):
     chart.replace_data(cd)
 
 
-def _preenche_barras(chart, cats, vals, titulo='Contribuição'):
-    """Preenche um gráfico de colunas escrevendo os caches de categorias e
-    valores direto na série. Funciona mesmo quando o gráfico do template vem
-    vazio ou aponta para uma fonte de dados externa (o replace_data não)."""
+# Cores das barras do waterfall (alta / baixa / total)
+COR_ALTA, COR_BAIXA, COR_TOTAL = '70AD47', 'C0504D', '1F4E79'
+
+
+def _waterfall_arrays(tickers, contribs, total, rotulo_total='Carteira'):
+    """Monta os vetores de um waterfall com colunas empilhadas.
+
+    Truque: uma série 'base' invisível flutua cada barra até o acumulado; as
+    séries de alta/baixa desenham a variação e a última barra é o total.
+    O problema clássico é o acumulado cruzar o zero (a base deixaria de ser
+    um simples deslocamento). Solução: ordenar as contribuições para o
+    caminho ficar sempre do mesmo lado do zero — positivas primeiro quando o
+    total é >= 0 (caminho >= 0), negativas primeiro caso contrário — e
+    calcular base/altura conforme a região.
+    """
+    total = float(total) if total is not None and not (isinstance(total, float) and np.isnan(total)) \
+        else float(np.nansum([c for c in contribs if c is not None]))
+    regiao_pos = total >= 0
+    pares = sorted(((t, 0.0 if (c is None or (isinstance(c, float) and np.isnan(c))) else float(c))
+                    for t, c in zip(tickers, contribs)),
+                   key=lambda tc: tc[1], reverse=regiao_pos)
+    cats, base, alta, baixa, tot = [], [], [], [], []
+    cum = 0.0
+    for tk, c in pares:
+        cb, cum, ca = cum, cum + c, cum + c
+        cats.append(tk)
+        if regiao_pos:                     # caminho >= 0: base e alturas >= 0
+            b, h = (cb if c >= 0 else ca), abs(c)
+        else:                              # caminho <= 0: base e alturas <= 0
+            b, h = max(cb, ca), -abs(c)
+        base.append(b)
+        alta.append(h if c >= 0 else None)
+        baixa.append(h if c < 0 else None)
+        tot.append(None)
+    cats.append(rotulo_total)
+    base.append(0.0); alta.append(None); baixa.append(None); tot.append(total)
+    return cats, base, alta, baixa, tot
+
+
+def _preenche_waterfall(chart, tickers, contribs, total):
+    """Reescreve o gráfico de colunas do template como um waterfall
+    (empilhado), escrevendo os caches direto nas séries."""
+    cats, base, alta, baixa, tot = _waterfall_arrays(tickers, contribs, total)
+    n = len(cats)
     barChart = chart._chartSpace.find('.//' + qn('c:barChart'))
+    barChart.find(qn('c:grouping')).set('val', 'stacked')
+    ov = barChart.find(qn('c:overlap'))
+    if ov is not None:
+        ov.set('val', '100')
     for ser in barChart.findall(qn('c:ser')):
         barChart.remove(ser)
-    pts_cat = ''.join(f'<c:pt idx="{i}"><c:v>{c}</c:v></c:pt>'
-                      for i, c in enumerate(cats))
-    pts_val = ''.join('' if (v is None or (isinstance(v, float) and np.isnan(v)))
+
+    cat_pts = ''.join(f'<c:pt idx="{i}"><c:v>{c}</c:v></c:pt>' for i, c in enumerate(cats))
+    cat_xml = (f'<c:cat><c:strRef><c:f>Sheet1!$A$2:$A${n + 1}</c:f>'
+               f'<c:strCache><c:ptCount val="{n}"/>{cat_pts}</c:strCache></c:strRef></c:cat>')
+    nofill = '<c:spPr><a:noFill/><a:ln><a:noFill/></a:ln></c:spPr>'
+
+    def _fill(rgb):
+        return f'<c:spPr><a:solidFill><a:srgbClr val="{rgb}"/></a:solidFill></c:spPr>'
+
+    def _ser(idx, nome, vals, sppr):
+        col = chr(ord('B') + idx)
+        pts = ''.join('' if (v is None or (isinstance(v, float) and np.isnan(v)))
                       else f'<c:pt idx="{i}"><c:v>{float(v)}</c:v></c:pt>'
                       for i, v in enumerate(vals))
-    ser_xml = (
-        f'<c:ser xmlns:c="{C_NS}"><c:idx val="0"/><c:order val="0"/>'
-        f'<c:tx><c:strRef><c:f>Sheet1!$B$1</c:f><c:strCache><c:ptCount val="1"/>'
-        f'<c:pt idx="0"><c:v>{titulo}</c:v></c:pt></c:strCache></c:strRef></c:tx>'
-        f'<c:cat><c:strRef><c:f>Sheet1!$A$2:$A${len(cats) + 1}</c:f>'
-        f'<c:strCache><c:ptCount val="{len(cats)}"/>{pts_cat}</c:strCache></c:strRef></c:cat>'
-        f'<c:val><c:numRef><c:f>Sheet1!$B$2:$B${len(vals) + 1}</c:f>'
-        f'<c:numCache><c:formatCode>0.0%</c:formatCode>'
-        f'<c:ptCount val="{len(vals)}"/>{pts_val}</c:numCache></c:numRef></c:val></c:ser>')
-    ser = parse_xml(ser_xml)
-    dlbls = barChart.find(qn('c:dLbls'))
-    (dlbls.addprevious if dlbls is not None else barChart.append)(ser)
+        return (f'<c:ser xmlns:c="{C_NS}" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                f'<c:idx val="{idx}"/><c:order val="{idx}"/>'
+                f'<c:tx><c:strRef><c:f>Sheet1!${col}$1</c:f><c:strCache><c:ptCount val="1"/>'
+                f'<c:pt idx="0"><c:v>{nome}</c:v></c:pt></c:strCache></c:strRef></c:tx>'
+                f'{sppr}{cat_xml}'
+                f'<c:val><c:numRef><c:f>Sheet1!${col}$2:${col}${n + 1}</c:f>'
+                f'<c:numCache><c:formatCode>0.0%</c:formatCode>'
+                f'<c:ptCount val="{n}"/>{pts}</c:numCache></c:numRef></c:val></c:ser>')
+
+    series = [
+        _ser(0, 'Base', base, nofill),
+        _ser(1, 'Contribuição (alta)', alta, _fill(COR_ALTA)),
+        _ser(2, 'Contribuição (baixa)', baixa, _fill(COR_BAIXA)),
+        _ser(3, 'Carteira (total)', tot, _fill(COR_TOTAL)),
+    ]
+    anchor = barChart.find(qn('c:dLbls'))
+    if anchor is None:
+        anchor = barChart.find(qn('c:gapWidth'))
+    for s in series:
+        anchor.addprevious(parse_xml(s))
 
 
 def _pc_grafico_decomposicao(shape, df_dec):
-    """Colunas: contribuição por papel (ignora a linha 'Carteira (total)')."""
+    """Waterfall: contribuição de cada papel + barra final com o retorno da
+    carteira. A linha 'Carteira (total)' de df_dec vira o total."""
+    total_row = df_dec[df_dec['Ticker'].astype(str).str.strip() == '']
+    total = float(total_row['Contribuição'].iloc[0]) if not total_row.empty else None
     d = df_dec[df_dec['Ticker'].astype(str).str.strip() != ''].copy()
-    _preenche_barras(shape.chart, d['Ticker'].tolist(), d['Contribuição'].tolist())
+    _preenche_waterfall(shape.chart, d['Ticker'].tolist(),
+                        d['Contribuição'].tolist(), total)
 
 
 # -------------------------------- datas ----------------------------------

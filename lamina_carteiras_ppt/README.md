@@ -6,17 +6,24 @@ formatação do template.
 
 ## O que é atualizado
 
-| Item | Origem na planilha |
+O script usa **duas planilhas**: a de gráficos (`Charts Lâmina Carteiras.xlsm`)
+e a de composição (`output/composicao_*.xlsx`, gerada à parte).
+
+| Item | Origem |
 |---|---|
 | Gráfico de desempenho (base 100) | Referências de células gravadas no próprio gráfico (`Charts Base 100`) |
 | Tabela de retornos mensais (Figura 1) | `performance_top_ações` / `performance_top_divs` / `performance_top_smll` |
 | Tabela de desempenho por ativo (Figura 2) | `Desempenho ativo * _last` |
 | Tabela de indicadores — Sharpe, Volatilidade, Beta (Figura 4) | `* Portfolio Metrics` |
+| Tabela de composição (slide 1) — setores, pesos, rating, preço-alvo | `composicao_*.xlsx`, aba `PT` |
+| Tabela de teses (slide 4) — peso, recomendação, preço-alvo, **link** | `composicao_*.xlsx`, aba `PT_data` |
 | Datas dos slides ("2 de julho de 2026", "Julho 2026") | Parâmetro `--data` (padrão: hoje) |
 
-As tabelas **editoriais** (composição da carteira com rating/preço-alvo e a
-tabela de comentários por papel) não existem na planilha e continuam sendo
-editadas à mão — o script as detecta e não mexe nelas.
+**Continuam manuais** (conteúdo editorial que não existe em planilha): a
+manchete, o comentário da carteira (slides 1 e 2) e o **texto** dos
+comentários por tese na tabela do slide 4. Esses comentários são
+**preservados** de um mês para o outro casando pelo ticker — só papéis novos
+entram com o comentário em branco (o script avisa quais).
 
 ## Como funciona
 
@@ -32,6 +39,15 @@ editadas à mão — o script as detecta e não mexe nelas.
   planilha (linhas são clonadas/removidas no XML). Os rótulos dos meses da
   tabela de retornos vêm da planilha, então a janela de 12 meses desliza
   automaticamente a cada atualização.
+* **Tabela de composição** — a aba `PT` da planilha de composição já vem com
+  as células de segmento/setor **em branco** onde há agrupamento; o script
+  usa esse padrão de brancos para reconstruir as mesclagens verticais da
+  tabela do slide 1. Ou seja, se o agrupamento de setores mudar no mês, os
+  merges se reajustam sozinhos.
+* **Tabela de teses** — preenche peso/recomendação/preço-alvo da composição e
+  monta o link de cada papel como `https://conteudos.xpi.com.br/acoes/TICKER`.
+  Antes de reconstruir, guarda os comentários por ticker e os recoloca, de
+  modo que reordenar/adicionar/remover papéis não embaralha os comentários.
 * **Datas** — os placeholders de data do template são campos automáticos do
   PowerPoint (`datetime4`), que se atualizam sozinhos ao abrir o arquivo; o
   script também grava o texto em cache para que exports (PDF, prévias)
@@ -52,11 +68,12 @@ e `SAIDA_PADRAO`) e podem ser sobrescritos por argumento:
 
 ```bash
 python gerar_ppt.py \
-    --template "Carteira Top Ações - Julho 2026.pptx" \
-    --planilha "Charts Lâmina Carteiras.xlsm" \
-    --saida    "Carteira Top Ações - Agosto 2026.pptx" \
-    --carteira top_acoes \
-    --data     04/08/2026
+    --template   "Carteira Top Ações - Julho 2026.pptx" \
+    --planilha   "Charts Lâmina Carteiras.xlsm" \
+    --composicao "composicao_top_acoes.xlsx" \
+    --saida      "Carteira Top Ações - Agosto 2026.pptx" \
+    --carteira   top_acoes \
+    --data       04/08/2026
 ```
 
 `--carteira` aceita `top_acoes` (padrão), `top_div` e `top_smll` — o mesmo
@@ -81,35 +98,43 @@ Rodar o arquivo inteiro na interactive window também funciona: o `main()`
 usa `parse_known_args`, que ignora os argumentos extras injetados pelo
 kernel do Jupyter (ex. `--f=kernel.json`).
 
+`--composicao` é opcional (padrão: `output/composicao_<carteira>.xlsx`). Se o
+arquivo não existir, as tabelas de composição e teses são mantidas como no
+template e o resto roda normalmente.
+
 Saída esperada:
 
 ```
 Lendo planilha: Charts Lâmina Carteiras.xlsm
-Lendo template: Carteira Top Ações - Julho 2026.pptx
-  [slide 1 / Table 1] tabela editorial — mantida como está
+Lendo composição: ...\output\composicao_top_acoes.xlsx
+Lendo template: Carteira Top Ações.pptx
+  [slide 1 / Table 1] composição atualizada: 16 papel(is)
   [slide 3 / Table 36] indicadores atualizados: 3 linha(s)
   [slide 3 / Table 2] retornos atualizados: 2 série(s), 12 mês(es) até jun-26
   [slide 3 / Table 6] desempenho por ativo atualizado: 16 papel(is)
   [slide 3 / Chart 9] gráfico atualizado: 2 série(s), 331 ponto(s) (2025-02-28 a 2026-06-30)
-  [slide 4 / Table 21] tabela editorial — mantida como está
+  [slide 4 / Table 21] teses atualizadas: 16 papel(is), links por ticker
   datas atualizadas para '4 de agosto de 2026' (6 ocorrência(s))
-OK: 4 objeto(s) atualizado(s) -> Carteira Top Ações - Agosto 2026.pptx
+OK: 6 objeto(s) atualizado(s) -> Carteira Top Ações.pptx
 ```
 
 ## Fluxo mensal sugerido
 
 1. Atualizar a planilha `Charts Lâmina Carteiras.xlsm` no Excel e **salvar**
-   (o script lê os valores calculados que o Excel grava no arquivo);
-2. Rodar o script apontando para o template do mês anterior;
-3. Ajustar à mão apenas o conteúdo editorial: título/manchete, comentário da
-   carteira, tabela de composição (rating, preço-alvo) e comentários por papel.
+   (o script lê os valores calculados que o Excel grava no arquivo); garantir
+   que o `output/composicao_<carteira>.xlsx` do mês foi gerado;
+2. Rodar o script (`python gerar_ppt.py`);
+3. Ajustar à mão só a manchete, o comentário da carteira e o texto dos
+   comentários por tese dos **papéis novos** (o script lista quais faltam).
 
 ## Limitações e observações
 
-* A planilha precisa ter sido salva pelo Excel — uma planilha gerada só por
-  script, sem passar pelo Excel, teria fórmulas sem valor em cache
-  (`data_only=True` do openpyxl).
+* As planilhas precisam ter sido salvas pelo Excel — o script lê os valores
+  calculados em cache das fórmulas (`data_only=True` do openpyxl).
 * A tabela de desempenho por ativo usa as abas `*_last` (composição vigente
   no período reportado), reproduzindo o comportamento do template original.
+* As mesclagens da tabela de composição são reconstruídas a partir do padrão
+  de células em branco da aba `PT` — mantenha essa aba com os brancos de
+  agrupamento (é como o gerador da composição já a entrega).
 * Se um gráfico ou tabela referenciar uma aba inexistente, o script falha
-  com erro claro indicando a aba faltante.
+  com erro claro indicando a aba/arquivo faltante.

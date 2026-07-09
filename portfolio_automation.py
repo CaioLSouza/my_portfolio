@@ -2116,7 +2116,6 @@ def _preenche_waterfall(chart, tickers, contribs, total):
             f'<c:tx><c:rich><a:bodyPr/><a:lstStyle/>'
             f'<a:p><a:pPr><a:defRPr sz="800"/></a:pPr>'
             f'<a:r><a:rPr lang="pt-BR" sz="800"/><a:t>{t}</a:t></a:r></a:p></c:rich></c:tx>'
-            f'<c:dLblPos val="ctr"/>'
             f'<c:showLegendKey val="0"/><c:showVal val="0"/><c:showCatName val="0"/>'
             f'<c:showSerName val="0"/><c:showPercent val="0"/><c:showBubbleSize val="0"/></c:dLbl>'
             for i, t in sorted(labels.items()))

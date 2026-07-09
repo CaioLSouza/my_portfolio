@@ -191,8 +191,8 @@ def _atualiza_grafico_linha(shape, df_port):
     chart.replace_data(cd)
 
 
-# Cores das barras do waterfall (alta / baixa / total)
-COR_ALTA, COR_BAIXA, COR_TOTAL = '70AD47', 'C0504D', '1F4E79'
+# Cores das barras do waterfall (alta / baixa / total). Amarelo XP no total.
+COR_ALTA, COR_BAIXA, COR_TOTAL = '70AD47', 'C0504D', 'FFBC00'
 
 
 def _waterfall_arrays(tickers, contribs, total, rotulo_total='Carteira'):

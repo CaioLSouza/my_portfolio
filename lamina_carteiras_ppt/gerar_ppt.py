@@ -8,13 +8,19 @@ O script atualiza, preservando toda a formatação do template:
   valores atuais dessas células e substitui os dados de cada série.
 * **Tabelas de desempenho** (slide "Desempenho") — retornos mensais,
   desempenho por ativo e indicadores (Sharpe, Volatilidade, Beta), lidos
-  das abas correspondentes da planilha. A tabela de ativos cresce ou
-  encolhe conforme o número de linhas na planilha.
+  das abas correspondentes da planilha de gráficos. A tabela de ativos
+  cresce ou encolhe conforme o número de linhas na planilha.
+* **Tabela de composição** (slide 1) — reconstruída a partir da planilha de
+  composição (composicao_*.xlsx), inclusive os agrupamentos mesclados de
+  segmento/setor, rating e preço-alvo.
+* **Tabela de teses** (slide 4) — peso, recomendação, preço-alvo e o link
+  para a tese (montado por ticker). Os comentários, editoriais, são
+  preservados casando pelo ticker; papéis novos ficam em branco.
 * **Datas** — os textos "D de mês de AAAA" e o título "Mês AAAA" são
   trocados pela data passada em --data (padrão: hoje).
 
-As tabelas editoriais (composição da carteira, rating, preço-alvo,
-comentários) não vêm da planilha e continuam sendo editadas à mão.
+Só continuam manuais: a manchete, o comentário da carteira e o texto dos
+comentários por tese (slide 4).
 
 Uso
 ---
@@ -28,6 +34,7 @@ Requisitos: pip install python-pptx openpyxl
 
 import argparse
 import datetime as dt
+import os
 import re
 import sys
 from copy import deepcopy
@@ -37,36 +44,48 @@ from openpyxl.utils import range_boundaries
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 
-# Namespace do DrawingML de gráficos (chartSpace XML)
+# Namespaces do DrawingML (chartSpace e "main", usado em texto/tabelas)
 C_NS = "http://schemas.openxmlformats.org/drawingml/2006/chart"
+A_NS = "http://schemas.openxmlformats.org/drawingml/2006/main"
+
+# Link para a tese de cada papel (o final é o ticker)
+LINK_TESE = "https://conteudos.xpi.com.br/acoes/{ticker}"
 
 MESES_ABREV = ["jan", "fev", "mar", "abr", "mai", "jun",
                "jul", "ago", "set", "out", "nov", "dez"]
 MESES_EXTENSO = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
                  "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
 
-# Abas de origem das tabelas, por carteira
+# Abas de origem das tabelas, por carteira. "composicao" é o nome do arquivo
+# gerado na pasta output/ (planilha à parte, com abas PT/PT_data).
 CARTEIRAS = {
     "top_acoes": {
         "metricas": "Top Ações Portfolio Metrics",
         "retornos": "performance_top_ações",
         "ativos": "Desempenho ativo top ações_last",
+        "composicao": "composicao_top_acoes.xlsx",
     },
     "top_div": {
         "metricas": "Top Div Portfolio Metrics",
         "retornos": "performance_top_divs",
         "ativos": "Desempenho ativo div_last",
+        "composicao": "composicao_top_div.xlsx",
     },
     "top_smll": {
         "metricas": "Top SMLL Portfolio Metrics",
         "retornos": "performance_top_smll",
         "ativos": "Desempenho ativo small_last",
+        "composicao": "composicao_top_smll.xlsx",
     },
 }
 
 
 def qn(tag: str) -> str:
     return f"{{{C_NS}}}{tag}"
+
+
+def qnA(tag: str) -> str:
+    return f"{{{A_NS}}}{tag}"
 
 
 def mes_ano(d) -> str:
@@ -76,6 +95,19 @@ def mes_ano(d) -> str:
 
 def pct(v, casas=1) -> str:
     return "" if v is None else f"{v:.{casas}%}"
+
+
+def pct_br(v, casas=1) -> str:
+    """Fração -> percentual no padrão brasileiro: 0.05 -> '5,0%'."""
+    return "" if v is None else f"{v * 100:.{casas}f}%".replace(".", ",")
+
+
+def rs_br(v) -> str:
+    """Número -> moeda no padrão brasileiro: 63 -> 'R$ 63,00'."""
+    if v is None:
+        return ""
+    s = f"{v:,.2f}"  # 1,234.56 (separadores americanos)
+    return "R$ " + s.replace(",", "\x00").replace(".", ",").replace("\x00", ".")
 
 
 # ---------------------------------------------------------------------------
@@ -290,14 +322,165 @@ def update_tabela_ativos(table, wb, sheet, label):
     print(f"  [{label}] desempenho por ativo atualizado: {len(ativos)} papel(is)")
 
 
-def update_table(table, wb, abas, label) -> bool:
+# ---------------------------------------------------------------------------
+# Tabelas de composição e teses (planilha de composição, à parte)
+# ---------------------------------------------------------------------------
+
+def read_composicao(path, lang="PT"):
+    """Lê a planilha de composição. Devolve (linhas_display, linhas_flat):
+
+    * display — aba `PT`, com as células de Segmento/Setor/Peso do setor em
+      branco onde há agrupamento (espelha o layout da tabela do slide 1);
+    * flat — aba `PT_data`, uma linha por papel com todas as colunas
+      preenchidas (usada na tabela de teses).
+
+    Colunas (0-8): Segmento, Setor, Peso setor (Ibov), Peso setor (Carteira),
+    Companhia, Ticker, Peso, Rating, Preço-Alvo.
+    """
+    wb = openpyxl.load_workbook(path, data_only=True)
+
+    def dados_apos_cabecalho(rows):
+        # o cabeçalho começa com "Segmento" (PT) ou "Segment" (ENG); acima
+        # dele pode haver título e linhas em branco. Mantém só linhas com
+        # Companhia preenchida (col 4).
+        hdr = next(i for i, r in enumerate(rows)
+                   if r and str(r[0]).strip() in ("Segmento", "Segment"))
+        return [r for r in rows[hdr + 1:] if len(r) > 4 and r[4] is not None]
+
+    disp = [list(r) for r in wb[lang].iter_rows(values_only=True)]
+    flat = [list(r) for r in wb[f"{lang}_data"].iter_rows(values_only=True)]
+    return dados_apos_cabecalho(disp), dados_apos_cabecalho(flat)
+
+
+def unmerge_all(table):
+    """Desfaz todas as mesclagens, devolvendo uma grade simples."""
+    for r in range(len(table.rows)):
+        for c in range(len(table.columns)):
+            cell = table.cell(r, c)
+            if cell.is_merge_origin:
+                cell.split()
+
+
+def merge_blank_runs(table, col, ndata):
+    """Mescla verticalmente, na coluna `col`, cada sequência de uma célula
+    com valor seguida de células em branco — reconstruindo o agrupamento
+    exatamente como a aba PT o codifica (branco = mesclado com o de cima)."""
+    r = 1
+    while r <= ndata:
+        start = r
+        r += 1
+        while r <= ndata and table.cell(r, col).text.strip() == "":
+            r += 1
+        if r - 1 > start:
+            table.cell(start, col).merge(table.cell(r - 1, col))
+
+
+def _txbody(cell):
+    return cell._tc.find(qnA("txBody"))
+
+
+def set_cell_paras(cell, paras):
+    """Substitui os parágrafos (<a:p>) de uma célula por cópias de `paras`,
+    preservando o bodyPr da célula de destino."""
+    tb = _txbody(cell)
+    for p in tb.findall(qnA("p")):
+        tb.remove(p)
+    for p in paras:
+        tb.append(deepcopy(p))
+
+
+def set_link(cell, url, texto="Clique aqui"):
+    """Mantém o run existente (com sua formatação) e ajusta texto + link."""
+    para = cell.text_frame.paragraphs[0]
+    if not para.runs:
+        para.text = texto
+    para.runs[0].text = texto
+    for extra in para.runs[1:]:
+        extra._r.getparent().remove(extra._r)
+    para.runs[0].hyperlink.address = url
+
+
+def update_tabela_composicao(table, comp_display, label):
+    """Reconstrói a tabela de composição (slide 1) a partir da aba PT.
+    Colunas: Segmento | Setor | Peso setor (Ibov) | Peso setor (Carteira) |
+    Companhia | Ticker | Peso | Rating | Preço-Alvo."""
+    ndata = len(comp_display)
+    unmerge_all(table)
+    set_table_data_rows(table, ndata)
+    for i, row in enumerate(comp_display, start=1):
+        seg, setor, peso_i, peso_c, comp, tick, peso, rating, preco = row[:9]
+        set_cell_text(table.cell(i, 0), "" if seg is None else str(seg))
+        set_cell_text(table.cell(i, 1), "" if setor is None else str(setor))
+        set_cell_text(table.cell(i, 2), pct_br(peso_i))
+        set_cell_text(table.cell(i, 3), pct_br(peso_c))
+        set_cell_text(table.cell(i, 4), "" if comp is None else str(comp))
+        set_cell_text(table.cell(i, 5), "" if tick is None else str(tick))
+        set_cell_text(table.cell(i, 6), pct_br(peso))
+        set_cell_text(table.cell(i, 7), "" if rating is None else str(rating))
+        set_cell_text(table.cell(i, 8), rs_br(preco))
+    # reconstrói os agrupamentos de Segmento/Setor/Peso do setor
+    for col in (0, 1, 2, 3):
+        merge_blank_runs(table, col, ndata)
+    print(f"  [{label}] composição atualizada: {ndata} papel(is)")
+
+
+def update_tabela_teses(table, comp_flat, label):
+    """Atualiza a tabela de teses (slide 4): Companhia | Ticker | Peso |
+    Recomendação | Preço-Alvo | Comentários | Link para tese.
+
+    Preenche tudo a partir da composição e monta o link por ticker. Os
+    comentários (editoriais) são preservados casando pelo ticker; papéis
+    novos ficam com o comentário em branco para você escrever."""
+    coment = {}
+    for r in range(1, len(table.rows)):
+        tick = table.cell(r, 1).text.strip()
+        if tick:
+            coment[tick] = [deepcopy(p) for p in _txbody(table.cell(r, 5)).findall(qnA("p"))]
+
+    set_table_data_rows(table, len(comp_flat))
+    novos = []
+    for i, row in enumerate(comp_flat, start=1):
+        comp, tick, peso, rating, preco = row[4], row[5], row[6], row[7], row[8]
+        tick = str(tick)
+        set_cell_text(table.cell(i, 0), "" if comp is None else str(comp))
+        set_cell_text(table.cell(i, 1), tick)
+        set_cell_text(table.cell(i, 2), pct_br(peso))
+        set_cell_text(table.cell(i, 3), "" if rating is None else str(rating))
+        set_cell_text(table.cell(i, 4), rs_br(preco))
+        if tick in coment:
+            set_cell_paras(table.cell(i, 5), coment[tick])
+        else:
+            set_cell_text(table.cell(i, 5), "")
+            novos.append(tick)
+        set_link(table.cell(i, 6), LINK_TESE.format(ticker=tick))
+
+    msg = f"  [{label}] teses atualizadas: {len(comp_flat)} papel(is), links por ticker"
+    if novos:
+        msg += f"; comentário a preencher: {', '.join(novos)}"
+    print(msg)
+
+
+# ---------------------------------------------------------------------------
+
+def update_table(table, wb, abas, comp, label) -> bool:
     """Identifica a tabela pelo cabeçalho e delega a atualização.
-    Tabelas editoriais (composição, comentários) são deixadas intactas."""
+    `comp` é a tupla (display, flat) da planilha de composição, ou None.
+    A tabela de comentários por tese é preenchida menos a coluna de texto."""
     header = [table.cell(0, c).text.strip() for c in range(len(table.columns))]
     if header and header[0].startswith("Indicador"):
         update_tabela_metricas(table, wb, abas["metricas"], label)
     elif any(h.startswith("Desde o início") for h in header):
         update_tabela_retornos(table, wb, abas["retornos"], label)
+    elif header[0].startswith("Segmento"):
+        if comp is None:
+            print(f"  [{label}] composição sem planilha de origem — mantida")
+            return False
+        update_tabela_composicao(table, comp[0], label)
+    elif header[0] == "Companhia" and any(h.startswith("Link para tese") for h in header):
+        if comp is None:
+            print(f"  [{label}] teses sem planilha de composição — mantidas")
+            return False
+        update_tabela_teses(table, comp[1], label)
     elif header[0] == "Companhia" and any(h.startswith("Data de entrada") for h in header):
         update_tabela_ativos(table, wb, abas["ativos"], label)
     else:
@@ -313,9 +496,6 @@ def update_table(table, wb, abas, label) -> bool:
 RE_DATA_LONGA = re.compile(r"^\s*\d{1,2} de [a-zç]+ de \d{4}\s*$", re.I)
 RE_MES_TITULO = re.compile(
     r"^\s*(" + "|".join(m.capitalize() for m in MESES_EXTENSO) + r")( de)? \d{4}\s*$")
-
-
-A_NS = "http://schemas.openxmlformats.org/drawingml/2006/main"
 
 
 def update_datas(prs, data: dt.date):
@@ -352,10 +532,12 @@ DIR_BASE = r"\\xpdocs\Research\Equities\Estrategia\Carteiras\Carteiras de Açõe
 TEMPLATE_PADRAO = rf"{DIR_BASE}\Templates\Carteira Top Ações.pptx"
 PLANILHA_PADRAO = rf"{DIR_BASE}\Charts Lâmina Carteiras.xlsm"
 SAIDA_PADRAO = rf"{DIR_BASE}\Lãmina Completa\Top Ações XP.pptx"
+DIR_OUTPUT = rf"{DIR_BASE}\output"  # onde ficam os composicao_*.xlsx
 
 
 def gerar_lamina(template=TEMPLATE_PADRAO, planilha=PLANILHA_PADRAO,
-                 saida=SAIDA_PADRAO, carteira="top_acoes", data=None):
+                 saida=SAIDA_PADRAO, carteira="top_acoes", data=None,
+                 composicao=None):
     """Gera a lâmina. Chamável direto de um notebook/interactive window:
 
         from gerar_ppt import gerar_lamina
@@ -363,6 +545,8 @@ def gerar_lamina(template=TEMPLATE_PADRAO, planilha=PLANILHA_PADRAO,
         gerar_lamina(data="04/08/2026")     # data específica
 
     `data` aceita "DD/MM/AAAA" ou um datetime.date (padrão: hoje).
+    `composicao` é o caminho do composicao_*.xlsx (padrão: pasta output/);
+    se o arquivo não existir, as tabelas de composição/teses são mantidas.
     Devolve o número de gráficos/tabelas atualizados.
     """
     if data is None:
@@ -370,10 +554,20 @@ def gerar_lamina(template=TEMPLATE_PADRAO, planilha=PLANILHA_PADRAO,
     elif isinstance(data, str):
         data = dt.datetime.strptime(data, "%d/%m/%Y").date()
     abas = CARTEIRAS[carteira]
+    if composicao is None:
+        composicao = os.path.join(DIR_OUTPUT, abas["composicao"])
 
     print(f"Lendo planilha: {planilha}")
     # data_only=True devolve os valores calculados salvos pelo Excel
     wb = openpyxl.load_workbook(planilha, data_only=True, read_only=False)
+
+    comp = None
+    if os.path.exists(composicao):
+        print(f"Lendo composição: {composicao}")
+        comp = read_composicao(composicao)
+    else:
+        print(f"Composição não encontrada ({composicao}) — tabelas de "
+              "composição e teses serão mantidas como no template.")
 
     print(f"Lendo template: {template}")
     prs = Presentation(template)
@@ -385,7 +579,7 @@ def gerar_lamina(template=TEMPLATE_PADRAO, planilha=PLANILHA_PADRAO,
             if shape.has_chart:
                 updated += bool(update_chart(shape.chart, wb, label))
             elif shape.has_table:
-                updated += bool(update_table(shape.table, wb, abas, label))
+                updated += bool(update_table(shape.table, wb, abas, comp, label))
 
     update_datas(prs, data)
 
@@ -410,13 +604,15 @@ def main():
                     help="qual carteira define as abas de origem das tabelas")
     ap.add_argument("--data", default=None, metavar="DD/MM/AAAA",
                     help="data exibida nos slides (padrão: hoje)")
+    ap.add_argument("--composicao", default=None,
+                    help="composicao_*.xlsx (padrão: pasta output/ da carteira)")
     # parse_known_args ignora argumentos extras injetados por notebooks e
     # interactive windows (ex. --f=kernel.json do Jupyter)
     args, _ = ap.parse_known_args()
 
     try:
         gerar_lamina(args.template, args.planilha, args.saida,
-                     args.carteira, args.data)
+                     args.carteira, args.data, args.composicao)
     except RuntimeError as e:
         print(str(e), file=sys.stderr)
         sys.exit(1)

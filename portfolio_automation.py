@@ -2076,15 +2076,16 @@ def _waterfall_arrays(tickers, contribs, total, rotulo_total='Carteira'):
         alta.append(h if c >= 0 else None)
         baixa.append(h if c < 0 else None)
         tot.append(None)
+    contrib_ord = [c for _, c in pares]      # contribuição real (com sinal), na ordem plotada
     cats.append(rotulo_total)
     base.append(0.0); alta.append(None); baixa.append(None); tot.append(total)
-    return cats, base, alta, baixa, tot
+    return cats, base, alta, baixa, tot, contrib_ord
 
 
 def _preenche_waterfall(chart, tickers, contribs, total):
     """Reescreve o gráfico de colunas do template como um waterfall
     (empilhado), escrevendo os caches direto nas séries."""
-    cats, base, alta, baixa, tot = _waterfall_arrays(tickers, contribs, total)
+    cats, base, alta, baixa, tot, contrib_ord = _waterfall_arrays(tickers, contribs, total)
     n = len(cats)
     barChart = chart._chartSpace.find('.//' + qn('c:barChart'))
     barChart.find(qn('c:grouping')).set('val', 'stacked')
@@ -2102,25 +2103,52 @@ def _preenche_waterfall(chart, tickers, contribs, total):
     def _fill(rgb):
         return f'<c:spPr><a:solidFill><a:srgbClr val="{rgb}"/></a:solidFill></c:spPr>'
 
-    def _ser(idx, nome, vals, sppr):
+    def _fmt_sign(c):
+        return f"{c * 100:+.1f}%".replace(".", ",")
+
+    def _dlbls(labels):
+        """labels: dict {idx: texto}. Rótulos de texto fixo (a altura da barra
+        não é a contribuição, então não dá para usar showVal)."""
+        if not labels:
+            return ''
+        itens = ''.join(
+            f'<c:dLbl><c:idx val="{i}"/>'
+            f'<c:tx><c:rich><a:bodyPr/><a:lstStyle/>'
+            f'<a:p><a:pPr><a:defRPr sz="800"/></a:pPr>'
+            f'<a:r><a:rPr lang="pt-BR" sz="800"/><a:t>{t}</a:t></a:r></a:p></c:rich></c:tx>'
+            f'<c:dLblPos val="ctr"/>'
+            f'<c:showLegendKey val="0"/><c:showVal val="0"/><c:showCatName val="0"/>'
+            f'<c:showSerName val="0"/><c:showPercent val="0"/><c:showBubbleSize val="0"/></c:dLbl>'
+            for i, t in sorted(labels.items()))
+        return (f'{itens}<c:showLegendKey val="0"/><c:showVal val="0"/><c:showCatName val="0"/>'
+                f'<c:showSerName val="0"/><c:showPercent val="0"/><c:showBubbleSize val="0"/>')
+
+    def _ser(idx, nome, vals, sppr, labels=None):
         col = chr(ord('B') + idx)
         pts = ''.join('' if (v is None or (isinstance(v, float) and np.isnan(v)))
                       else f'<c:pt idx="{i}"><c:v>{float(v)}</c:v></c:pt>'
                       for i, v in enumerate(vals))
+        dl = _dlbls(labels or {})
+        dlbls_xml = f'<c:dLbls>{dl}</c:dLbls>' if dl else ''
         return (f'<c:ser xmlns:c="{_C_NS}" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
                 f'<c:idx val="{idx}"/><c:order val="{idx}"/>'
                 f'<c:tx><c:strRef><c:f>Sheet1!${col}$1</c:f><c:strCache><c:ptCount val="1"/>'
                 f'<c:pt idx="0"><c:v>{nome}</c:v></c:pt></c:strCache></c:strRef></c:tx>'
-                f'{sppr}{cat_xml}'
+                f'{sppr}{dlbls_xml}{cat_xml}'
                 f'<c:val><c:numRef><c:f>Sheet1!${col}$2:${col}${n + 1}</c:f>'
                 f'<c:numCache><c:formatCode>0.0%</c:formatCode>'
                 f'<c:ptCount val="{n}"/>{pts}</c:numCache></c:numRef></c:val></c:ser>')
 
+    # rótulos: contribuição real (com sinal) nas barras de alta/baixa; total na última
+    lbl_alta = {i: _fmt_sign(contrib_ord[i]) for i in range(n - 1) if alta[i] is not None}
+    lbl_baixa = {i: _fmt_sign(contrib_ord[i]) for i in range(n - 1) if baixa[i] is not None}
+    lbl_total = {n - 1: _fmt_sign(tot[-1])}
+
     series = [
         _ser(0, 'Base', base, nofill),
-        _ser(1, 'Contribuição (alta)', alta, _fill(COR_ALTA)),
-        _ser(2, 'Contribuição (baixa)', baixa, _fill(COR_BAIXA)),
-        _ser(3, 'Carteira (total)', tot, _fill(COR_TOTAL)),
+        _ser(1, 'Contribuição (alta)', alta, _fill(COR_ALTA), lbl_alta),
+        _ser(2, 'Contribuição (baixa)', baixa, _fill(COR_BAIXA), lbl_baixa),
+        _ser(3, 'Carteira (total)', tot, _fill(COR_TOTAL), lbl_total),
     ]
     anchor = barChart.find(qn('c:dLbls'))
     if anchor is None:

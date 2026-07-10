@@ -225,24 +225,35 @@ def extrair_data_referencia(driver) -> datetime | None:
     return None
 
 
+def salvar_debug(driver, debug_dir: Path) -> None:
+    """Grava o HTML renderizado e um screenshot da pagina, para diagnostico
+    quando a coleta falha. Nunca levanta excecao (best-effort)."""
+    try:
+        debug_dir.mkdir(parents=True, exist_ok=True)
+        (debug_dir / "pagina_renderizada.html").write_text(driver.page_source, encoding="utf-8")
+        driver.save_screenshot(str(debug_dir / "pagina.png"))
+    except Exception as exc:  # pragma: no cover - diagnostico
+        print(f"Aviso: falha ao salvar debug ({exc})")
+
+
 def coletar(
     url: str = URL_FAIXA_ETARIA,
     headless: bool = True,
     timeout: int = 60,
     debug_dir: Path | None = None,
 ) -> DadosB3:
-    """Fluxo completo: abre a pagina, le a tabela e devolve os totais."""
+    """Fluxo completo: abre a pagina, le a tabela e devolve os totais. Se
+    debug_dir for informado, salva HTML/screenshot mesmo quando algo falha."""
     driver = criar_driver(headless=headless)
     try:
-        carregar_pagina(driver, url=url, timeout=timeout)
-        if debug_dir is not None:
-            debug_dir.mkdir(parents=True, exist_ok=True)
-            (debug_dir / "pagina_renderizada.html").write_text(
-                driver.page_source, encoding="utf-8"
-            )
-        data_ref = extrair_data_referencia(driver)
-        numero, posicao, origem = extrair_dados(_tabelas_da_pagina(driver))
-        return DadosB3(data_ref, numero, posicao, origem)
+        try:
+            carregar_pagina(driver, url=url, timeout=timeout)
+            data_ref = extrair_data_referencia(driver)
+            numero, posicao, origem = extrair_dados(_tabelas_da_pagina(driver))
+            return DadosB3(data_ref, numero, posicao, origem)
+        finally:
+            if debug_dir is not None:
+                salvar_debug(driver, debug_dir)
     finally:
         driver.quit()
 

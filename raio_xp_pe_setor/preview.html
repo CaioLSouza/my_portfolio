@@ -1,0 +1,200 @@
+<title>Raio-XP · P/E por Setor — Preview</title>
+<style>
+  :root{
+    --bg:#eceef1; --panel:#ffffff; --ink:#141a21; --muted:#5b6672;
+    --navy:#2e3b4e; --navy-2:#3b4a5e; --line:#d9dee4; --zebra:#f3f5f7;
+    --dot:#8eb3df; --bar:#2f3a45; --accent:#b23b3b; --shadow:rgba(20,30,45,.10);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#12161c; --panel:#1a212b; --ink:#e7ecf2; --muted:#93a0af;
+      --navy:#22303f; --navy-2:#2b3a4c; --line:#2b3542; --zebra:#20272f;
+      --dot:#9cc0ea; --bar:#c4ccd6; --accent:#e0736f; --shadow:rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eceef1; --panel:#ffffff; --ink:#141a21; --muted:#5b6672;
+    --navy:#2e3b4e; --navy-2:#3b4a5e; --line:#d9dee4; --zebra:#f3f5f7;
+    --dot:#8eb3df; --bar:#2f3a45; --accent:#b23b3b; --shadow:rgba(20,30,45,.10);
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161c; --panel:#1a212b; --ink:#e7ecf2; --muted:#93a0af;
+    --navy:#22303f; --navy-2:#2b3a4c; --line:#2b3542; --zebra:#20272f;
+    --dot:#9cc0ea; --bar:#c4ccd6; --accent:#e0736f; --shadow:rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:34px 22px 70px}
+  header.top{display:flex; justify-content:space-between; align-items:flex-end;
+    gap:18px; flex-wrap:wrap; border-bottom:2px solid var(--navy); padding-bottom:16px}
+  .brand{display:flex; align-items:center; gap:12px}
+  .logo{background:var(--navy); color:#fff; font-weight:800; letter-spacing:.06em;
+    padding:7px 10px; border-radius:3px; font-size:15px}
+  h1{font-size:22px; margin:0; font-weight:700; letter-spacing:-.01em; text-wrap:balance}
+  .sub{color:var(--muted); font-size:13px; margin-top:3px}
+  .controls{display:flex; gap:8px; align-items:center}
+  .seg{display:inline-flex; background:var(--panel); border:1px solid var(--line);
+    border-radius:7px; overflow:hidden; box-shadow:0 1px 2px var(--shadow)}
+  .seg button{border:0; background:transparent; color:var(--muted); font:inherit;
+    font-size:13px; font-weight:600; padding:7px 14px; cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--navy); color:#fff}
+  .note{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:8px; padding:14px 18px; margin:22px 0 8px; font-size:13.5px; color:var(--muted);
+    box-shadow:0 1px 3px var(--shadow)}
+  .note b{color:var(--ink)}
+  .tables{display:flex; flex-direction:column; gap:30px; margin-top:26px}
+  .caption{font-weight:700; font-size:15px; margin:0 0 8px}
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; box-shadow:0 2px 10px var(--shadow)}
+  .scroll{overflow-x:auto}
+  table{border-collapse:collapse; width:100%; min-width:560px; font-size:13.5px}
+  thead .band th{background:var(--navy); color:#fff; font-weight:700; font-size:15px;
+    text-align:center; padding:9px 10px; letter-spacing:.01em}
+  thead .cols th{background:var(--navy-2); color:#eaf0f7; font-weight:600; font-size:12.5px;
+    padding:7px 10px; text-align:center; white-space:nowrap}
+  thead .cols th:first-child{text-align:left; padding-left:16px}
+  tbody td{padding:6px 10px; text-align:center; border-bottom:1px solid var(--line);
+    font-variant-numeric:tabular-nums}
+  tbody td:first-child{text-align:left; padding-left:16px; color:var(--ink)}
+  tbody tr:nth-child(even){background:var(--zebra)}
+  tbody tr.total td{font-style:italic; font-weight:700; border-top:2px solid var(--navy);
+    background:transparent}
+  .bar{display:block}
+  tfoot td{padding:10px 16px; font-size:12px; color:var(--muted); font-style:italic}
+  .legend{display:flex; gap:18px; align-items:center; margin:8px 2px 0; font-size:12.5px; color:var(--muted)}
+  .legend .dot{width:10px; height:10px; border-radius:50%; background:var(--dot); display:inline-block}
+  .legend span{display:inline-flex; align-items:center; gap:7px}
+  .legend .ln{width:26px; height:2px; background:var(--bar); display:inline-block}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">XP</div>
+      <div>
+        <h1 data-i18n="title">Raio-XP da Bolsa — P/E 12m fwd. por Setor</h1>
+        <div class="sub" data-i18n="sub">MSCI · Brasil vs. Latam / Emergentes / Mundo — prévia das tabelas geradas pela macro</div>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Language">
+        <button id="pt" aria-pressed="true">PT</button>
+        <button id="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="note" data-i18n="note"></div>
+  <div class="legend">
+    <span><span class="ln"></span> <span data-i18n="lg1">linha = mín→máx (10 anos)</span></span>
+    <span><span class="dot"></span> <span data-i18n="lg2">bolinha = P/E atual na faixa</span></span>
+  </div>
+
+  <div class="tables" id="tables"></div>
+</div>
+
+<script>
+const DATA = {
+  sectors:{
+    en:["Cons. Discretionary","Cons. Staples","Financials","Technology","Energy",
+        "Industrials","Materials","Utilities","Healthcare","Telecom","Ibovespa"],
+    pt:["Cons. Discricionário","Cons. Básico","Financeiro","Tecnologia","Energia",
+        "Indústria","Materiais","Utilities","Saúde","Telecom","Ibovespa"]
+  },
+  // [peBrazil, pe, avg, min, max]  (pe/avg/min/max em %)
+  latam:[[9.8,91,95,56,116],[14.3,89,94,78,106],[8.6,95,99,75,109],[16.4,91,89,27,102],
+         [4.7,108,97,47,118],[15.9,105,127,96,190],[8.6,85,83,65,112],[11.5,90,97,76,108],
+         [14.3,100,100,58,102],[11.7,92,105,82,137],[8.3,87,91,82,103]],
+  // [pe, avg, min, max]
+  em:[[80,119,58,234],[82,83,61,108],[95,113,78,162],[141,140,57,362],[55,113,45,641],
+      [115,196,97,428],[86,72,45,164],[92,90,53,137],[56,79,44,143],[90,83,50,124],[73,84,53,124]],
+  world:[[48,106,32,204],[73,90,55,123],[67,83,56,125],[83,94,43,217],[41,65,35,324],
+         [70,132,70,255],[61,56,34,138],[68,66,44,85],[78,124,63,208],[66,87,56,133],[46,61,39,98]]
+};
+
+const I18N = {
+  pt:{title:"Raio-XP da Bolsa — P/E 12m fwd. por Setor",
+    sub:"MSCI · Brasil vs. Latam / Emergentes / Mundo — prévia das tabelas geradas pela macro",
+    note:"<b>Prévia do resultado.</b> Ao abrir a planilha no Bloomberg e rodar a macro <b>AtualizarTudo</b>, "+
+      "estas tabelas são montadas automaticamente em <b>português e inglês</b>, com 10 anos de histórico de "+
+      "P/E projetado (12m) por setor. As <b>barras</b> são desenhadas via macro.",
+    lg1:"linha = mín→máx (10 anos)", lg2:"bolinha = P/L atual na faixa",
+    titles:["Brasil vs. Latam","Brasil vs. Emergentes","Brasil vs. ACWI"],
+    caps:["Brasil vs. Latam — P/L proj. 12m","Brasil vs. Emergentes — P/L proj. 12m","Brasil vs. Mundo — P/L proj. 12m"],
+    h1:["Setores MSCI","P/L Brasil","P/L","Média 10a","Mín","Máx","Faixa"],
+    h2:["Setores MSCI","P/L","Média 10a","Mín","Máx","Faixa"],
+    src:"Fonte: Bloomberg, XP Research. Data-base: 30/06/2026."},
+  en:{title:"Raio-XP — 12M fwd. P/E by Sector",
+    sub:"MSCI · Brazil vs. Latam / EM / World — preview of the macro-built tables",
+    note:"<b>Preview of the output.</b> Open the workbook in Bloomberg and run the <b>AtualizarTudo</b> macro; "+
+      "these tables are built automatically in <b>Portuguese and English</b>, with 10 years of 12M forward "+
+      "P/E history by sector. The <b>range bars</b> are drawn by the macro.",
+    lg1:"line = min→max (10y)", lg2:"dot = current P/E within range",
+    titles:["Brazil vs. Latam","Brazil vs. EM","Brazil vs. ACWI"],
+    caps:["Brazil vs Latam — 12M fwd. P/E","Brazil vs EM — 12M fwd. P/E","Brazil vs World — 12M fwd. P/E"],
+    h1:["MSCI Sectors","P/E Brazil","P/E","10y Avg.","Min","Max","Range"],
+    h2:["MSCI Sectors","P/E","10y Avg.","Min","Max","Range"],
+    src:"Source: Bloomberg, XP Research. Date as of 06/30/2026."}
+};
+
+function bar(val,min,max){
+  const W=150,H=22,pad=10;
+  const x0=pad, x1=W-pad;
+  let f=(val-min)/(max-min); f=Math.max(0,Math.min(1,f));
+  const xd=x0+(x1-x0)*f, y=H/2;
+  return `<svg class="bar" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+    <line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="var(--bar)" stroke-width="1.8"/>
+    <line x1="${x0}" y1="${y-4}" x2="${x0}" y2="${y+4}" stroke="var(--bar)" stroke-width="1.2"/>
+    <line x1="${x1}" y1="${y-4}" x2="${x1}" y2="${y+4}" stroke="var(--bar)" stroke-width="1.2"/>
+    <circle cx="${xd}" cy="${y}" r="3.4" fill="var(--dot)"/></svg>`;
+}
+
+function renderTable(lang,idx,rows,hasBr){
+  const L=I18N[lang], secs=DATA.sectors[lang];
+  const heads = hasBr?L.h1:L.h2;
+  const ncol = heads.length;
+  let head = `<thead>
+    <tr class="band"><th colspan="${ncol}">${L.titles[idx]}</th></tr>
+    <tr class="cols">${heads.map(h=>`<th>${h}</th>`).join("")}</tr></thead>`;
+  let body = rows.map((r,i)=>{
+    const total = i===rows.length-1;
+    let cells;
+    if(hasBr){ // [peBr, pe, avg, min, max]
+      cells=`<td>${secs[i]}</td><td>${r[0].toFixed(1)}</td><td>${r[1]}%</td>`+
+            `<td>${r[2]}%</td><td>${r[3]}%</td><td>${r[4]}%</td><td>${bar(r[1],r[3],r[4])}</td>`;
+    }else{ // [pe, avg, min, max]
+      cells=`<td>${secs[i]}</td><td>${r[0]}%</td><td>${r[1]}%</td>`+
+            `<td>${r[2]}%</td><td>${r[3]}%</td><td>${bar(r[0],r[2],r[3])}</td>`;
+    }
+    return `<tr class="${total?'total':''}">${cells}</tr>`;
+  }).join("");
+  let foot=`<tfoot><tr><td colspan="${ncol}">${L.src}</td></tr></tfoot>`;
+  return `<div><p class="caption">${L.caps[idx]}</p>
+    <div class="card"><div class="scroll"><table>${head}<tbody>${body}</tbody>${foot}</table></div></div></div>`;
+}
+
+let LANG="pt";
+function render(){
+  const L=I18N[LANG];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k=el.getAttribute("data-i18n"); if(L[k]!==undefined) el.innerHTML=L[k];
+  });
+  document.getElementById("tables").innerHTML =
+    renderTable(LANG,0,DATA.latam,true)+
+    renderTable(LANG,1,DATA.em,false)+
+    renderTable(LANG,2,DATA.world,false);
+  document.title = LANG==="pt" ? "Raio-XP · P/E por Setor — Prévia" : "Raio-XP · P/E by Sector — Preview";
+}
+function setLang(l){
+  LANG=l;
+  pt.setAttribute("aria-pressed", l==="pt"); en.setAttribute("aria-pressed", l==="en");
+  render();
+}
+document.getElementById("pt").onclick=()=>setLang("pt");
+document.getElementById("en").onclick=()=>setLang("en");
+render();
+</script>

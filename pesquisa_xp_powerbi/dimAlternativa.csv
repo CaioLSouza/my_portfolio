@@ -1,0 +1,1143 @@
+﻿AnswerID,QuestionID,RotuloPT,RotuloEN,Ordem,Origem
+Q001-A01,Q001,Centro Oeste,Midwest,1,curada
+Q001-A02,Q001,Nordeste,Northeast,2,curada
+Q001-A03,Q001,Norte,North,3,curada
+Q001-A04,Q001,Sudeste,Southeast,4,curada
+Q001-A05,Q001,Sul,South,5,curada
+Q002-A01,Q002,0% a 25%,0% to 25%,1,curada
+Q002-A02,Q002,25% a 50%,25% to 50%,2,curada
+Q002-A03,Q002,0% a 10%,0% to 10%,3,curada
+Q002-A04,Q002,10% a 25%,10% to 25%,4,curada
+Q002-A05,Q002,50% a 75%,50% to 75%,5,curada
+Q002-A06,Q002,75% a 100%,75% to 100%,6,curada
+Q002-A07,Q002,Total,,7,curada
+Q003-A01,Q003,Não pretendem alterar seus investimentos em renda variável,Do not wish to alter them,1,curada
+Q003-A02,Q003,Planejam diminuir a alocação em renda variável,Wish to decrease them,2,curada
+Q003-A03,Q003,Planejam aumentar a alocação em renda variável,Wish to increase them,3,curada
+Q003-A04,Q003,Total,,4,curada
+Q004-A01,Q004,Ações,Equities,1,curada
+Q004-A02,Q004,Fundos Imobiliários,REITs,2,curada
+Q004-A03,Q004,"Investimentos Internacionais (dólar, fundos, ETFs, etc)",International Investments,3,curada
+Q004-A04,Q004,Fundos Multimercado,Hedge Funds,4,curada
+Q004-A05,Q004,Fundos de Renda Variável,Equities Funds,5,curada
+Q004-A06,Q004,Ouro e commodities,Gold,6,curada
+Q004-A07,Q004,Fundos de Renda Fixa,Fixed Income Funds,7,curada
+Q004-A08,Q004,Tesouro Direto e Renda Fixa,Fixed Income,8,curada
+Q004-A09,Q004,Criptoativos,Cryptocurrencies,9,curada
+Q004-A10,Q004,Outra,,10,curada
+Q005-A01,Q005,0% a 20%,0% to 20%,1,curada
+Q005-A02,Q005,20% a 40%,20% to 40%,2,curada
+Q005-A03,Q005,40% a 60%,40% to 60%,3,curada
+Q005-A04,Q005,60% a 80%,60% to 80%,4,curada
+Q005-A05,Q005,80% a 100%,80% to 100%,5,curada
+Q005-A06,Q005,0% a 5%,0% to 5%,6,curada
+Q005-A07,Q005,5% a 10%,5% to 10%,7,curada
+Q005-A08,Q005,10% a 20%,10% to 20%,8,curada
+Q005-A09,Q005,20% a 50%,20% to 50%,9,curada
+Q005-A10,Q005,Acima de 50%,Above 50%,10,curada
+Q006-A01,Q006,Fundos Internacionais,,1,curada
+Q006-A02,Q006,Ações internacionais,,2,curada
+Q006-A03,Q006,ETFs,,3,curada
+Q006-A04,Q006,Dólar,,4,curada
+Q006-A05,Q006,Bonds,,5,curada
+Q006-A06,Q006,Não estão interessados por investimentos internacionais,,6,curada
+Q006-A07,Q006,Outros,,7,curada
+Q007-A01,Q007,Entre 125 mil e 135 mil pontos,,1,curada
+Q007-A02,Q007,Entre 115 mil e 125 mil pontos,,2,curada
+Q007-A03,Q007,Entre 135 mil e 145 mil pontos,,3,curada
+Q007-A04,Q007,Entre 105 mil e 115 mil pontos,,4,curada
+Q007-A05,Q007,Acima de 145 mil pontos,,5,curada
+Q007-A06,Q007,Abaixo de 95 mil pontos,,6,curada
+Q007-A07,Q007,Acima de 100 mil pontos,,7,curada
+Q007-A08,Q007,Entre 90 mil e 100 mil pontos,,8,curada
+Q007-A09,Q007,Entre 80 mil e 90 mil pontos,,9,curada
+Q007-A10,Q007,Entre 70 mil e 80 mil pontos,,10,curada
+Q007-A11,Q007,Abaixo de 70 mil pontos,,11,curada
+Q007-A12,Q007,Acima de 120 mil pontos,,12,curada
+Q007-A13,Q007,Entre 100 mil e 120 mil pontos,,13,curada
+Q007-A16,Q007,Abaixo de 80 mil pontos,,16,curada
+Q007-A17,Q007,Acima de 150 mil pontos,,17,curada
+Q007-A18,Q007,Acima de 140 mil pontos,,18,curada
+Q007-A19,Q007,Acima de 130 mil pontos,,19,curada
+Q007-A20,Q007,Entre 140 e 150 mil pontos,,20,curada
+Q007-A21,Q007,Entre 130 e 140 mil pontos,,21,curada
+Q007-A22,Q007,Entre 120 mil e 130 mil pontos,,22,curada
+Q007-A23,Q007,Entre 110 mil e 120 mil pontos,,23,curada
+Q007-A24,Q007,Entre 100 mil e 110 mil pontos,,24,curada
+Q007-A25,Q007,Abaixo de 100 mil pontos,,25,curada
+Q007-A27,Q007,Abaixo de 110 mil pontos,,27,curada
+Q007-A28,Q007,Abaixo de 90 mil pontos,,28,curada
+Q007-A29,Q007,Média,,29,curada
+Q007-A32,Q007,Entre 130 mil e 140 mil pontos,135000,32,curada
+Q007-A36,Q007,Total,,36,curada
+Q008-A01,Q008,Crescimento econômico fraco na China,China disapointing economic recovery,1,curada
+Q008-A02,Q008,Recessão nos EUA,US recession,2,curada
+Q008-A03,Q008,Política monetária mais dura nos mercados desenvolvidos,Tighter monetary policy in DM,3,curada
+Q008-A04,Q008,Riscos fiscais no Brasil,Domestic fiscal risks,4,curada
+Q008-A05,Q008,Inflação em alta no Brasil,Higher domestic inflation,5,curada
+Q008-A06,Q008,Juros mais altos no Brasil,Higher domestic rates,6,curada
+Q008-A07,Q008,Dólar mais alto,Strong USD,7,curada
+Q008-A08,Q008,Instabilidade política,Political instability,8,curada
+Q008-A09,Q008,Riscos geopolíticos,Geopolitical events,9,curada
+Q008-A10,Q008,Interferência em empresas estatais,Government intervention on SOEs,10,curada
+Q008-A11,Q008,Política tarifária americana,US tariff policy,11,curada
+Q008-A12,Q008,Desaceleração econômica global,Global economic slowdown,12,curada
+Q008-A13,Q008,Juros mais altos nos mercados desenvolvidos,Higher interest rates in developed markets,13,curada
+Q008-A14,Q008,Juros mais altos que o esperado o Brasil,Higher-than-expected interest rates in Brazil,14,curada
+Q008-A15,Q008,Instabilidade política/ Eleições,Political instability / elections,15,curada
+Q008-A18,Q008,Riscos geopolíticos/ Guerra,Geopolitical risks / war,18,curada
+Q008-A19,Q008,Choque do petróleo,Oil shock,19,curada
+Q008-A20,Q008,Outra,Others,20,curada
+Q008-A21,Q008,"Entre as carteiras recomendas XP, seus clientes se interessam por:",,21,curada
+Q008-A22,Q008,Não estão interessados pelas carteiras recomendadas XP,,22,curada
+Q008-A23,Q008,Top Dividendos XP,,23,curada
+Q008-A24,Q008,Top 10 Ações XP,,24,curada
+Q008-A25,Q008,Carteira de Fundos Imobiliários XP,,25,curada
+Q008-A26,Q008,Top 10 Ações Internacionais (BDRs) XP,,26,curada
+Q008-A27,Q008,Top Small Caps,,27,curada
+Q008-A28,Q008,ESG XP,,28,curada
+Q008-A29,Q008,Outros,,29,curada
+Q009-A01,Q009,Agro,Agribusiness,1,curada
+Q009-A02,Q009,Bens de Capital,Capital Goods,2,curada
+Q009-A03,Q009,Educação,Education,3,curada
+Q009-A04,Q009,Financeiro,Financials,4,curada
+Q009-A05,Q009,Alimentos & Bebidas,Food & Beverages,5,curada
+Q009-A06,Q009,Saúde,Health Care,6,curada
+Q009-A07,Q009,Mineração & Siderurgia,Metals & Mining,7,curada
+Q009-A08,Q009,Petróleo & Gás,Oil & Gas,8,curada
+Q009-A09,Q009,Papel & Celulose,Pulp & Paper,9,curada
+Q009-A10,Q009,Imobiliário,Real Estate,10,curada
+Q009-A11,Q009,Varejo,Retail,11,curada
+Q009-A12,Q009,"Telecomunicações, Mídia e Tecnologia",TMT,12,curada
+Q009-A13,Q009,Elétricas & Saneamento,Utilities,13,curada
+Q009-A14,Q009,Transportes,Transportation,14,curada
+Q010-A01,Q010,0,,1,curada
+Q010-A02,Q010,1,,2,curada
+Q010-A03,Q010,2,,3,curada
+Q010-A04,Q010,3,,4,curada
+Q010-A05,Q010,4,,5,curada
+Q010-A06,Q010,5,,6,curada
+Q010-A07,Q010,6,,7,curada
+Q010-A08,Q010,7,,8,curada
+Q010-A09,Q010,8,,9,curada
+Q010-A10,Q010,9,,10,curada
+Q010-A11,Q010,10,,11,curada
+Q010-A12,Q010,Resposta média,,12,curada
+Q011-A01,Q011,0,,1,curada
+Q011-A02,Q011,1,,2,curada
+Q011-A03,Q011,2,,3,curada
+Q011-A04,Q011,3,,4,curada
+Q011-A05,Q011,4,,5,curada
+Q011-A06,Q011,5,,6,curada
+Q011-A07,Q011,6,,7,curada
+Q011-A08,Q011,7,,8,curada
+Q011-A09,Q011,8,,9,curada
+Q011-A10,Q011,9,,10,curada
+Q011-A11,Q011,10,,11,curada
+Q011-A12,Q011,Resposta média,,12,curada
+Q012-A01,Q012,Mais otimista,More optimistic,1,curada
+Q012-A02,Q012,Mais pessimista,More pessimist,2,curada
+Q012-A03,Q012,Não mudou,Not changed,3,curada
+Q013-A01,Q013,Abaixo de 9%,Under 9%,1,curada
+Q013-A02,Q013,Entre 9% e 10%,Between 9% to 10%,2,curada
+Q013-A03,Q013,Entre 10% e 11%,Between 10% to 11%,3,curada
+Q013-A04,Q013,Entre 11% e 12%,Between 11% to 12%,4,curada
+Q013-A05,Q013,"Entre 12% e 12,75%",Between 12% to 12.75%,5,curada
+Q013-A06,Q013,"Acima de 12,75%",Above 12.75%,6,curada
+Q015-A01,Q015,Diariamente,Daily,1,curada
+Q015-A02,Q015,Semanalmente,Weekly,2,curada
+Q015-A03,Q015,Mensalmente,Monthly,3,curada
+Q015-A04,Q015,Trimestralmente,Quarterly,4,curada
+Q015-A05,Q015,Anualmente,Yearly,5,curada
+Q015-A06,Q015,Outra,Other,6,curada
+Q014-A01,Q014,Abaixo de 100 mil pontos,100000,1,curada
+Q014-A02,Q014,Entre 100 mil e 110 mil pontos,105000,2,curada
+Q014-A03,Q014,Entre 110 mil e 120 mil pontos,115000,3,curada
+Q014-A04,Q014,Entre 120 mil e 130 mil pontos,125000,4,curada
+Q014-A05,Q014,Entre 130 mil e 140 mil pontos,135000,5,curada
+Q014-A06,Q014,Acima de 140 mil pontos,140000,6,curada
+Q014-A07,Q014,Abaixo de 110 mil pontos,110000,7,curada
+Q014-A11,Q014,Entre 140 mil e 150 mil pontos,145000,11,curada
+Q014-A12,Q014,Entre 150 mil e 160 mil pontos,155000,12,curada
+Q014-A13,Q014,Acima de 160 mil pontos,160000,13,curada
+Q016-A01,Q016,Cortes de juros no Brasil;,Cortes de juros no Brasil,1,curada
+Q016-A02,Q016,Queda de juros nos EUA e no mundo,Queda de juros nos EUA e mundo,2,curada
+Q016-A03,Q016,Mercado voltando a ter performance sólida,Mercado voltando a ter performance sólida,3,curada
+Q016-A04,Q016,Melhora na recuperação econômica global;,Melhora na recuperação econômica da China,4,curada
+Q016-A05,Q016,Mudança de rumo na política econômica;,Mudança de rumo na política econômica,5,curada
+Q016-A06,Q016,Melhora na recuperação econômica global,Melhora na recuperação econômica global,6,curada
+Q016-A07,Q016,Outra,Outra,7,curada
+Q017-A01,Q017,Small Caps;,Small Caps,1,curada
+Q017-A02,Q017,Dividendos;,Dividendos,2,curada
+Q017-A03,Q017,Large Caps;,Large Caps,3,curada
+Q017-A04,Q017,Commodities;,Commodities,4,curada
+Q017-A05,Q017,Ações com exposição a dólar;,Ações com exposição a dólar,5,curada
+Q017-A06,Q017,Ações defensivas;,Ações defensivas,6,curada
+Q017-A07,Q017,Alto momentum;,Alto momentum,7,curada
+Q017-A08,Q017,Teses de turnaround;,Teses de turnaround,8,curada
+Q017-A09,Q017,Ações de alto crescimento;,Ações de alto crescimento,9,curada
+Q017-A10,Q017,Outra;,Outra,10,curada
+Q018-A01,Q018,Estou posicionado em um nível que acho adequado,I am positioned at a level that I think is appropriate,1,curada
+Q018-A02,Q018,Estou me preparando para aumentar exposição,I'm getting ready to increase exposure,2,curada
+Q018-A03,Q018,Devo comprar quando o Ibovespa subir de forma mais consistente,I should buy when the Ibovespa  rises more consistently,3,curada
+Q018-A04,Q018,Só compro quando meus investimentos no setor tiverem se recuperado,I only buy when my investments in the sector have recovered,4,curada
+Q018-A05,Q018,Só invisto se tiver muito conforto pois perdi muito dinheiro nos últimos meses/anos,I only invest if I feel very comfortable because I lost a lot of money in the last few months,5,curada
+Q019-A01,Q019,A recente onda de Recuperações Judiciais no agro afetou a decisão de investimento no setor,The recent wave of judicial recoveries in the agribusiness sector has affected investiment decisions in the sector,1,curada
+Q019-A02,Q019,"A ciclicidade, questões climáticas e efeitos macro (ex. taxa de câmbio) são fatores que reduzem o apetite pelo setor","The cilicality, climate questions and macro effects (like exchange rates) are factors the reduce the appetite for the sector",2,curada
+Q019-A03,Q019,"Além de investir via ações, meus clientes operam derivativos agrícolas também","In addition to investiments through stocks, my clients also trade agricultural derivatives",3,curada
+Q019-A04,Q019,"A liquidez dos papéis com IPO mais recente (ex. TTEN, SOJA, JALL, VITT) reduz o apetite do investidor",The liquidity of the stocks that have had recent IPOs reduce the apetite of the investor,4,curada
+Q019-A05,Q019,Por sua relevância nas discussões da reforma tributária prefiro ficar fora do setor,"Due its relevance in Tax Reform discussions, I prefer to stay out of the sector",5,curada
+Q019-A06,Q019,Quais são os 3 papéis de maior procura pelos seus clientes?,,6,curada
+Q019-A07,Q019,Seus clientes acompanham a temporada de resultados?,,7,curada
+Q019-A08,Q019,"Sim, para acharem oportunidades de curto prazo",,8,curada
+Q019-A09,Q019,"Sim, para buscarem oportunidades de longo prazo",,9,curada
+Q019-A10,Q019,"Sim, para monitoramento da carteira",,10,curada
+Q019-A11,Q019,Não acompanham,,11,curada
+Q019-A12,Q019,"Com a alta do dólar, como seus clientes estão se posicionando?",,12,curada
+Q019-A13,Q019,Ações internacionais,,13,curada
+Q019-A14,Q019,Renda fixa internacional,,14,curada
+Q019-A15,Q019,Ações de empresas brasileiras expostas ao dólar,,15,curada
+Q019-A16,Q019,Renda fixa local,,16,curada
+Q019-A17,Q019,Diretamente em moeda americana (dólar) ou fundo cambial,,17,curada
+Q019-A18,Q019,Meus clientes não estão fazendo nenhuma alteração na alocação,,18,curada
+Q019-A19,Q019,Em qual nível de Selic seus clientes devem voltar a alocar em renda variável?,,19,curada
+Q019-A20,Q019,0.12,,20,curada
+Q019-A21,Q019,0.11,,21,curada
+Q019-A22,Q019,0.1,,22,curada
+Q019-A23,Q019,0.09,,23,curada
+Q019-A24,Q019,0.08,,24,curada
+Q019-A25,Q019,Abaixo 8%,,25,curada
+Q019-A26,Q019,Qual o nível que você espera que o Ibovespa atinja nos próximos 12 meses?,,26,curada
+Q019-A27,Q019,Abaixo 120 mil pontos,120000,27,curada
+Q019-A28,Q019,Entre 120 mil e 130 mil pontos,125000,28,curada
+Q019-A29,Q019,Entre 130 mil e 140 mil pontos,135000,29,curada
+Q019-A30,Q019,Entre 140 mil e 150 mil pontos,145000,30,curada
+Q019-A31,Q019,Entre 150 mil e 160 mil pontos,155000,31,curada
+Q019-A32,Q019,Entre 160 e 170 mil pontos,165000,32,curada
+Q019-A33,Q019,Acima 170 mil pontos,170000,33,curada
+Q019-A34,Q019,Houve alteração nas carteiras de seus clientes após os recentes anúncios de estímulos na China?,,34,curada
+Q019-A35,Q019,"Sim, aumentaram exposição em ativos chineses ou expostos à China",,35,curada
+Q019-A36,Q019,"Não, mas meus clientes planejam aumentar a alocação em ativos chineses ou expostos à China",,36,curada
+Q019-A37,Q019,"Não, pois meus clientes já estão posicionados em ativos chineses ou expostos à China",,37,curada
+Q019-A38,Q019,"Não, e não planejam pois os clientes não acreditam numa mudança estrutural na China",,38,curada
+Q019-A39,Q019,Outra,,39,curada
+Q019-A40,Q019,Houve alteração no sentimento de seus clientes em relação à renda variável após a temporada de resultados do 3o trimestre?,,40,curada
+Q019-A41,Q019,"Sim, ficaram mais otimistas",,41,curada
+Q019-A42,Q019,"Sim, ficaram mais neutros",,42,curada
+Q019-A43,Q019,"Sim, ficaram mais pessimistas",,43,curada
+Q019-A44,Q019,"Não, permaneceram otimistas",,44,curada
+Q019-A45,Q019,"Não, permaneceram neutros",,45,curada
+Q019-A46,Q019,"Não, permaneceram pessimistas",,46,curada
+Q019-A47,Q019,Houve ou haverá alteração nas carteiras de renda variável de seus clientes em meio às eleições americanas?,,47,curada
+Q019-A48,Q019,"Sim, aumentaram ou planejam aumentar a exposição em setores de exportação de commodities visando vitória de Trump",,48,curada
+Q019-A49,Q019,"Sim, aumentaram ou planejam aumentar a exposição em outros setores visando vitória de Trump",,49,curada
+Q019-A50,Q019,"Sim, aumentaram ou planejam aumentar a exposição em investimento verde visando vitória da Kamala",,50,curada
+Q019-A51,Q019,"Sim, aumentaram ou planejam aumentar a exposição em outros setores visando vitória de Kamala",,51,curada
+Q019-A52,Q019,Não fizeram e não planejam efetuar mudanças baseado no resultado das eleições presidenciais americanas,,52,curada
+Q019-A53,Q019,Qual o nível que você espera que o Ibovespa atinja ao fim de 2026?,,53,curada
+Q019-A54,Q019,Abaixo de 140 mil pontos,140000,54,curada
+Q019-A57,Q019,Entre 160 mil e 170 mil pontos,165000,57,curada
+Q019-A58,Q019,Entre 170 mil e 180 mil pontos,175000,58,curada
+Q019-A59,Q019,Entre 180 e 190 mil pontos,185000,59,curada
+Q019-A60,Q019,Entre 190 e 200 mil pontos,195000,60,curada
+Q019-A61,Q019,Entre 200 e 210 mil pontos,205000,61,curada
+Q019-A62,Q019,Acima de 210 mil pontos,210000,62,curada
+Q019-A64,Q019,Abaixo de 110 mil pontos,110000,64,curada
+Q019-A65,Q019,Entre 110 mil e 120 mil pontos,115000,65,curada
+Q019-A69,Q019,Entre 150 e 160 mil pontos,155000,69,curada
+Q019-A72,Q019,Quais características na renda variável que seus clientes estão mais interessados em investir neste momento?,,72,curada
+Q019-A73,Q019,Ações dolarizadas,,73,curada
+Q019-A74,Q019,Ações defensivas,,74,curada
+Q019-A75,Q019,Ações cíclicas,,75,curada
+Q019-A76,Q019,Ações com baixa alavancagem financeira,,76,curada
+Q019-A77,Q019,"Ações com carrego sólido (altas TIRs, geração de caixa)",,77,curada
+Q019-A78,Q019,Ações com uma forte dinâmica de lucros,,78,curada
+Q019-A79,Q019,Ações de crescimento,,79,curada
+Q019-A80,Q019,"Como se tornou o sentimento de seus clientes em relação à renda variável após o anúncio do pacote de corte de gastos, comparado ao que era antes?",,80,curada
+Q019-A81,Q019,Pessimista,,81,curada
+Q019-A82,Q019,Levemente pessimista,,82,curada
+Q019-A83,Q019,Neutro,,83,curada
+Q019-A84,Q019,Levemente otimista,,84,curada
+Q019-A85,Q019,Otimista,,85,curada
+Q019-A86,Q019,"Em períodos de maior incerteza, seus clientes costumam preferir:",,86,curada
+Q019-A87,Q019,Manter exposição em renda variável,,87,curada
+Q019-A88,Q019,Reduzir exposição em renda variável,,88,curada
+Q019-A89,Q019,Aumentar exposição em renda variável,,89,curada
+Q019-A90,Q019,Zerar exposição em renda variável,,90,curada
+Q019-A91,Q019,"A alta do custo de vida, refletida nas leituras recentes e expectativas para o IPCA, tem levado seus clientes a reduzir os aportes em renda variável?",,91,curada
+Q019-A92,Q019,Sim,,92,curada
+Q019-A93,Q019,Não,,93,curada
+Q019-A94,Q019,Como está a expectativa de seus clientes para o desempenho das empresas nesta temporada de resultados?,,94,curada
+Q019-A95,Q019,Fortemente negativa,,95,curada
+Q019-A96,Q019,Negativa,,96,curada
+Q019-A97,Q019,Neutra,,97,curada
+Q019-A98,Q019,Positiva,,98,curada
+Q019-A99,Q019,Fortemente positiva,,99,curada
+Q019-A100,Q019,Quais tipos de papéis seus clientes preferem evitar?,,100,curada
+Q019-A101,Q019,Alta alavancagem financeira,,101,curada
+Q019-A102,Q019,Baixo crescimento,,102,curada
+Q019-A103,Q019,Margens baixas,,103,curada
+Q019-A104,Q019,Exposição a riscos políticos,,104,curada
+Q019-A105,Q019,Alta sensitividade aos juros,,105,curada
+Q019-A106,Q019,Alta sensitividade a inflação,,106,curada
+Q019-A107,Q019,Yields baixos,,107,curada
+Q019-A108,Q019,Beta alto,,108,curada
+Q019-A109,Q019,Quais estratégias de proteção seus clientes utilizam?,,109,curada
+Q019-A110,Q019,Opções,,110,curada
+Q019-A111,Q019,Futuros,,111,curada
+Q019-A112,Q019,Diversificação (ex.: geografia; classes de ativos),,112,curada
+Q019-A113,Q019,Dólar,,113,curada
+Q019-A114,Q019,Alocação tática,,114,curada
+Q019-A115,Q019,Operações estruturadas,,115,curada
+Q019-A116,Q019,Ficar short,,116,curada
+Q019-A117,Q019,Não utilizam estratégias de proteção,,117,curada
+Q019-A118,Q019,Qual o nível de monitoramento de portfólio que seus clientes fazem?,,118,curada
+Q019-A119,Q019,Diariamente,,119,curada
+Q019-A120,Q019,Semanalmente,,120,curada
+Q019-A121,Q019,Mensalmente,,121,curada
+Q019-A122,Q019,Trimestralmente,,122,curada
+Q019-A123,Q019,Semestralmente,,123,curada
+Q019-A124,Q019,Anualmente,,124,curada
+Q019-A125,Q019,Quase nunca,,125,curada
+Q019-A126,Q019,Qual a frequência de rebalanceamento de portfólio que seus clientes fazem?,,126,curada
+Q019-A134,Q019,Quais estratégias de proteção contra a volatilidade alta seus clientes utilizam?,,134,curada
+Q019-A136,Q019,Custo médio (Dollar-Cost Average),,136,curada
+Q019-A137,Q019,Ordens de Stop-Loss,,137,curada
+Q019-A138,Q019,Hedging com Opções,,138,curada
+Q019-A139,Q019,Rebalanceamento de ativos no portfólio,,139,curada
+Q019-A140,Q019,Investimentos em setores defensivos,,140,curada
+Q019-A141,Q019,Investimento a longo prazo,,141,curada
+Q019-A142,Q019,Não utilizam estratégias de proteção contra volatilidade,,142,curada
+Q019-A143,Q019,Quão confiantes seus clientes estão de que seus portfólios estão bem diversificados em relação aos riscos de mercado?,,143,curada
+Q019-A144,Q019,Bem confiante,,144,curada
+Q019-A145,Q019,Meio confiante,,145,curada
+Q019-A146,Q019,Não estou confiante,,146,curada
+Q019-A147,Q019,Qual o horizonte de investimento de seus clientes?,,147,curada
+Q019-A148,Q019,Curto-prazo (menor que 3 meses),,148,curada
+Q019-A149,Q019,Médio-prazo (de 3 meses a 1 ano),,149,curada
+Q019-A150,Q019,Longo-prazo (maior que 1 ano),,150,curada
+Q019-A151,Q019,O horizonte de investimento de seus clientes mudou devido a eventos macroeconômicos recentes?,,151,curada
+Q019-A152,Q019,"Sim, encurtou",,152,curada
+Q019-A153,Q019,"Sim, ficou mais longo",,153,curada
+Q019-A154,Q019,"Não, mas querem mudar",,154,curada
+Q019-A155,Q019,"Não, sem intenção de mudar",,155,curada
+Q019-A156,Q019,O interesse de seus clientes por investimentos internacionais aumentou após o anúncio das tarifas e a volatilidade recente no mercado?,,156,curada
+Q019-A157,Q019,Sim - consideravelmente,,157,curada
+Q019-A158,Q019,Sim - razoavelmente,,158,curada
+Q019-A159,Q019,Sim - levemente,,159,curada
+Q019-A160,Q019,Não mudou,,160,curada
+Q019-A161,Q019,Não - reduziu levemente,,161,curada
+Q019-A162,Q019,Não - reduziu razoavelmente,,162,curada
+Q019-A163,Q019,Não - reduziu consideravelmente,,163,curada
+Q019-A164,Q019,Seus clientes acreditam que o atual ciclo de alta de juros no Brasil está próximo do fim?,,164,curada
+Q019-A165,Q019,Não tem certeza / Preferem não opinar,,165,curada
+Q019-A167,Q019,"Não, ainda veem espaço para novos aumentos",,167,curada
+Q019-A168,Q019,Não acompanham esse tipo de informação,,168,curada
+Q019-A169,Q019,A partir de qual nível de Selic seus clientes começam a se interessar por renda variável?,,169,curada
+Q019-A170,Q019,9%,,170,curada
+Q019-A171,Q019,10%,,171,curada
+Q019-A172,Q019,12%,,172,curada
+Q019-A173,Q019,=< 8%,,173,curada
+Q019-A174,Q019,11%,,174,curada
+Q019-A175,Q019,14%,,175,curada
+Q019-A176,Q019,13%,,176,curada
+Q019-A177,Q019,Como seus clientes costumam reagir a fortes quedas de mercado (ex.: -5% na Bolsa)?,,177,curada
+Q019-A178,Q019,Ficam inseguros e buscam orientação,,178,curada
+Q019-A179,Q019,Aguardam estabilidade antes de agir,,179,curada
+Q019-A180,Q019,Aproveitam para aumentar exposição (oportunidade),,180,curada
+Q019-A181,Q019,Vendem parte da posição para se protegerem,,181,curada
+Q019-A182,Q019,Qual é a percepção predominante dos seus clientes sobre a taxa de câmbio referente ao dólar?,,182,curada
+Q019-A183,Q019,Acreditam que vai subir e querem se proteger,,183,curada
+Q019-A184,Q019,Acreditam que vai permanecer estável,,184,curada
+Q019-A185,Q019,Acreditam que vai cair e estão evitando ativos atrelados,,185,curada
+Q019-A186,Q019,Não consideram relevante para a carteira,,186,curada
+Q019-A187,Q019,As recentes mudanças nas regras do IOF sobre investimentos/previdência alteraram a visão dos seus clientes?,,187,curada
+Q019-A188,Q019,"Sim, reduziu o interesse por previdência privada",,188,curada
+Q019-A189,Q019,"Sim, reduziu o interesse por investimentos internacionais/offshore",,189,curada
+Q019-A190,Q019,"Não, a maioria dos clientes não percebeu ou entendeu a mudança",,190,curada
+Q019-A191,Q019,"Não, mesmo sabendo da mudança, mantiveram as estratégias",,191,curada
+Q019-A192,Q019,Como você avaliaria o nível de compreensão dos seus clientes sobre o atual cenário macro?,,192,curada
+Q019-A193,Q019,Alto - entendem os principais impactos econômicos,,193,curada
+Q019-A194,Q019,"Médio - acompanham, mas com compreensão limitada",,194,curada
+Q019-A195,Q019,"Baixo - ouvem falar, mas não conectam com seus investimentos",,195,curada
+Q019-A196,Q019,Muito baixo - não demonstram interesse ou conhecimento,,196,curada
+Q019-A197,Q019,Como seus clientes enxergam a trajetória da inflação nos próximos 12 meses e como isso tem influenciado o posicionamento deles em investimentos?,,197,curada
+Q019-A198,Q019,Inflação em alta - estão priorizando ativos atrelados à inflação (ex.: Tesouro IPCA),,198,curada
+Q019-A199,Q019,"Inflação estável - estão mantendo uma carteira diversificada, sem grandes mudanças",,199,curada
+Q019-A200,Q019,Inflação em queda - estão buscando mais exposição a renda fixa prefixada ou ações,,200,curada
+Q019-A201,Q019,Não possuem opinião formada sobre a inflação e/ou não alteraram suas carteiras,,201,curada
+Q019-A202,Q019,A performance dos ativos no 1o semestre gerou mudanças nas carteiras dos seus clientes?,,202,curada
+Q019-A203,Q019,"Sim, aumentou interesse em Bolsa brasileira",,203,curada
+Q019-A204,Q019,"Sim, aumentou interesse em ativos internacionais",,204,curada
+Q019-A205,Q019,"Nao, seguiram alocando primordialmente em renda fixa",,205,curada
+Q019-A206,Q019,"Sim, aumentou o interesse em Bolsa brasileira e ativos internacionais",,206,curada
+Q019-A207,Q019,"Diante do contexto recente de alterações nas relações comerciais entre Brasil e EUA, incluindo anúncios de tarifas, quais movimentos de alocação você tem observado nas carteiras dos clientes?",,207,curada
+Q019-A208,Q019,Aumentaram a exposição a ativos dolarizados,,208,curada
+Q019-A209,Q019,Reforçaram posições em ações locais mais defensivas (setores de menor beta ou menos cíclicos),,209,curada
+Q019-A210,Q019,"Aumentaram a alocação em renda fixa local (prefixado, CDI ou IPCA+)",,210,curada
+Q019-A211,Q019,Reduziram risco de forma não estruturada,,211,curada
+Q019-A212,Q019,Não realizaram alterações relevantes nas carteiras,,212,curada
+Q019-A213,Q019,Outro,,213,curada
+Q019-A214,Q019,A expectativa de início do ciclo de cortes na Selic em 2026 influenciou de alguma forma as alocações dos seus clientes?,,214,curada
+Q019-A215,Q019,Aumentaram exposição à bolsa,,215,curada
+Q019-A216,Q019,Reduziram posição em renda fixa,,216,curada
+Q019-A217,Q019,Realocaram de ações defensivas para cíclicas/sensíveis a juros,,217,curada
+Q019-A218,Q019,Mantiveram a estratégia anterior,,218,curada
+Q019-A220,Q019,Houve alteração no sentimento de seus clientes em relação à renda variável após a temporada de resultados do 2º trimestre?,,220,curada
+Q019-A227,Q019,A expectativa da retomada do ciclo de cortes de juros nos EUA está influenciando de alguma forma as alocações dos seus clientes?,,227,curada
+Q019-A228,Q019,"Sim, estão aumentando exposição em renda variável internacional",,228,curada
+Q019-A229,Q019,"Sim, estão aumentando exposição em renda variável local",,229,curada
+Q019-A230,Q019,"Sim, estão se posicionando no mercado de moedas (ex.: comprando moedas de mercados emergentes)",,230,curada
+Q019-A231,Q019,"Não, mantiveram a estratégia anterior",,231,curada
+Q019-A233,Q019,O recém-aprovado PL que irá introduzir a tributação de 10% na fonte sobre dividendos acima de R$ 50 mil por mês alterou a visão dos seus clientes?,,233,curada
+Q019-A234,Q019,"Sim, reduziu o interesse por ações",,234,curada
+Q019-A235,Q019,"Sim, aumentou o interesse por investimentos isentos (ex: FIIs, LCI/LCA)",,235,curada
+Q019-A237,Q019,"Não, a maioria não percebeu ou entendeu a mudança",,237,curada
+Q019-A238,Q019,"Não, os meus clientes não são impactados",,238,curada
+Q019-A240,Q019,Você utiliza ferramentas de Inteligência Artificial para avaliar ou apoiar decisões de investimento?,,240,curada
+Q019-A241,Q019,"Sim, tenho interesse e estou começando a explorar o tema",,241,curada
+Q019-A242,Q019,"Sim, já utilizo regularmente ferramentas de IA no meu dia a dia",,242,curada
+Q019-A243,Q019,"Não, ainda vejo pouca aplicação prática para o meu trabalho",,243,curada
+Q019-A244,Q019,"Ainda não utilizo, mas pretendo aprender mais sobre o assunto",,244,curada
+Q019-A246,Q019,Qual é a alocação dos seus clientes em ações de empresas endividadas?,,246,curada
+Q019-A247,Q019,<5%,,247,curada
+Q019-A248,Q019,5-10%,,248,curada
+Q019-A249,Q019,11-20%,,249,curada
+Q019-A250,Q019,21-30%,,250,curada
+Q019-A251,Q019,31-50%,,251,curada
+Q019-A252,Q019,51-75%,,252,curada
+Q019-A253,Q019,>75%,,253,curada
+Q019-A254,Q019,A partir de qual nível da taxa Selic seus clientes aumentariam alocação em renda variável?,,254,curada
+Q019-A261,Q019,8%,,261,curada
+Q019-A262,Q019,<8%,,262,curada
+Q019-A263,Q019,"Os eventos recentes e volatilidade no crédito privado, alteraram as perspectivas de alocação em renda variavel e outras classes de risco, com seus clientes?",,263,curada
+Q019-A264,Q019,"Nao, seguem inalteradas",,264,curada
+Q019-A265,Q019,"Sim, aumentaram o apetite para outras classes de ativos",,265,curada
+Q019-A266,Q019,"Sim, diminuíram o apetite para outras classes de ativos",,266,curada
+Q019-A267,Q019,Os clientes estão alterando suas perspectivas de alocação em meio aos recentes anúncios de dividendos em antecipação à lei da reforma do Imposto de Renda?,,267,curada
+Q019-A268,Q019,"Ainda não, mas pode influenciar mais adiante",,268,curada
+Q019-A269,Q019,"Sim, houve algum interesse, mas sem mudanças relevantes na alocação",,269,curada
+Q019-A270,Q019,"Não, não houve e não deve haver impacto nas decisões de alocação",,270,curada
+Q019-A271,Q019,"Sim, os clientes aumentaram a alocação em ações de companhias que já anteciparam ou devem antecipar dividendos",,271,curada
+Q019-A272,Q019,Quais características na renda variável que seus clientes estão mais interessados em investir neste momento?2,,272,curada
+Q019-A276,Q019,Ações com sólida geração de caixa e TIR elevada,,276,curada
+Q019-A279,Q019,O cenário eleitoral de 2026 já está influenciando no posicionamento de seus clientes?,,279,curada
+Q019-A280,Q019,"Sim, há algum movimento, mas ainda sem mudanças relevantes no posicionamento",,280,curada
+Q019-A281,Q019,"Sim, os clientes já estão se posicionando de forma relevante pensando nas eleições de 2026",,281,curada
+Q019-A282,Q019,"Ainda não, mas deve ganhar força nos próximos meses",,282,curada
+Q019-A283,Q019,O cenário eleitoral não deve impactar o posicionamento dos meus clientes,,283,curada
+Q019-A284,Q019,"Como você avalia a evolução do interesse dos clientes por fundos passivos (fundos de investimento que acompanham um índice de mercado, replicando sua composição) nos últimos meses/anos?",,284,curada
+Q019-A285,Q019,Diminuiu,,285,curada
+Q019-A286,Q019,Permaneceu estável,,286,curada
+Q019-A287,Q019,Cresceu de forma consistente e relevante,,287,curada
+Q019-A288,Q019,Não possuo percepção clara,,288,curada
+Q019-A289,Q019,"Cresceu, mas em pequena intensidade",,289,curada
+Q019-A290,Q019,Como você avalia a evolução do interesse dos clientes por fundos ativos nos últimos meses/anos?,,290,curada
+Q019-A296,Q019,Em qual nível você acha que a taxa Selic estará no final de 2026?,,296,curada
+Q019-A297,Q019,Entre 13% e 14%,,297,curada
+Q019-A298,Q019,Entre 11% e 12%,,298,curada
+Q019-A299,Q019,Entre 12% e 13%,,299,curada
+Q019-A300,Q019,Entre 14% e 15%,,300,curada
+Q019-A301,Q019,Acima de 15%,,301,curada
+Q019-A302,Q019,Como você avalia o desempenho das carteiras de seus clientes durante a recente alta da bolsa brasileira?,,302,curada
+Q019-A303,Q019,"Os clientes tiveram desempenho acima do Ibovespa, aproveitando bem a alta",,303,curada
+Q019-A304,Q019,"Os clientes capturaram a alta, com performance em linha com o Ibovespa",,304,curada
+Q019-A305,Q019,Os clientes tinham baixa exposição à renda variável brasileira e aproveitaram pouco a alta,,305,curada
+Q019-A306,Q019,"Os clientes estavam expostos à renda variável, mas em ativos que apresentaram desempenho mais fraco, abaixo do Ibovespa",,306,curada
+Q019-A308,Q019,"Nessa mesma linha, com a forte alta recente da Bolsa, como você avalia a atratividade das ações brasileiras no momento?",,308,curada
+Q019-A309,Q019,"Acredito que ficaram um pouco mais caras, mas ainda vejo valor",,309,curada
+Q019-A310,Q019,"Considero que ficaram caras após a alta, com pouca atratividade",,310,curada
+Q019-A311,Q019,Acredito que continuam muito atrativas,,311,curada
+Q019-A312,Q019,Não tenho percepção clara,,312,curada
+Q019-A313,Q019,Como a recente escalada da guerra no Oriente Médio e o aumento do preço do petróleo estão impactando as decisões de alocação de seus clientes?,,313,curada
+Q019-A314,Q019,Redução de risco nas carteiras (ex: redução da exposição a ações),,314,curada
+Q019-A315,Q019,"Aumento de alocação em ativos que oferecem proteção nesse cenário (ex: dólar, Tesouro Selic)",,315,curada
+Q019-A316,Q019,Aumento do interesse por ações de petroleiras ou por exposição ao petróleo e commodities,,316,curada
+Q019-A317,Q019,Ainda não houve impacto relevante nas decisões dos clientes,,317,curada
+Q019-A318,Q019,"Como você descreveria a postura atual de seus clientes em relação ao início do ciclo de corte de juros no Brasil, que deve se iniciar em março?",,318,curada
+Q019-A319,Q019,Estão aguardando a confirmação do ciclo e a queda da Selic e assim alterar a alocação,,319,curada
+Q019-A320,Q019,Já se anteciparam ao ciclo e aumentaram exposição a risco,,320,curada
+Q019-A321,Q019,Estão aumentando exposição a risco de forma gradual,,321,curada
+Q019-A322,Q019,"Estão mantendo postura neutra por enquanto, sem indicar mudanças relevantes",,322,curada
+Q019-A324,Q019,Abaixo de 150 mil pontos,150000,324,curada
+Q019-A325,Q019,Entre 150 mil e 170 mil pontos,160000,325,curada
+Q019-A326,Q019,Entre 170 mil e 190 mil pontos,180000,326,curada
+Q001-A06,Q001,SudesteSul,,6,auto
+Q001-A07,Q001,SulSudeste,,7,auto
+Q001-A08,Q001,Opção 6,,8,auto
+Q001-A09,Q001,NordesteSudeste,,9,auto
+Q001-A10,Q001,SudesteNordeste,,10,auto
+Q001-A11,Q001,SulNordeste,,11,auto
+Q001-A12,Q001,NordesteNorte,,12,auto
+Q001-A13,Q001,SulNorte,,13,auto
+Q001-A14,Q001,Centro OesteSudeste,,14,auto
+Q001-A15,Q001,NorteSudeste,,15,auto
+Q004-A11,Q004,Ouro,,11,auto
+Q004-A12,Q004,Fundo de ações,,12,auto
+Q004-A13,Q004,Previdência,,13,auto
+Q004-A14,Q004,Renda Fixa,,14,auto
+Q004-A15,Q004,Opções,,15,auto
+Q004-A16,Q004,Alternativos,,16,auto
+Q004-A17,Q004,crédito privado,,17,auto
+Q004-A18,Q004,Renda +,,18,auto
+Q004-A19,Q004,DERIVATIVOS AGRICOLAS,,19,auto
+Q004-A20,Q004,Fundos Alternativos,,20,auto
+Q004-A21,Q004,Operações estruturadas,,21,auto
+Q004-A22,Q004,Estruturadas,,22,auto
+Q004-A23,Q004,PRODUTOS ESTRUTURADOS,,23,auto
+Q004-A24,Q004,Cetipados,,24,auto
+Q004-A25,Q004,Derivativos,,25,auto
+Q004-A26,Q004,ETF,,26,auto
+Q004-A27,Q004,Compromissadas,,27,auto
+Q004-A28,Q004,Carteiras automatizadas,,28,auto
+Q004-A29,Q004,previdência privada,,29,auto
+Q004-A30,Q004,venda coberta,,30,auto
+Q004-A31,Q004,"CDB, LCI, LCA",,31,auto
+Q004-A32,Q004,Opcoes,,32,auto
+Q004-A33,Q004,Fundos Cetipados,,33,auto
+Q004-A34,Q004,Estruturados,,34,auto
+Q004-A35,Q004,ETF RF,,35,auto
+Q004-A36,Q004,COE,,36,auto
+Q004-A37,Q004,Fundos de Inflação / Pré,,37,auto
+Q004-A38,Q004,imoveis,,38,auto
+Q004-A39,Q004,AÇÕES direto,,39,auto
+Q004-A40,Q004,"Operações Estruturadas, Trade Ideas, Câmbio",,40,auto
+Q004-A41,Q004,COE Bond Repack Pré,,41,auto
+Q004-A42,Q004,Fundos ESG e investimento com propósito,,42,auto
+Q004-A43,Q004,Câmbio,,43,auto
+Q004-A44,Q004,cdb,,44,auto
+Q004-A45,Q004,Produtos de crédito,,45,auto
+Q004-A46,Q004,Derivativos operações estruturadas,,46,auto
+Q004-A47,Q004,Pirâmides,,47,auto
+Q004-A48,Q004,"CDB, LCI, LCA CRI, CRA",,48,auto
+Q004-A49,Q004,Titulos de RF,,49,auto
+Q004-A50,Q004,treasuries,,50,auto
+Q004-A51,Q004,Opções lançamento coberto e pozinho. Operação estruturada não gostam.,,51,auto
+Q004-A52,Q004,LCI e LCA,,52,auto
+Q004-A53,Q004,"Crédito Privado , LCA CDB",,53,auto
+Q004-A54,Q004,Emissões bancárias e privadas,,54,auto
+Q004-A55,Q004,Títulos de renda fixa,,55,auto
+Q004-A56,Q004,Carteira recomendada,,56,auto
+Q004-A57,Q004,"Lci/Lca, Cri/Cra",,57,auto
+Q004-A58,Q004,Conta internacional,,58,auto
+Q004-A59,Q004,Conta internacional e Coe RF Pre,,59,auto
+Q004-A60,Q004,venda de opções,,60,auto
+Q004-A61,Q004,Renda fixa internacional,,61,auto
+Q004-A62,Q004,RF,,62,auto
+Q004-A63,Q004,Renda Fixa Pré,,63,auto
+Q004-A64,Q004,renda fixa bancarios - \fgc,,64,auto
+Q004-A65,Q004,Precatorio,,65,auto
+Q004-A66,Q004,carteiras de ações e operações estruturadas,,66,auto
+Q004-A67,Q004,COE alavancado em bolsa americana,,67,auto
+Q004-A68,Q004,Fundo Cetipado,,68,auto
+Q004-A69,Q004,Papeis de RF isentos,,69,auto
+Q004-A70,Q004,"Ofertas Públicas (CRI, CRA)",,70,auto
+Q004-A71,Q004,estratégias de renda recorrente com opções,,71,auto
+Q004-A72,Q004,cambio,,72,auto
+Q004-A73,Q004,Debentures incentivadas,,73,auto
+Q004-A74,Q004,FI-Infra e FIP-IE,,74,auto
+Q004-A75,Q004,Ativos Ipca,,75,auto
+Q004-A76,Q004,LCA e LCI,,76,auto
+Q004-A77,Q004,Carteira Automatizada,,77,auto
+Q004-A78,Q004,Fidc fiagro,,78,auto
+Q004-A79,Q004,Private equity,,79,auto
+Q004-A80,Q004,Operações estruturadas em ações com proteção 100% ex: POP,,80,auto
+Q004-A81,Q004,Credito Privado,,81,auto
+Q004-A82,Q004,automatizada,,82,auto
+Q004-A83,Q004,Credito nprivado,,83,auto
+Q004-A84,Q004,Fixed Income,,84,auto
+Q004-A85,Q004,Conta nos EUA,,85,auto
+Q004-A86,Q004,Fundos Listados,,86,auto
+Q004-A87,Q004,RENDA FIXA BANCÁRIA COM FGC,,87,auto
+Q004-A88,Q004,Muito variado.,,88,auto
+Q004-A89,Q004,Bond Repack,,89,auto
+Q004-A90,Q004,isentos,,90,auto
+Q004-A91,Q004,Ativos indexados ao CDI,,91,auto
+Q004-A92,Q004,Bonds repacks,,92,auto
+Q004-A93,Q004,CRA CRI DEB E BOND,,93,auto
+Q004-A94,Q004,Emissões Bancárias,,94,auto
+Q004-A95,Q004,Crédito Privado isento de IR,,95,auto
+Q004-A96,Q004,"RF CP Estruturados, FIDCs",,96,auto
+Q004-A97,Q004,previdencia,,97,auto
+Q004-A98,Q004,"FIAGRO, FUNDOS DE INFRA.",,98,auto
+Q004-A99,Q004,Ativos de renda fixa e não fundos,,99,auto
+Q004-A100,Q004,Renda Fixa.,,100,auto
+Q004-A101,Q004,FI-Infra,,101,auto
+Q004-A102,Q004,RENDA FIXA CDB/CRA/CRI/DEB,,102,auto
+Q004-A103,Q004,carteiras de ações,,103,auto
+Q004-A104,Q004,BOLSA AMERICANA E DOLAR,,104,auto
+Q004-A105,Q004,Precatórios,,105,auto
+Q004-A106,Q004,Portfólio Renda+,,106,auto
+Q004-A107,Q004,"metais como iridio, rodio niobio",,107,auto
+Q004-A108,Q004,"Renda Fixa Bancária, Pública e Privada",,108,auto
+Q004-A109,Q004,Ações Internacionais,,109,auto
+Q004-A110,Q004,Estruturada como proteção,,110,auto
+Q004-A111,Q004,Imóvel,,111,auto
+Q004-A112,Q004,termo,,112,auto
+Q004-A113,Q004,Fundos de RF de infra e fundo de FIDC.,,113,auto
+Q004-A114,Q004,Renda Fixa - Isento IR E IOF,,114,auto
+Q004-A115,Q004,Ativos isentos,,115,auto
+Q004-A116,Q004,Derivativos / NDF,,116,auto
+Q004-A117,Q004,Renda Fixa Pós e IPCA+,,117,auto
+Q004-A118,Q004,Ativos Bancários - RF,,118,auto
+Q004-A119,Q004,Mercado de Opções,,119,auto
+Q004-A120,Q004,"Investimentos ""isentos""",,120,auto
+Q004-A121,Q004,renda fixa de juros mensal,,121,auto
+Q004-A122,Q004,Algoritmos / Robôs,,122,auto
+Q004-A123,Q004,papeis de RF,,123,auto
+Q004-A124,Q004,RF Brasil,,124,auto
+Q004-A125,Q004,operação com IA,,125,auto
+Q004-A126,Q004,robo,,126,auto
+Q004-A127,Q004,Ntnb,,127,auto
+Q004-A128,Q004,Ter custódia de bitcoin dentro da XP,,128,auto
+Q004-A129,Q004,robo trader,,129,auto
+Q004-A130,Q004,Renda+,,130,auto
+Q004-A131,Q004,DOLAR,,131,auto
+Q004-A132,Q004,BDRs,,132,auto
+Q004-A133,Q004,Portfólios renda,,133,auto
+Q004-A134,Q004,ETFs Brasil,,134,auto
+Q004-A135,Q004,em uma carteira estruturada que os prepare para qq cenario,,135,auto
+Q004-A136,Q004,ETF com renda mensal,,136,auto
+Q004-A137,Q004,Fundos Incentivados,,137,auto
+Q004-A138,Q004,Cetipados Pré e IPCA+,,138,auto
+Q004-A139,Q004,Renda fixa até 1 ano,,139,auto
+Q004-A140,Q004,Previdência Privada.,,140,auto
+Q004-A141,Q004,"Criptoativos puros, sem ser por fundos ou COE",,141,auto
+Q004-A142,Q004,ETFs,,142,auto
+Q004-A143,Q004,short strangle,,143,auto
+Q004-A144,Q004,Bitcoin (não cripto),,144,auto
+Q004-A145,Q004,prata,,145,auto
+Q004-A146,Q004,PR+,,146,auto
+Q004-A147,Q004,Fundos Renda +,,147,auto
+Q004-A148,Q004,Emissões Bancarias,,148,auto
+Q006-A08,Q006,Bonds e crédito,,8,auto
+Q006-A09,Q006,Treasury,,9,auto
+Q006-A10,Q006,REITs,,10,auto
+Q006-A11,Q006,Treasuries,,11,auto
+Q006-A12,Q006,BDRs,,12,auto
+Q006-A13,Q006,Renda fixa,,13,auto
+Q006-A14,Q006,ouro,,14,auto
+Q006-A15,Q006,Treasurys,,15,auto
+Q006-A16,Q006,REIT,,16,auto
+Q006-A17,Q006,Tresuries,,17,auto
+Q006-A18,Q006,derivativos agricolas,,18,auto
+Q006-A19,Q006,criptomoedas,,19,auto
+Q006-A20,Q006,Treasures,,20,auto
+Q006-A21,Q006,ucits,,21,auto
+Q006-A22,Q006,Derivativos,,22,auto
+Q006-A23,Q006,coe,,23,auto
+Q006-A24,Q006,cripto,,24,auto
+Q006-A25,Q006,Treasure,,25,auto
+Q006-A26,Q006,Tesouro,,26,auto
+Q006-A27,Q006,CD,,27,auto
+Q006-A28,Q006,BDR,,28,auto
+Q006-A29,Q006,CDs,,29,auto
+Q006-A30,Q006,POR ENQUANTO NENHUM PRONUNCIOU,,30,auto
+Q006-A31,Q006,credito dolarizado,,31,auto
+Q006-A32,Q006,COE Bond Repack Pré,,32,auto
+Q006-A33,Q006,ADRs e Reits,,33,auto
+Q006-A34,Q006,ainda não tenho cliente nesta modalidade,,34,auto
+Q006-A35,Q006,Imoveis,,35,auto
+Q006-A36,Q006,Falta de conhecimento,,36,auto
+Q006-A37,Q006,iniciando a carteira agora,,37,auto
+Q006-A38,Q006,conta global,,38,auto
+Q006-A39,Q006,Segurança títulos americanos,,39,auto
+Q006-A40,Q006,Nenhuma,,40,auto
+Q006-A41,Q006,T-bills,,41,auto
+Q006-A42,Q006,não tenho informação,,42,auto
+Q006-A43,Q006,sem aplicações internacionais,,43,auto
+Q006-A44,Q006,COEs,,44,auto
+Q006-A45,Q006,cartao internacional em várias moedas,,45,auto
+Q006-A46,Q006,Notas Estruturadas,,46,auto
+Q006-A47,Q006,ETFs irlandeses,,47,auto
+Q006-A48,Q006,Títulos públicos Americanos,,48,auto
+Q006-A49,Q006,Não operAm,,49,auto
+Q006-A50,Q006,T-Notes,,50,auto
+Q006-A51,Q006,Bond Repack,,51,auto
+Q006-A52,Q006,Alguns planejando,,52,auto
+Q006-A53,Q006,Opções,,53,auto
+Q006-A54,Q006,Estruturados,,54,auto
+Q006-A55,Q006,Trend Bolsa Americana,,55,auto
+Q006-A56,Q006,Treasorys,,56,auto
+Q006-A57,Q006,tesouro americano,,57,auto
+Q006-A58,Q006,Imóveis,,58,auto
+Q006-A59,Q006,TNOTES,,59,auto
+Q006-A60,Q006,Renda fixa americana,,60,auto
+Q006-A61,Q006,COE Bolsa Americana,,61,auto
+Q006-A62,Q006,criptoativos em corretoras externas,,62,auto
+Q006-A63,Q006,ETFs que replicam e COE da Bolsa Americana,,63,auto
+Q006-A64,Q006,"Não sabem ao certo o que querem, só querem sair de Brasil.",,64,auto
+Q006-A65,Q006,ainda não investem,,65,auto
+Q006-A66,Q006,certificados de ouro,,66,auto
+Q006-A67,Q006,Segurança em tesouro,,67,auto
+Q006-A68,Q006,Bitcoin (criptomoedas),,68,auto
+Q006-A69,Q006,fundos,,69,auto
+Q006-A70,Q006,não possuem,,70,auto
+Q006-A71,Q006,Dolar,,71,auto
+Q006-A72,Q006,nao imteressa,,72,auto
+Q006-A73,Q006,real estate,,73,auto
+Q006-A74,Q006,nenhum,,74,auto
+Q006-A75,Q006,Sem Cliente no Internacional,,75,auto
+Q008-A30,Q008,Eleições,,30,auto
+Q008-A31,Q008,Lula,,31,auto
+Q008-A32,Q008,Todas acima,,32,auto
+Q008-A33,Q008,Eleições americanas,,33,auto
+Q008-A34,Q008,PT,,34,auto
+Q008-A35,Q008,Guerras,,35,auto
+Q008-A36,Q008,Eleições Brasil,,36,auto
+Q008-A37,Q008,riscos fiscais e instabilidade política,,37,auto
+Q008-A38,Q008,Inflação Global,,38,auto
+Q008-A39,Q008,POLITICA ESQUERDISTA,,39,auto
+Q008-A40,Q008,"Direcionamento da política, indo contra o básico das teorias  econômicas, amento de gastos, influencia nas estatais, perda de controle fiscal, China mais fracaatais,",,40,auto
+Q008-A41,Q008,Varios riscos acima e não so um,,41,auto
+Q008-A42,Q008,"Uma combinação de deflação na China, aumento das taxas de juros nas curvas de 10y e 30y, instabilidade econômica na Europa, instabilidade politica e não conclusão das reformas econômicas/fiscais no Brasil.",,42,auto
+Q008-A43,Q008,Contas Publicas,,43,auto
+Q008-A44,Q008,Todos os riscos alistados,,44,auto
+Q008-A45,Q008,Juros alto EUA e governo atual com gastos e tributações no Brasil.,,45,auto
+Q008-A46,Q008,Um bom mix de fatores internacionais e nacionais,,46,auto
+Q008-A47,Q008,Juro futuro alto nos EUA,,47,auto
+Q008-A48,Q008,Elevação das taxas de juros nos EUA,,48,auto
+Q008-A49,Q008,Juros mais altos nos EUA,,49,auto
+Q008-A50,Q008,Lula.,,50,auto
+Q008-A51,Q008,Todas as anteriores,,51,auto
+Q008-A52,Q008,Nossa bolsa sempre foi especulativa.,,52,auto
+Q008-A53,Q008,Juros altos nos Estados Unidos,,53,auto
+Q008-A54,Q008,Lula e sua quadrilha!,,54,auto
+Q008-A55,Q008,"Tudo que o atual governo faz. Que muito ruim, poderia falar de reforma adm e não de aumento de tributos....enfim.",,55,auto
+Q008-A56,Q008,Risco fiscal somado ao juros mais altos no Brasil e Instabilidade política,,56,auto
+Q008-A57,Q008,Política monetária em desenvolvidos E fiscal e juros br,,57,auto
+Q008-A58,Q008,"Governo, pro baixa capacidade técnica e má gestão",,58,auto
+Q008-A59,Q008,Juros ainda altos nos EUA,,59,auto
+Q008-A60,Q008,lucros decepcionantes,,60,auto
+Q008-A61,Q008,A CORRPUÇÃO DESSE GOVERNO LIXO !,,61,auto
+Q008-A62,Q008,Movimentos de outros Bancos Centrais para ano fiscal 2024,,62,auto
+Q008-A63,Q008,Insegurança jurídica e corrupção crescente no governo PT.,,63,auto
+Q008-A64,Q008,Tese do softlanding não perdurar,,64,auto
+Q008-A65,Q008,Intervenção militar,,65,auto
+Q008-A66,Q008,riscos fiscais Brasil somados a geopolítica,,66,auto
+Q008-A67,Q008,"Riscos fiscais, interferência em estatais, inflação maquiada (combustivel com defasagem de 20% - petrobrás não está repassando a realidade), juros nos EUA",,67,auto
+Q008-A68,Q008,"alem de risco fiscal,risco geopolitico,interferencia de empresas estatais e ainda a guerra .",,68,auto
+Q008-A69,Q008,Demora na queda dos juros americanos,,69,auto
+Q008-A70,Q008,GOVERNO DESASTROSO,,70,auto
+Q008-A71,Q008,Risco Fiscal,,71,auto
+Q008-A72,Q008,Absurdos do governos federal,,72,auto
+Q008-A73,Q008,Vieses politicos de alguns membros do Copom podem impactar negativamente o trabalho na condução da politica monetária. Soma-se a isso o descaso com o fiscal pelo Governo. No cenário exterior a politica monetária mais dura deve ser o maior peso.,,73,auto
+Q008-A74,Q008,RISCO EUA,,74,auto
+Q008-A75,Q008,Juros Americanos,,75,auto
+Q008-A76,Q008,nenhum,,76,auto
+Q008-A77,Q008,Perda de confiança nesse governo,,77,auto
+Q008-A78,Q008,Guerra,,78,auto
+Q008-A79,Q008,Política monetária e fiscal,,79,auto
+Q008-A80,Q008,"pelo menos 3 cenários acima, teria que ter mais opções simultaneas.",,80,auto
+Q008-A81,Q008,"Acredito que um misto de fiscal, inflação e atividade econômica.",,81,auto
+Q008-A82,Q008,Presidente Lula,,82,auto
+Q008-A83,Q008,"Riscos ficais no Brasil, Inflação em alta no Brasil e Juros mais altos no Brasil",,83,auto
+Q008-A84,Q008,todas as anteriores. Será marcada por alta volatilidade e com prêmio de risco baixo.,,84,auto
+Q008-A85,Q008,"Risco Fiscal, Juros mais altos e Inflação",,85,auto
+Q008-A86,Q008,Atravidade devido aos juros altos. Para alocar em bolsa tem que ter um prêmio e hoje o prêmio é baixo.,,86,auto
+Q008-A87,Q008,risco politico,,87,auto
+Q008-A88,Q008,Juros altos e instabilidade econômica e fiscal,,88,auto
+Q008-A89,Q008,Atual Presidente,,89,auto
+Q008-A90,Q008,Os traders.,,90,auto
+Q008-A91,Q008,Trump,,91,auto
+Q008-A92,Q008,Reeleição do atual presidente,,92,auto
+Q008-A93,Q008,Dependência de fluxo estrangeiro.,,93,auto
+Q008-A94,Q008,Juros Americano não cair,,94,auto
+Q008-A95,Q008,Releição do lula,,95,auto
+Q008-A96,Q008,reeleição do governo atual,,96,auto
+Q008-A97,Q008,Volatilidade diante de um ano eleitoral para presidente da república,,97,auto
+Q008-A98,Q008,Caso Master - Muitos figurões envolvidos,,98,auto
+Q008-A99,Q008,Eleição,,99,auto
+Q008-A100,Q008,Inflação alta nos EUA,,100,auto
+Q008-A101,Q008,Eleições presidenciais 2026,,101,auto
+Q008-A102,Q008,Fuga de capital estrangeiro,,102,auto
+Q008-A103,Q008,atual governo,,103,auto
+Q008-A104,Q008,Fluxo estrangeiro em saida,,104,auto
+Q008-A105,Q008,SAIDA DOS INVESTIDORES ESTRANGEIROSS,,105,auto
+Q009-A15,Q009,Não estão interessados,,15,auto
+Q015-A07,Q015,semestralmente,,7,auto
+Q015-A08,Q015,Depende do cliente,,8,auto
+Q015-A09,Q015,bimestralmente,,9,auto
+Q015-A10,Q015,semestral,,10,auto
+Q015-A11,Q015,Depende do net.,,11,auto
+Q015-A12,Q015,Alguns bimestral,,12,auto
+Q015-A13,Q015,Depende do volume investido.,,13,auto
+Q015-A14,Q015,Depende de cada cliente.,,14,auto
+Q015-A15,Q015,"Depende do cliente, e a necessidade de cada um deles.",,15,auto
+Q015-A16,Q015,Base de clientes muito baixa.,,16,auto
+Q015-A17,Q015,Bimestralmente em média,,17,auto
+Q015-A18,Q015,Depende do Patrimônio. Na escala Trimestral para Anual,,18,auto
+Q016-A08,Q016,Redução em riscos de política fiscal no Brasil,,8,auto
+Q016-A09,Q016,Cortes de juros no Brasil,,9,auto
+Q016-A10,Q016,Redução em ruídos políticos no Brasil,,10,auto
+Q016-A11,Q016,Corte de juros nos EUA,,11,auto
+Q016-A12,Q016,Cortes de juros mais agressivos no Brasil,,12,auto
+Q016-A13,Q016,Mudança de rumo na política econômica,,13,auto
+Q016-A14,Q016,Melhora na recuperação econômica da China,,14,auto
+Q016-A15,Q016,Cenário de desaceleração econômica nos EUA sem recessão,,15,auto
+Q016-A16,Q016,Corte de juros mais agressivo nos EUA,,16,auto
+Q016-A17,Q016,Queda de juros nos EUA e mundo,,17,auto
+Q016-A18,Q016,Mudança de Governo,,18,auto
+Q016-A19,Q016,troca de governo,,19,auto
+Q016-A20,Q016,Troca de Presidente,,20,auto
+Q016-A21,Q016,Nenhum,,21,auto
+Q016-A22,Q016,Queda do Lula,,22,auto
+Q016-A23,Q016,Educação Financeira,,23,auto
+Q016-A24,Q016,fiscal,,24,auto
+Q016-A25,Q016,Terceira guerra mundial,,25,auto
+Q016-A26,Q016,Bolsonaro,,26,auto
+Q016-A27,Q016,queda Taxa Selic,,27,auto
+Q016-A28,Q016,Queda do atual Presidente,,28,auto
+Q016-A29,Q016,troca do governo federal,,29,auto
+Q016-A30,Q016,Troca do presidente.,,30,auto
+Q016-A31,Q016,Ausência de interferência pelo Governo em Estatais (empresas de economia mista),,31,auto
+Q016-A32,Q016,Mudanças nas atitudes do Governo,,32,auto
+Q016-A33,Q016,nao querem saber de bolsa brasileira,,33,auto
+Q016-A34,Q016,acordo de paz,,34,auto
+Q016-A35,Q016,"Redução de ruídos de conflitos entre países no oriente médio, russia, china e EUA",,35,auto
+Q016-A36,Q016,Aumento expressivo do capital estrangeiro na B3,,36,auto
+Q016-A37,Q016,Preço/Lucro muito a baixo,,37,auto
+Q016-A38,Q016,posse do Alckmin,,38,auto
+Q016-A39,Q016,Acredito que redução dos juros e redução do risco fiscal.,,39,auto
+Q016-A40,Q016,Troca do atual Presidente do Brasil,,40,auto
+Q016-A41,Q016,ações muito baratas,,41,auto
+Q016-A42,Q016,RISCO POLITICO,,42,auto
+Q016-A43,Q016,Mudança do governo,,43,auto
+Q016-A44,Q016,Expectativa de candidatos a eleição em 2026,,44,auto
+Q016-A45,Q016,Saida do lula do poder,,45,auto
+Q016-A46,Q016,"O sentimento é claro: As ações são boas, mas o governo não ajuda",,46,auto
+Q016-A47,Q016,Troca do Presidente,,47,auto
+Q016-A48,Q016,Eleições,,48,auto
+Q016-A49,Q016,mudança de rumo na política econômica EUA,,49,auto
+Q016-A50,Q016,Sinalização de mudança de governo,,50,auto
+Q016-A51,Q016,"Melhor custo beneficio em relação a rentabilidade. Renda fixa, baixo risco ganhando 15%, qual o prêmio em RV ?",,51,auto
+Q016-A52,Q016,vitória de um candidato de direita,,52,auto
+Q016-A53,Q016,eleiçao 2026,,53,auto
+Q016-A54,Q016,Expectativa da alternância de poder no Brasil,,54,auto
+Q016-A55,Q016,Os preços caírem mais,,55,auto
+Q016-A56,Q016,Entrada de recursos estrangeiros em nossa bolsa.,,56,auto
+Q016-A57,Q016,Queda do governo Lula.,,57,auto
+Q016-A58,Q016,Mudança política,,58,auto
+Q016-A59,Q016,Derrota do Lula (vagabundo),,59,auto
+Q016-A60,Q016,sinalização de vitória da direita em 2026,,60,auto
+Q016-A61,Q016,Ter fee fixo para clientes menores de 300k,,61,auto
+Q016-A62,Q016,"Meus clientes não se guiam pelo imediato, mas pelo longo prazo. No longo prazo, notícias e fatos específicos não fazem diferença.",,62,auto
+Q016-A63,Q016,continuação do atual governo,,63,auto
+Q016-A64,Q016,Mudança total do governo,,64,auto
+Q016-A65,Q016,Mudar governo e CORTAR GASTOS,,65,auto
+Q016-A66,Q016,Direita assumindo o BRasil,,66,auto
+Q016-A67,Q016,Mudança na Política Fiscal,,67,auto
+Q016-A68,Q016,Fiscal e crescimento sustentável,,68,auto
+Q016-A69,Q016,eleiçoes,,69,auto
+Q016-A70,Q016,Alternância do partido no governo,,70,auto
+Q016-A71,Q016,Mudança no espectro politico brasileiro,,71,auto
+Q016-A72,Q016,Estabilidade e previsibilidade juridica e ecônomica,,72,auto
+Q016-A73,Q016,Eleição de um Fiscalista.,,73,auto
+Q016-A74,Q016,redução das incertezas na geopolítica internacional,,74,auto
+Q016-A75,Q016,Eleição de um governo fiscalista,,75,auto
+Q016-A76,Q016,eleição da direita,,76,auto
+Q016-A77,Q016,Mudança política.,,77,auto
+Q016-A78,Q016,PT perder a eleição,,78,auto
+Q016-A79,Q016,Riscos geopolíticos,,79,auto
+Q016-A80,Q016,Lula morrer,,80,auto
+Q016-A81,Q016,"Fim da guerra, estabilização preço petróleo",,81,auto
+Q016-A82,Q016,Menos conflitos geopolíticos,,82,auto
+Q016-A83,Q016,saída do PT,,83,auto
+Q016-A84,Q016,acabar a guerra do EUA-irã,,84,auto
+Q016-A85,Q016,Fim do conflito no Irã,,85,auto
+Q016-A86,Q016,"os clientes ainda nao sabem como a bolsa vai se comportar, então estao surfando enquanto podem.",,86,auto
+Q016-A87,Q016,Sensação de segurança nas informações,,87,auto
+Q016-A88,Q016,Fim de conflitos geopolíticos,,88,auto
+Q016-A89,Q016,fim das guerras,,89,auto
+Q017-A11,Q017,Dividendos,,11,auto
+Q017-A12,Q017,Ações defensivas,,12,auto
+Q017-A13,Q017,Ações de alto crescimento,,13,auto
+Q017-A14,Q017,Commodities,,14,auto
+Q017-A15,Q017,Ações com exposição a dólar,,15,auto
+Q017-A16,Q017,Large Caps,,16,auto
+Q017-A17,Q017,Small Caps,,17,auto
+Q017-A18,Q017,Teses de turnaround,,18,auto
+Q017-A19,Q017,Alto momentum,,19,auto
+Q017-A20,Q017,Outra,,20,auto
+Q017-A21,Q017,Por que diabos os relatórios de ações em pdf do research da XP estão só em inglês?,,21,auto
+Q017-A22,Q017,opções,,22,auto
+Q017-A23,Q017,Produtos Estruturados,,23,auto
+Q021-A01,Q021,Não acompanham,,1,auto
+Q021-A02,Q021,"Sim, para monitoramento da carteira",,2,auto
+Q021-A03,Q021,"Sim, para buscarem oportunidades de longo prazo",,3,auto
+Q021-A04,Q021,"Sim, para acharem oportunidades de curto prazo",,4,auto
+Q023-A01,Q023,9%,,1,auto
+Q023-A02,Q023,8%,,2,auto
+Q023-A03,Q023,Abaixo 8%,,3,auto
+Q023-A04,Q023,10%,,4,auto
+Q023-A05,Q023,12%,,5,auto
+Q023-A06,Q023,11%,,6,auto
+Q024-A01,Q024,Entre 130 mil e 140 mil pontos,,1,auto
+Q024-A02,Q024,Entre 140 mil e 150 mil pontos,,2,auto
+Q024-A03,Q024,Entre 120 mil e 130 mil pontos,,3,auto
+Q024-A04,Q024,Entre 150 mil e 160 mil pontos,,4,auto
+Q024-A05,Q024,Abaixo 120 mil pontos,,5,auto
+Q024-A06,Q024,Entre 160 e 170 mil pontos,,6,auto
+Q024-A07,Q024,Acima 170 mil pontos,,7,auto
+Q025-A01,Q025,"Não, e não planejam pois os clientes não acreditam numa mudança estrutural na China",,1,auto
+Q025-A02,Q025,"Não, pois meus clientes já estão posicionados em ativos chineses ou expostos à China",,2,auto
+Q025-A03,Q025,"Não, mas meus clientes planejam aumentar a alocação em ativos chineses ou expostos à China",,3,auto
+Q025-A04,Q025,"Sim, aumentaram exposição em ativos chineses ou expostos à China",,4,auto
+Q025-A05,Q025,Investem apenas no Brasil,,5,auto
+Q025-A06,Q025,não pois a maioria dos clientes estão alocados em renda fixa aqui no Brasil.,,6,auto
+Q025-A07,Q025,"Não, pois meus clientes não possuem esse tipo de exposição direta.",,7,auto
+Q025-A08,Q025,"Não, clientes expostos em carteira de dividendos",,8,auto
+Q025-A09,Q025,investem através de fundos de ações,,9,auto
+Q025-A10,Q025,sairam da posição em china no passado,,10,auto
+Q025-A11,Q025,Não,,11,auto
+Q025-A12,Q025,Não houve.,,12,auto
+Q025-A13,Q025,"Não, pois não se interessam pelo assunto.",,13,auto
+Q026-A01,Q026,"Não, permaneceram neutros",,1,auto
+Q026-A02,Q026,"Sim, ficaram mais pessimistas",,2,auto
+Q026-A03,Q026,"Não, permaneceram pessimistas",,3,auto
+Q026-A04,Q026,"Sim, ficaram mais neutros",,4,auto
+Q026-A05,Q026,"Sim, ficaram mais otimistas",,5,auto
+Q026-A06,Q026,"Não, permaneceram otimistas",,6,auto
+Q027-A01,Q027,Não fizeram e não planejam efetuar mudanças baseado no resultado das eleições presidenciais americanas,,1,auto
+Q027-A02,Q027,"Sim, aumentaram ou planejam aumentar a exposição em outros setores visando vitória de Trump",,2,auto
+Q027-A03,Q027,"Sim, aumentaram ou planejam aumentar a exposição em setores de exportação de commodities visando vitória de Trump",,3,auto
+Q027-A04,Q027,"Sim, aumentaram ou planejam aumentar a exposição em investimento verde visando vitória da Kamala",,4,auto
+Q028-A01,Q028,Entre 130 mil e 140 mil pontos,,1,auto
+Q028-A02,Q028,Entre 140 mil e 150 mil pontos,,2,auto
+Q028-A03,Q028,Entre 120 mil e 130 mil pontos,,3,auto
+Q028-A04,Q028,Entre 110 mil e 120 mil pontos,,4,auto
+Q028-A05,Q028,Entre 150 e 160 mil pontos,,5,auto
+Q028-A06,Q028,Abaixo de 110 mil pontos,,6,auto
+Q028-A07,Q028,Entre 160 e 170 mil pontos,,7,auto
+Q028-A08,Q028,Acima 170 mil pontos,,8,auto
+Q029-A01,Q029,Ações defensivas,,1,auto
+Q029-A02,Q029,"Ações com carrego sólido (altas TIRs, geração de caixa)",,2,auto
+Q029-A03,Q029,Ações dolarizadas,,3,auto
+Q029-A04,Q029,Ações com uma forte dinâmica de lucros,,4,auto
+Q029-A05,Q029,Ações de crescimento,,5,auto
+Q029-A06,Q029,Ações com baixa alavancagem financeira,,6,auto
+Q029-A07,Q029,Ações cíclicas,,7,auto
+Q030-A01,Q030,Pessimista,,1,auto
+Q030-A02,Q030,Levemente pessimista,,2,auto
+Q030-A03,Q030,Neutro,,3,auto
+Q030-A04,Q030,Levemente otimista,,4,auto
+Q030-A05,Q030,Otimista,,5,auto
+Q031-A01,Q031,Reduzir exposição em renda variável,,1,auto
+Q031-A02,Q031,Manter exposição em renda variável,,2,auto
+Q031-A03,Q031,Zerar exposição em renda variável,,3,auto
+Q031-A04,Q031,Aumentar exposição em renda variável,,4,auto
+Q032-A01,Q032,Sim,,1,auto
+Q032-A02,Q032,Não,,2,auto
+Q033-A01,Q033,Neutra,,1,auto
+Q033-A02,Q033,Positiva,,2,auto
+Q033-A03,Q033,Negativa,,3,auto
+Q033-A04,Q033,Fortemente positiva,,4,auto
+Q033-A05,Q033,Fortemente negativa,,5,auto
+Q034-A01,Q034,Alta alavancagem financeira,,1,auto
+Q034-A02,Q034,Exposição a riscos políticos,,2,auto
+Q034-A03,Q034,Alta sensitividade aos juros,,3,auto
+Q034-A04,Q034,Yields baixos,,4,auto
+Q034-A05,Q034,Baixo crescimento,,5,auto
+Q034-A06,Q034,Alta sensitividade a inflação,,6,auto
+Q034-A07,Q034,Margens baixas,,7,auto
+Q034-A08,Q034,Beta alto,,8,auto
+Q035-A01,Q035,Diversificação (ex.: geografia,,1,auto
+Q035-A02,Q035,classes de ativos),,2,auto
+Q035-A03,Q035,Dólar,,3,auto
+Q035-A04,Q035,Operações estruturadas,,4,auto
+Q035-A05,Q035,Não utilizam estratégias de proteção,,5,auto
+Q035-A06,Q035,Opções,,6,auto
+Q035-A07,Q035,Alocação tática,,7,auto
+Q035-A08,Q035,Ficar short,,8,auto
+Q035-A09,Q035,Futuros,,9,auto
+Q036-A01,Q036,Mensalmente,,1,auto
+Q036-A02,Q036,Semanalmente,,2,auto
+Q036-A03,Q036,Diariamente,,3,auto
+Q036-A04,Q036,Trimestralmente,,4,auto
+Q036-A05,Q036,Quase nunca,,5,auto
+Q036-A06,Q036,Semestralmente,,6,auto
+Q037-A01,Q037,Trimestralmente,,1,auto
+Q037-A02,Q037,Mensalmente,,2,auto
+Q037-A03,Q037,Semestralmente,,3,auto
+Q037-A04,Q037,Quase nunca,,4,auto
+Q037-A05,Q037,Anualmente,,5,auto
+Q037-A06,Q037,Semanalmente,,6,auto
+Q038-A01,Q038,Diversificação (ex.: geografia,,1,auto
+Q038-A02,Q038,classes de ativos),,2,auto
+Q038-A03,Q038,Investimento a longo prazo,,3,auto
+Q038-A04,Q038,Investimentos em setores defensivos,,4,auto
+Q038-A05,Q038,Rebalanceamento de ativos no portfólio,,5,auto
+Q038-A06,Q038,Não utilizam estratégias de proteção contra volatilidade,,6,auto
+Q038-A07,Q038,Hedging com Opções,,7,auto
+Q038-A08,Q038,Custo médio (Dollar-Cost Average),,8,auto
+Q038-A09,Q038,Ordens de Stop-Loss,,9,auto
+Q039-A01,Q039,Meio confiante,,1,auto
+Q039-A02,Q039,Bem confiante,,2,auto
+Q039-A03,Q039,Não estou confiante,,3,auto
+Q040-A01,Q040,Longo-prazo (maior que 1 ano),,1,auto
+Q040-A02,Q040,Médio-prazo (de 3 meses a 1 ano),,2,auto
+Q041-A01,Q041,"Não, sem intenção de mudar",,1,auto
+Q041-A02,Q041,"Sim, encurtou",,2,auto
+Q041-A03,Q041,"Não, mas querem mudar",,3,auto
+Q041-A04,Q041,"Sim, ficou mais longo",,4,auto
+Q042-A01,Q042,Não mudou,,1,auto
+Q042-A02,Q042,Sim - levemente,,2,auto
+Q042-A03,Q042,Sim - razoavelmente,,3,auto
+Q042-A04,Q042,Não - reduziu levemente,,4,auto
+Q042-A05,Q042,Sim - consideravelmente,,5,auto
+Q042-A06,Q042,Não - reduziu consideravelmente,,6,auto
+Q042-A07,Q042,Não - reduziu razoavelmente,,7,auto
+Q043-A01,Q043,Sim,,1,auto
+Q043-A02,Q043,Não tem certeza / Preferem não opinar,,2,auto
+Q043-A03,Q043,"Não, ainda veem espaço para novos aumentos",,3,auto
+Q043-A04,Q043,Não acompanham esse tipo de informação,,4,auto
+Q044-A01,Q044,10%,,1,auto
+Q044-A02,Q044,=< 8%,,2,auto
+Q044-A03,Q044,9%,,3,auto
+Q044-A04,Q044,11%,,4,auto
+Q044-A05,Q044,12%,,5,auto
+Q044-A06,Q044,13%,,6,auto
+Q044-A07,Q044,14%,,7,auto
+Q045-A01,Q045,Ficam inseguros e buscam orientação,,1,auto
+Q045-A02,Q045,Aguardam estabilidade antes de agir,,2,auto
+Q045-A03,Q045,Aproveitam para aumentar exposição (oportunidade),,3,auto
+Q045-A04,Q045,Vendem parte da posição para se protegerem,,4,auto
+Q046-A01,Q046,Acreditam que vai subir e querem se proteger,,1,auto
+Q046-A02,Q046,Acreditam que vai permanecer estável,,2,auto
+Q046-A03,Q046,Não consideram relevante para a carteira,,3,auto
+Q046-A04,Q046,Acreditam que vai cair e estão evitando ativos atrelados,,4,auto
+Q047-A01,Q047,"Não, a maioria dos clientes não percebeu ou entendeu a mudança",,1,auto
+Q047-A02,Q047,"Sim, reduziu o interesse por investimentos internacionais/offshore",,2,auto
+Q047-A03,Q047,"Não, mesmo sabendo da mudança, mantiveram as estratégias",,3,auto
+Q047-A04,Q047,"Sim, reduziu o interesse por previdência privada",,4,auto
+Q048-A01,Q048,"Médio - acompanham, mas com compreensão limitada",,1,auto
+Q048-A02,Q048,"Baixo - ouvem falar, mas não conectam com seus investimentos",,2,auto
+Q048-A03,Q048,Alto - entendem os principais impactos econômicos,,3,auto
+Q048-A04,Q048,Muito baixo - não demonstram interesse ou conhecimento,,4,auto
+Q049-A01,Q049,"Inflação estável - estão mantendo uma carteira diversificada, sem grandes mudanças",,1,auto
+Q049-A02,Q049,Inflação em alta - estão priorizando ativos atrelados à inflação (ex.: Tesouro IPCA),,2,auto
+Q049-A03,Q049,Não possuem opinião formada sobre a inflação e/ou não alteraram suas carteiras,,3,auto
+Q049-A04,Q049,Inflação em queda - estão buscando mais exposição a renda fixa prefixada ou ações,,4,auto
+Q050-A01,Q050,"Nao, seguiram alocando primordialmente em renda fixa",,1,auto
+Q050-A02,Q050,"Sim, aumentou interesse em Bolsa brasileira",,2,auto
+Q050-A03,Q050,"Sim, aumentou o interesse em Bolsa brasileira e ativos internacionais",,3,auto
+Q050-A04,Q050,"Sim, aumentou interesse em ativos internacionais",,4,auto
+Q051-A01,Q051,"Aumentaram a alocação em renda fixa local (prefixado, CDI ou IPCA+)",,1,auto
+Q051-A02,Q051,Não realizaram alterações relevantes nas carteiras,,2,auto
+Q051-A03,Q051,Aumentaram a exposição a ativos dolarizados,,3,auto
+Q051-A04,Q051,Reforçaram posições em ações locais mais defensivas (setores de menor beta ou menos cíclicos),,4,auto
+Q051-A05,Q051,Reduziram risco de forma não estruturada,,5,auto
+Q051-A06,Q051,Outro,,6,auto
+Q052-A01,Q052,Mantiveram a estratégia anterior,,1,auto
+Q052-A02,Q052,Aumentaram exposição à bolsa,,2,auto
+Q052-A03,Q052,Realocaram de ações defensivas para cíclicas/sensíveis a juros,,3,auto
+Q052-A04,Q052,Reduziram posição em renda fixa,,4,auto
+Q052-A05,Q052,Outro,,5,auto
+Q053-A01,Q053,"Não, permaneceram neutros",,1,auto
+Q053-A02,Q053,"Sim, ficaram mais neutros",,2,auto
+Q053-A03,Q053,"Sim, ficaram mais otimistas",,3,auto
+Q053-A04,Q053,"Não, permaneceram otimistas",,4,auto
+Q053-A05,Q053,"Sim, ficaram mais pessimistas",,5,auto
+Q053-A06,Q053,"Não, permaneceram pessimistas",,6,auto
+Q054-A01,Q054,"Não, mantiveram a estratégia anterior",,1,auto
+Q054-A02,Q054,"Sim, estão aumentando exposição em renda variável local",,2,auto
+Q054-A03,Q054,"Sim, estão aumentando exposição em renda variável internacional",,3,auto
+Q054-A04,Q054,Outro,,4,auto
+Q054-A05,Q054,"Sim, estão se posicionando no mercado de moedas (ex.: comprando moedas de mercados emergentes)",,5,auto
+Q055-A01,Q055,"Não, mantiveram a estratégia anterior",,1,auto
+Q055-A02,Q055,"Não, a maioria não percebeu ou entendeu a mudança",,2,auto
+Q055-A03,Q055,"Sim, aumentou o interesse por investimentos isentos (ex: FIIs, LCI/LCA)",,3,auto
+Q055-A04,Q055,"Não, os meus clientes não são impactados",,4,auto
+Q055-A05,Q055,"Sim, reduziu o interesse por ações",,5,auto
+Q055-A06,Q055,Outro,,6,auto
+Q056-A01,Q056,"Ainda não utilizo, mas pretendo aprender mais sobre o assunto",,1,auto
+Q056-A02,Q056,"Sim, tenho interesse e estou começando a explorar o tema",,2,auto
+Q056-A03,Q056,"Sim, já utilizo regularmente ferramentas de IA no meu dia a dia",,3,auto
+Q056-A04,Q056,"Não, ainda vejo pouca aplicação prática para o meu trabalho",,4,auto
+Q057-A01,Q057,<5%,,1,auto
+Q057-A02,Q057,5-10%,,2,auto
+Q057-A03,Q057,11-20%,,3,auto
+Q057-A04,Q057,21-30%,,4,auto
+Q057-A05,Q057,51-75%,,5,auto
+Q057-A06,Q057,31-50%,,6,auto
+Q058-A01,Q058,10%,,1,auto
+Q058-A02,Q058,12%,,2,auto
+Q058-A03,Q058,11%,,3,auto
+Q058-A04,Q058,14%,,4,auto
+Q058-A05,Q058,9%,,5,auto
+Q058-A06,Q058,13%,,6,auto
+Q058-A07,Q058,<8%,,7,auto
+Q058-A08,Q058,8%,,8,auto
+Q059-A01,Q059,"Nao, seguem inalteradas",,1,auto
+Q059-A02,Q059,"Sim, diminuíram o apetite para outras classes de ativos",,2,auto
+Q059-A03,Q059,"Sim, aumentaram o apetite para outras classes de ativos",,3,auto
+Q060-A01,Q060,Entre 190 e 200 mil pontos,,1,auto
+Q060-A02,Q060,Entre 200 e 210 mil pontos,,2,auto
+Q060-A03,Q060,Entre 180 e 190 mil pontos,,3,auto
+Q060-A04,Q060,Entre 170 mil e 190 mil pontos,,4,auto
+Q060-A05,Q060,Entre 170 mil e 180 mil pontos,,5,auto
+Q060-A06,Q060,Acima de 210 mil pontos,,6,auto
+Q060-A07,Q060,Entre 160 mil e 170 mil pontos,,7,auto
+Q060-A08,Q060,Entre 150 mil e 170 mil pontos,,8,auto
+Q060-A09,Q060,Entre 150 mil e 160 mil pontos,,9,auto
+Q060-A10,Q060,Entre 140 mil e 150 mil pontos,,10,auto
+Q060-A11,Q060,Abaixo de 140 mil pontos,,11,auto
+Q060-A12,Q060,Abaixo de 150 mil pontos,,12,auto
+Q061-A01,Q061,"Sim, houve algum interesse, mas sem mudanças relevantes na alocação",,1,auto
+Q061-A02,Q061,"Ainda não, mas pode influenciar mais adiante",,2,auto
+Q061-A03,Q061,"Não, não houve e não deve haver impacto nas decisões de alocação",,3,auto
+Q061-A04,Q061,"Sim, os clientes aumentaram a alocação em ações de companhias que já anteciparam ou devem antecipar dividendos",,4,auto
+Q062-A01,Q062,Ações defensivas,,1,auto
+Q062-A02,Q062,Ações com sólida geração de caixa e TIR elevada,,2,auto
+Q062-A03,Q062,Ações com uma forte dinâmica de lucros,,3,auto
+Q062-A04,Q062,Ações com baixa alavancagem financeira,,4,auto
+Q062-A05,Q062,Ações dolarizadas,,5,auto
+Q062-A06,Q062,Ações cíclicas,,6,auto
+Q063-A01,Q063,"Ainda não, mas deve ganhar força nos próximos meses",,1,auto
+Q063-A02,Q063,"Sim, há algum movimento, mas ainda sem mudanças relevantes no posicionamento",,2,auto
+Q063-A03,Q063,"Sim, os clientes já estão se posicionando de forma relevante pensando nas eleições de 2026",,3,auto
+Q063-A04,Q063,O cenário eleitoral não deve impactar o posicionamento dos meus clientes,,4,auto
+Q064-A01,Q064,Permaneceu estável,,1,auto
+Q064-A02,Q064,"Cresceu, mas em pequena intensidade",,2,auto
+Q064-A03,Q064,Cresceu de forma consistente e relevante,,3,auto
+Q064-A04,Q064,Não possuo percepção clara,,4,auto
+Q064-A05,Q064,Diminuiu,,5,auto
+Q065-A01,Q065,Permaneceu estável,,1,auto
+Q065-A02,Q065,"Cresceu, mas em pequena intensidade",,2,auto
+Q065-A03,Q065,Não possuo percepção clara,,3,auto
+Q065-A04,Q065,Diminuiu,,4,auto
+Q065-A05,Q065,Cresceu de forma consistente e relevante,,5,auto
+Q066-A01,Q066,Entre 12% e 13%,,1,auto
+Q066-A02,Q066,Entre 13% e 14%,,2,auto
+Q066-A03,Q066,Entre 11% e 12%,,3,auto
+Q066-A04,Q066,Entre 14% e 15%,,4,auto
+Q066-A05,Q066,Acima de 15%,,5,auto
+Q067-A01,Q067,"Os clientes capturaram a alta, com performance em linha com o Ibovespa",,1,auto
+Q067-A02,Q067,Os clientes tinham baixa exposição à renda variável brasileira e aproveitaram pouco a alta,,2,auto
+Q067-A03,Q067,"Os clientes tiveram desempenho acima do Ibovespa, aproveitando bem a alta",,3,auto
+Q067-A04,Q067,Não possuo percepção clara,,4,auto
+Q067-A05,Q067,"Os clientes estavam expostos à renda variável, mas em ativos que apresentaram desempenho mais fraco, abaixo do Ibovespa",,5,auto
+Q068-A01,Q068,"Acredito que ficaram um pouco mais caras, mas ainda vejo valor",,1,auto
+Q068-A02,Q068,Acredito que continuam muito atrativas,,2,auto
+Q068-A03,Q068,"Considero que ficaram caras após a alta, com pouca atratividade",,3,auto
+Q068-A04,Q068,Não tenho percepção clara,,4,auto
+Q069-A01,Q069,Ainda não houve impacto relevante nas decisões dos clientes,,1,auto
+Q069-A02,Q069,Redução de risco nas carteiras (ex: redução da exposição a ações),,2,auto
+Q069-A03,Q069,"Aumento de alocação em ativos que oferecem proteção nesse cenário (ex: dólar, Tesouro Selic)",,3,auto
+Q069-A04,Q069,Aumento do interesse por ações de petroleiras ou por exposição ao petróleo e commodities,,4,auto
+Q070-A01,Q070,Estão aguardando a confirmação do ciclo e a queda da Selic e assim alterar a alocação,,1,auto
+Q070-A02,Q070,Estão aumentando exposição a risco de forma gradual,,2,auto
+Q070-A03,Q070,"Estão mantendo postura neutra por enquanto, sem indicar mudanças relevantes",,3,auto
+Q070-A04,Q070,Já se anteciparam ao ciclo e aumentaram exposição a risco,,4,auto
+Q071-A01,Q071,"Sim, ficaram mais avessos à risco",,1,auto
+Q071-A02,Q071,Não tem influenciado as decisões de alocação até o momento,,2,auto
+Q071-A03,Q071,"Sim, usaram a volatilidade como oportunidade",,3,auto
+Q072-A01,Q072,Mantiveram o posicionamento sem mudanças relevantes,,1,auto
+Q072-A02,Q072,Aumentaram a exposição a ativos internacionais/dolarizados,,2,auto
+Q072-A03,Q072,Aumentaram a exposição a ativos locais,,3,auto
+Q072-A04,Q072,Reduziram a exposição a ativos internacionais/dolarizados,,4,auto
+Q073-A01,Q073,O interesse permaneceu estável,,1,auto
+Q073-A02,Q073,"Sim, de forma moderada",,2,auto
+Q073-A03,Q073,Meus clientes não demonstram interesse por esse tema,,3,auto
+Q073-A04,Q073,"Sim, de forma expressiva",,4,auto
+Q073-A05,Q073,"Não, o interesse diminuiu",,5,auto

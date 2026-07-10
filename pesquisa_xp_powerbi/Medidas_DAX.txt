@@ -1,0 +1,52 @@
+// ============================================================================
+//  Medidas DAX — Pesquisa XP de Sentimento de Bolsa (modelo tidy / Power BI)
+//  Crie cada medida em: Modelo -> clique na tabela fResponses -> Nova Medida.
+// ============================================================================
+
+// Nº de respondentes distintos no contexto atual (pergunta/período/resposta filtrados)
+Respondentes = DISTINCTCOUNT ( fResponses[RespID] )
+
+// Denominador da pergunta: respondentes que responderam a pergunta no período,
+// ignorando qual alternativa (funciona para pergunta única E múltipla escolha).
+Base da Pergunta =
+CALCULATE (
+    DISTINCTCOUNT ( fResponses[RespID] ),
+    REMOVEFILTERS ( dimAlternativa ),
+    REMOVEFILTERS ( fResponses[AnswerRaw] ),
+    REMOVEFILTERS ( fResponses[AnswerID] )
+)
+
+// % da alternativa = respondentes que marcaram ÷ respondentes da pergunta.
+% da Resposta =
+DIVIDE ( [Respondentes], [Base da Pergunta] )
+
+// Total de respondentes do período (para rótulos "N = ...")
+Respondentes no Período =
+CALCULATE (
+    DISTINCTCOUNT ( fResponses[RespID] ),
+    ALLEXCEPT ( fResponses, fResponses[Periodo] )
+)
+
+// (Opcional) Variação da alternativa vs. mês anterior — para setas/cores
+% Mês Anterior =
+CALCULATE (
+    [% da Resposta],
+    DATEADD ( dimPeriodo[Data], -1, MONTH )
+)
+
+Δ vs Mês Anterior = [% da Resposta] - [% Mês Anterior]
+
+// ----------------------------------------------------------------------------
+// COMO USAR NOS VISUAIS
+//   Slicer 1: dimPergunta[TextoPT]      (escolher a pergunta)
+//   Slicer 2: dimPeriodo[Data]          (escolher o mês)
+//   Gráfico de barras (mês atual):
+//       Eixo   = dimAlternativa[RotuloPT]   (ou fResponses[AnswerRaw])
+//       Valor  = [% da Resposta]
+//   Gráfico de linhas (série temporal de uma pergunta):
+//       Eixo   = dimPeriodo[Data]
+//       Legenda= dimAlternativa[RotuloPT]
+//       Valor  = [% da Resposta]
+// Como o % usa "Base da Pergunta", único e múltipla escolha ficam corretos
+// automaticamente (múltipla soma > 100%, que é o esperado).
+// ============================================================================

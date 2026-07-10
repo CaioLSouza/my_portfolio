@@ -92,6 +92,11 @@ def criar_driver(headless: bool = True):
     from selenium.webdriver.chrome.options import Options
 
     opcoes = Options()
+    # "eager" = o get() retorna no DOMContentLoaded, sem esperar o evento "load"
+    # da pagina inteira. Essencial aqui: as paginas da B3 mantem rastreadores/
+    # long-polling abertos, o "load" as vezes nunca dispara e o get() padrao
+    # ("normal") fica travado. Os numeros ficam prontos bem antes disso.
+    opcoes.page_load_strategy = "eager"
     if headless:
         opcoes.add_argument("--headless=new")
     opcoes.add_argument("--window-size=1920,1080")
@@ -100,7 +105,11 @@ def criar_driver(headless: bool = True):
     opcoes.add_argument("--disable-dev-shm-usage")
     opcoes.add_argument(f"--user-agent={USER_AGENT}")
     opcoes.add_argument("--lang=pt-BR")
-    return webdriver.Chrome(options=opcoes)
+    driver = webdriver.Chrome(options=opcoes)
+    # Rede de seguranca: mesmo com "eager", limita o tempo do get() para ele nao
+    # travar indefinidamente — o TimeoutException e tratado em carregar_pagina.
+    driver.set_page_load_timeout(45)
+    return driver
 
 
 def _aceitar_cookies(driver) -> None:
@@ -130,10 +139,22 @@ def _tabelas_da_pagina(driver) -> list[pd.DataFrame]:
         return []
 
 
+def abrir_url(driver, url: str) -> None:
+    """Navega ate a URL tolerando o timeout do get() — nessas paginas da B3 o
+    evento "load" pode nao disparar; o conteudo ja esta la mesmo assim."""
+    from selenium.common.exceptions import TimeoutException
+
+    try:
+        driver.get(url)
+    except TimeoutException:
+        print("Aviso: o carregamento completo estourou o tempo (normal na B3); "
+              "seguindo para ler a tabela mesmo assim.")
+
+
 def carregar_pagina(driver, url: str = URL_FAIXA_ETARIA, timeout: int = 60) -> None:
     """Abre a pagina e espera a tabela de dados renderizar (Angular carrega os
     numeros depois do HTML inicial)."""
-    driver.get(url)
+    abrir_url(driver, url)
     _aceitar_cookies(driver)
 
     limite = time.time() + timeout

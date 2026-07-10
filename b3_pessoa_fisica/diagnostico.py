@@ -40,7 +40,7 @@ def main() -> None:
         sys.exit(1)
 
     try:
-        driver.get(args.url)
+        s.abrir_url(driver, args.url)
         s._aceitar_cookies(driver)
         print(f"Pagina aberta. Esperando {args.espera}s a tabela renderizar...", flush=True)
 

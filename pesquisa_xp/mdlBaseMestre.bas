@@ -67,7 +67,7 @@ Public Sub ImportarForms()
         wsRaw.Cells(rawNext + i - 1, PERIOD_COL).Value = periodo
         For fc = LBound(mapa) To UBound(mapa)
             If mapa(fc) > 0 Then
-                wsRaw.Cells(rawNext + i - 1, mapa(fc)).Value = wsForms.Cells(1 + i, fc).Value
+                EscreverSeguro wsRaw.Cells(rawNext + i - 1, mapa(fc)), wsForms.Cells(1 + i, fc).Value
             End If
         Next fc
     Next i
@@ -146,7 +146,7 @@ Private Sub AnexarLong(wsRaw As Worksheet, wsLong As Worksheet, periodo As Doubl
                         wsLong.Cells(lr, 1).Value = periodo
                         wsLong.Cells(lr, 2).Value = r
                         wsLong.Cells(lr, 3).Value = wsRaw.Cells(1, c).Value
-                        wsLong.Cells(lr, 4).Value = Trim$(CStr(p))
+                        EscreverSeguro wsLong.Cells(lr, 4), Trim$(CStr(p))
                         lr = lr + 1
                     End If
                 Next p
@@ -195,6 +195,21 @@ Private Function TemRespostaNoPeriodo(wsRaw As Worksheet, col As Long, periodo A
         End If
     Next r
 End Function
+
+'-------------------------------------------------------------------------------
+'  Escreve valor tratando strings que comecam com "=" como TEXTO literal.
+'  Sem isso, respostas como "=< 8%" seriam interpretadas como formula
+'  (erro 1004 ou celula corrompida). O apostrofo nao fica no valor da celula.
+'-------------------------------------------------------------------------------
+Private Sub EscreverSeguro(celula As Range, v As Variant)
+    If VarType(v) = vbString Then
+        If Left$(v, 1) = "=" Then
+            celula.Value = "'" & v
+            Exit Sub
+        End If
+    End If
+    celula.Value = v
+End Sub
 
 Private Function ColLetra(col As Long) As String
     Dim s As String

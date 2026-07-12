@@ -37,6 +37,18 @@ WHITE = "FFFFFF"
 
 
 # %% [3] Funcao de migracao ----------------------------------------------------
+def escrever(ws, r, c, v):
+    """Escreve valor tratando strings que comecam com '=' como TEXTO literal.
+
+    Sem isso, o openpyxl grava respostas como '=< 8%' como formula; o Excel
+    nao consegue interpretar e 'repara' o arquivo apagando essas celulas.
+    """
+    cell = ws.cell(r, c, v)
+    if isinstance(v, str) and v.startswith("="):
+        cell.data_type = "s"
+    return cell
+
+
 def migrar(origem, destino):
     src = openpyxl.load_workbook(origem, data_only=True)
     raw = src["Raw Data"]
@@ -60,7 +72,7 @@ def migrar(origem, destino):
         for c in range(1, last_col + 1):
             v = raw.cell(r, c).value
             if v is not None:
-                w.cell(r, c, v)
+                escrever(w, r, c, v)
     for c in range(1, last_col + 1):
         w.cell(1, c).font = Font(bold=True, size=9, color=WHITE)
         w.cell(1, c).fill = PatternFill("solid", fgColor=NAVY)
@@ -95,8 +107,8 @@ def migrar(origem, destino):
                     continue
                 lg.cell(lr, 1, periodo)
                 lg.cell(lr, 2, r)          # id = linha original no Raw Data
-                lg.cell(lr, 3, pergunta)
-                lg.cell(lr, 4, p)
+                escrever(lg, lr, 3, pergunta)
+                escrever(lg, lr, 4, p)
                 lr += 1
             st = stats.setdefault(pergunta, {"first": periodo, "last": periodo, "n": 0, "col": c})
             st["first"] = min(st["first"], periodo)
@@ -118,7 +130,7 @@ def migrar(origem, destino):
     r = 2
     for pergunta, st in sorted(stats.items(), key=lambda kv: kv[1]["col"]):
         cat.cell(r, 1, gcl(st["col"]))
-        cat.cell(r, 2, pergunta)
+        escrever(cat, r, 2, pergunta)
         cat.cell(r, 3, st["first"])
         cat.cell(r, 4, st["last"])
         cat.cell(r, 5, st["n"])

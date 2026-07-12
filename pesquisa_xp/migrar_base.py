@@ -1,21 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-Migra o historico da PA_Principal.xlsx para a BASE MESTRE hibrida:
+Migra o historico da PA_Principal.xlsx para a BASE MESTRE hibrida.
 
-  PA_Base_Historica.xlsx
-    - "Raw Data"   : copia fiel da aba larga atual (canonica; o import mensal
-                     do Forms continua colando aqui, via macro)
-    - "Respostas"  : visao LONG derivada -- uma linha por resposta x opcao
-                     (multi-escolha explodida por ';'), ideal para consultas
-                     e para o Power Query
-    - "Perguntas"  : catalogo de todas as perguntas ja feitas, com primeira/
-                     ultima edicao, nº de edicoes e o flag ATIVA (editavel --
-                     e ele que controla o que a planilha de producao carrega)
-    - "LEIA-ME"    : instrucoes
+Funciona de DUAS formas:
 
-Uso:  python3 migrar_base.py PA_Principal.xlsx -o PA_Base_Historica.xlsx
+  1. Interactive Window / Jupyter (VS Code):
+     ajuste os caminhos na celula [1] e rode as celulas em ordem
+     (Shift+Enter), ou "Run All". Tambem da para chamar direto:
+         info = migrar("PA_Principal.xlsx", "PA_Base_Historica.xlsx")
+
+  2. Linha de comando:
+         python3 migrar_base.py PA_Principal.xlsx -o PA_Base_Historica.xlsx
+
+Saida (PA_Base_Historica.xlsx):
+    - "Raw Data"  : copia fiel da aba larga atual (canonica)
+    - "Respostas" : visao LONG (1 linha por resposta x opcao; ';' explodido)
+    - "Perguntas" : catalogo com primeira/ultima edicao e flag ATIVA
+    - "LEIA-ME"   : instrucoes
 """
-import argparse
+
+# %% [1] Parametros (edite aqui quando rodar no Interactive Window) -----------
+ARQUIVO_ORIGEM = "PA_Principal.xlsx"          # planilha atual, com a aba "Raw Data"
+ARQUIVO_SAIDA = "PA_Base_Historica.xlsx"      # base mestre a ser gerada
+
+# %% [2] Imports e constantes -------------------------------------------------
+import sys
 import openpyxl
 from openpyxl.utils import get_column_letter as gcl
 from openpyxl.styles import Font, PatternFill
@@ -27,14 +36,7 @@ NAVY = "1F2F44"
 WHITE = "FFFFFF"
 
 
-def norm(v):
-    s = "" if v is None else str(v)
-    s = s.replace("\xa0", " ").replace("\t", " ")
-    while "  " in s:
-        s = s.replace("  ", " ")
-    return s.strip()
-
-
+# %% [3] Funcao de migracao ----------------------------------------------------
 def migrar(origem, destino):
     src = openpyxl.load_workbook(origem, data_only=True)
     raw = src["Raw Data"]
@@ -72,7 +74,7 @@ def migrar(origem, destino):
         cell.font = Font(bold=True, size=9, color=WHITE)
         cell.fill = PatternFill("solid", fgColor=NAVY)
     lr = 2
-    stats = {}   # pergunta -> {first, last, n}
+    stats = {}   # pergunta -> {first, last, n, col}
     for r in range(2, last_row + 1):
         periodo = raw.cell(r, PERIOD_COL).value
         if periodo is None:
@@ -160,12 +162,27 @@ def migrar(origem, destino):
     }
 
 
+def _interativo():
+    """True quando rodando em Jupyter/Interactive Window (VS Code)."""
+    return "ipykernel" in sys.modules or hasattr(sys, "ps1")
+
+
+# %% [4] Executar ---------------------------------------------------------------
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("origem")
-    ap.add_argument("-o", "--out", default="PA_Base_Historica.xlsx")
-    args = ap.parse_args()
-    info = migrar(args.origem, args.out)
-    print("Base mestre gerada:", args.out)
-    for k, v in info.items():
-        print(f"  {k}: {v}")
+    if _interativo():
+        # Interactive Window: usa os parametros da celula [1]
+        info = migrar(ARQUIVO_ORIGEM, ARQUIVO_SAIDA)
+        print("Base mestre gerada:", ARQUIVO_SAIDA)
+        for k, v in info.items():
+            print(f"  {k}: {v}")
+    else:
+        # Linha de comando: argumentos via argparse
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("origem", nargs="?", default=ARQUIVO_ORIGEM)
+        ap.add_argument("-o", "--out", default=ARQUIVO_SAIDA)
+        args = ap.parse_args()
+        info = migrar(args.origem, args.out)
+        print("Base mestre gerada:", args.out)
+        for k, v in info.items():
+            print(f"  {k}: {v}")

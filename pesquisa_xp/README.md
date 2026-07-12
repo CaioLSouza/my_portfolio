@@ -26,10 +26,14 @@ Resolve a divergência: **base proprietária com histórico completo** vs.
 | `mdlProducao.bas` | Importar **na produção** e salvar como `.xlsm` |
 | `PowerQuery_RawDataFiltrada.m` | Colar no Power Query da produção (setup 1x, ver abaixo) |
 
-> A base mestre com os dados **não está neste repositório** (repo público;
-> os dados da pesquisa são proprietários). Gere localmente:
-> `python3 migrar_base.py PA_Principal.xlsx -o PA_Base_Historica.xlsx`
-> (requer `pip install openpyxl`)
+> A base mestre com os dados não está neste repositório. Gere localmente
+> (requer `pip install openpyxl`), de qualquer um dos dois jeitos:
+>
+> **Terminal:** `python3 migrar_base.py PA_Principal.xlsx -o PA_Base_Historica.xlsx`
+>
+> **Interactive Window (VS Code) / Jupyter:** abra o `migrar_base.py`, ajuste os
+> caminhos na célula `[1] Parametros` e rode as células em ordem (Shift+Enter).
+> O script detecta o modo interativo sozinho.
 
 ## Setup — uma vez só
 

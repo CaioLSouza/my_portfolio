@@ -77,6 +77,23 @@ Resolve a divergência: **base proprietária com histórico completo** vs.
 - **Consultas históricas** ("como evoluiu X em 2022?"): use a aba `Respostas`
   (long) da mestre — filtra por pergunta e período, e uma tabela dinâmica resolve.
 
+## Solução de problemas
+
+**Erro "Formula.Firewall: a consulta referencia outras consultas ou etapas..."**
+ao atualizar o Power Query — a consulta combina duas fontes (tabela `Config`
+local + arquivo da mestre) e a checagem de privacidade bloqueia. Duas saídas:
+
+1. *Rápida:* Dados → Obter Dados → Opções de Consulta → **Pasta de Trabalho
+   Atual → Privacidade** → marcar **"Ignorar os níveis de privacidade..."** →
+   OK → Atualizar. (Seguro aqui: as duas fontes são arquivos locais seus.)
+2. *Sem mexer em configuração:* use a variante
+   `PowerQuery_RawDataFiltrada_parametros.m`, que troca a tabela `Config` por
+   parâmetros nativos do Power Query (instruções no cabeçalho do arquivo).
+
+**Excel "repara" a base mestre ao abrir** — regenere com a versão atual do
+`migrar_base.py` (corrigido: respostas começando com `=`, como `=< 8%`, eram
+gravadas como fórmula).
+
 ## Limitações conhecidas
 - O Power Query lê a mestre **fechada** pelo caminho da `Config`; se mover o
   arquivo, atualize o caminho.

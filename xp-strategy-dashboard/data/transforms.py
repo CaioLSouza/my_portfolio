@@ -21,6 +21,15 @@ import pandas as pd
 # generic helpers
 # --------------------------------------------------------------------------
 
+def filter_dates(df: pd.DataFrame, start, end,
+                 date_col: str = "date") -> pd.DataFrame:
+    """Rows whose date_col falls inside [start, end] (inclusive)."""
+    if date_col not in df.columns or df.empty:
+        return df
+    d = pd.to_datetime(df[date_col])
+    return df[(d >= pd.Timestamp(start)) & (d <= pd.Timestamp(end))]
+
+
 def latest_snapshot(df: pd.DataFrame, date_col: str = "data",
                     by: str = "cod_ativo") -> pd.DataFrame:
     """Most recent row per ticker (panel -> cross-section)."""

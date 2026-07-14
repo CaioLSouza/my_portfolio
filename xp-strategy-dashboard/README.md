@@ -21,9 +21,12 @@ per-source breakdown.
 
 ## Production (XP corporate Windows machine)
 
+**Full step-by-step guide (install options, offline pip, preflight,
+troubleshooting): [`DEPLOYMENT.md`](DEPLOYMENT.md).** Short version:
+
 ```bat
-set DATA_SOURCE=prod
-streamlit run app.py
+python scripts\check_prod_env.py   :: preflight: packages + \\xpdocs access
+start_dashboard.bat                :: sets DATA_SOURCE=prod and launches
 ```
 
 In `prod` mode every source is read directly from its UNC path

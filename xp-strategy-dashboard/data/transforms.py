@@ -112,6 +112,53 @@ def top_singlename_flows(df: pd.DataFrame, investor: str = "foreigners",
     return pd.concat([top, bottom]).drop_duplicates("cod_ativo").sort_values("value")
 
 
+def implied_flow_denominator(df: pd.DataFrame, flow_col: str,
+                             ratio_col: str) -> pd.Series:
+    """Recover the normalization denominator per row (ADTV in BRL for
+    ``_to_adtv`` ratios, free-float value for ``_to_ff``).
+
+    The flow panel ships both the raw flow and the normalized ratio, so
+    ``denominator = flow / ratio`` — no extra data source needed. Rows where
+    either side is missing/zero return NaN.
+    """
+    if flow_col not in df.columns or ratio_col not in df.columns:
+        return pd.Series(index=df.index, dtype=float)
+    flow = pd.to_numeric(df[flow_col], errors="coerce")
+    ratio = pd.to_numeric(df[ratio_col], errors="coerce")
+    denom = flow / ratio.replace(0, np.nan)
+    return denom.abs().where(np.isfinite(denom))
+
+
+def aggregate_sector_flows(snap: pd.DataFrame, investor: str, window: str,
+                           metric: str, sector_col: str) -> pd.Series:
+    """Sector-level flow aggregation with *correct* normalization.
+
+    - ``metric='flow'``      → Σ flows per sector (BRL).
+    - ``metric='to_adtv'``   → Σ flows ÷ Σ implied ADTVs per sector.
+    - ``metric='to_ff'``     → Σ flows ÷ Σ implied free-float values.
+
+    Summing the per-name ratios would over-weight illiquid names; dividing
+    the sector's total flow by the sector's total denominator is the
+    aggregation a desk actually wants.
+    """
+    flow_col = f"{window}_{investor}_flow"
+    if sector_col not in snap.columns or flow_col not in snap.columns:
+        return pd.Series(dtype=float)
+    work = snap[[sector_col, flow_col]].copy()
+    work[flow_col] = pd.to_numeric(work[flow_col], errors="coerce")
+    if metric == "flow":
+        return (work.dropna().groupby(sector_col)[flow_col].sum()
+                .sort_values())
+    ratio_col = f"{flow_col}_{metric}"
+    work["denom"] = implied_flow_denominator(snap, flow_col, ratio_col)
+    work = work.dropna(subset=[flow_col, "denom"])
+    if work.empty:
+        return pd.Series(dtype=float)
+    agg = work.groupby(sector_col).agg(flow=(flow_col, "sum"),
+                                       denom=("denom", "sum"))
+    return (agg["flow"] / agg["denom"]).sort_values()
+
+
 # --------------------------------------------------------------------------
 # factors
 # --------------------------------------------------------------------------

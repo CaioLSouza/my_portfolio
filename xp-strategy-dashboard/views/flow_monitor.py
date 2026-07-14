@@ -213,9 +213,18 @@ with tab_single:
             snap = transforms.latest_snapshot(sf)
             snap = transforms.add_sector(snap, demo.sector_classification())
 
-        sectors = sorted(snap["macro_sector_xp"].dropna().unique()) \
-            if "macro_sector_xp" in snap.columns else []
-        sel_sec = st.multiselect("Filter sectors (blank = all)", sectors,
+        f1, f2 = st.columns((3, 9))
+        sector_col = f1.radio(
+            "Sector level (xpqs taxonomy)",
+            ["sector_xp", "macro_sector_xp"],
+            format_func={"sector_xp": "XP sector",
+                         "macro_sector_xp": "XP macro sector"}.get,
+            key="sn_sector_level")
+        if sector_col not in snap.columns:
+            sector_col = "macro_sector_xp"
+        sectors = sorted(snap[sector_col].dropna().unique()) \
+            if sector_col in snap.columns else []
+        sel_sec = f2.multiselect("Filter sectors (blank = all)", sectors,
                                  key="sn_sectors")
 
         col = (f"{window}_{investor}_flow" if metric == "flow"
@@ -226,8 +235,8 @@ with tab_single:
             st.info("Selected flow column not available.")
         else:
             view = snap if not sel_sec else \
-                snap[snap["macro_sector_xp"].isin(sel_sec)]
-            ranked = view[["cod_ativo", "macro_sector_xp", col]].dropna()
+                snap[snap[sector_col].isin(sel_sec)]
+            ranked = view[["cod_ativo", sector_col, col]].dropna()
             movers = pd.concat([ranked.nlargest(top_n, col),
                                 ranked.nsmallest(top_n, col)]) \
                 .drop_duplicates("cod_ativo").sort_values(col)
@@ -243,13 +252,23 @@ with tab_single:
                                       value_fmt=fmt),
                     width="stretch")
             with b2:
-                agg = (view.groupby("macro_sector_xp")[col].sum()
-                       .dropna().sort_values())
-                st.plotly_chart(
-                    charts.bar_signed(agg.index, agg.values, height=520,
-                                      title="Aggregated by XP macro sector",
-                                      value_fmt=fmt),
-                    width="stretch")
+                agg = transforms.aggregate_sector_flows(
+                    view, investor, window, metric, sector_col)
+                agg_title = {
+                    "flow": "Sector total flow (Σ BRL)",
+                    "to_adtv": "Sector flow ÷ sector ADTV "
+                               "(Σ flows / Σ implied ADTVs)",
+                    "to_ff": "Sector flow ÷ sector free float "
+                             "(Σ flows / Σ implied FF values)",
+                }[metric]
+                if agg.empty:
+                    st.info("Sector aggregation unavailable — flow/ratio "
+                            "columns missing for this selection.")
+                else:
+                    st.plotly_chart(
+                        charts.bar_signed(agg.index, agg.values, height=520,
+                                          title=agg_title, value_fmt=fmt),
+                        width="stretch")
 
             # ---- ticker drill-down: flow history inside the period ----
             st.subheader("Ticker drill-down")

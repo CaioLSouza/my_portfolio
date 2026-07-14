@@ -62,3 +62,13 @@ continue without questions; all are easy to revisit next round.
     `data/catalog_snapshot.csv` so the app boots offline (and in prod, which
     never touches the network); github mode refreshes it from the raw URL
     when reachable.
+
+14. **Sector-level flow normalization.** Sector aggregates divide the
+    sector's total flow by the sector's total ADTV (or free-float value),
+    with the denominator backed out per name as `flow ÷ flow_to_adtv`
+    (`flow ÷ flow_to_ff`). This assumes the prod parquet keeps raw flows
+    and ratios consistent per row, as the samples do. If prod rows can have
+    a ratio without the raw flow (or vice versa), those names silently drop
+    out of the sector denominator — passing an explicit ADTV column (or
+    factor_zoo's `{21,63,252}d_average_dollar_volume_traded`) would make it
+    exact. Flagged to confirm in prod.

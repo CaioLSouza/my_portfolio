@@ -42,3 +42,15 @@
 
 ## Phase 4 — docs & delivery
 - README, ASSUMPTIONS, WORKLOG, requirements.txt; committed and pushed.
+
+## Round 2 — Flow Monitor deep-dive (user-directed)
+- Interactive period control (presets + custom from/to) shared by all tabs;
+  group/category filters, view toggles, rolling-window slider, ticker
+  drill-down, CSV exports.
+- Sector flow aggregation switched to the xpqs taxonomy with a level toggle
+  (`sector_xp` default, `macro_sector_xp` optional).
+- Correct ADTV / free-float normalization at sector level: the denominator
+  is recovered implicitly per name (flow ÷ flow_to_adtv ratio, both already
+  in singlename_flows), then sectors aggregate as Σ flows ÷ Σ denominators —
+  no additional data source required. Verified: denominator recovered for
+  65/65 names, identical across investor types (max rel. diff ~1e-16).

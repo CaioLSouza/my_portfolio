@@ -63,31 +63,57 @@ O modelo é conferido contra três âncoras divulgadas, na parte de baixo da aba
 O workbook foi recalculado de ponta a ponta e não tem nenhuma célula de erro. Isso atesta a
 aritmética, não as premissas.
 
-## O que a montagem revelou
+## O que esta reconstrução corrigiu
 
-**A alíquota efetiva domina tudo.** A primeira versão usava 20% do EBITDA, que parecia prudente.
-Com ela o preço-alvo caía ~40% e, pior, cada real de capex novo passava a destruir valor: aumentar
-o programa de investimentos *reduzia* o preço-alvo. Isso não descreve uma companhia que compõe
-valor arrematando lote atrás de lote há décadas — era sinal de erro, não de conservadorismo. As
-SPEs de transmissão apuram em lucro presumido (imposto ≈ 3–4% da receita bruta) e boa parte do
-portfólio tem redução de IR por SUDAM/SUDENE, o que põe a carga efetiva na casa de 5–10% do
-EBITDA. Se você mexer neste input, confira sempre se a expansão continua criando valor — é o melhor
-teste de sanidade do arquivo.
+A branch anterior tinha os dados de mercado desatualizados. Três premissas foram substituídas por
+dados verificados de fontes públicas em 31-jul-2026 (ver `Dados de origem` e as notas de cada input
+em `Inputs`):
 
-**O modelo não reproduz o preço de mercado, e não se deve forçá-lo a isso.** Com as premissas
-padrão o DCF dá cerca de R$ 21/unit contra R$ 33,75 de cotação, e a TIR real implícita fica pouco
-acima da NTN-B. As linhas "Gap a explicar" na aba `Valuation` medem essa diferença. Ela é a
-pergunta de investimento, não um defeito a calibrar: o mercado está pagando por renovação de
-concessões, leilões além de 2045 ou um custo de capital menor que os 11,5% reais assumidos aqui.
+| Input | Antes | Agora | Fonte |
+|---|---:|---:|---|
+| NTN-B 10 anos (juro real) | 7,00% | **8,33%** | Tesouro IPCA+ 2035, fechamento 31-jul-2026 |
+| Cotação ALUP11 | R$ 33,75 (15-jul-2026) | **R$ 32,62** (31-jul-2026) | Status Invest / Dados de Mercado |
+| Eficiência de capex do Lote 7 vs. referência ANEEL | 80% (20% de economia, estimado) | **70%** (~30% de economia, noticiado) | ADVFN, jul/2026 |
+| Início/fim dos vencimentos de concessão | 2042–2055 (intervalo estimado) | **2030–2047** (3 concessões reais: ECTE, EBTE, Aimorés) | Imprensa setorial |
+
+O resto da base pública (ações em circulação, patrimônio líquido, receita e EBITDA do 1T26, dívida
+líquida, sistemas de transmissão, RAP e capex do último leilão, capacidade instalada de geração)
+foi conferido de forma independente contra Status Invest, Investidor10, InfoMoney, CNN Brasil e a
+própria ANEEL e bateu com o que já estava na aba `Dados de origem` — não precisou de correção.
+
+**A NTN-B desatualizada é a que mais pesou.** Sozinha, ela derruba o Ke real de 11,5% para 12,83% —
+e como o fluxo roda até 2080, 133 pontos-base a mais de desconto compostos por décadas pesam mais
+que qualquer premissa operacional. O preço-alvo cai de ~R$ 21 para **R$ 11,62/unit**.
+
+**A alíquota efetiva domina o lado operacional.** A primeira versão usava 20% do EBITDA, que
+parecia prudente. Com ela o preço-alvo caía ~40% e, pior, cada real de capex novo passava a
+destruir valor: aumentar o programa de investimentos *reduzia* o preço-alvo. Isso não descreve uma
+companhia que compõe valor arrematando lote atrás de lote há décadas — era sinal de erro, não de
+conservadorismo. As SPEs de transmissão apuram em lucro presumido (imposto ≈ 3–4% da receita
+bruta) e boa parte do portfólio tem redução de IR por SUDAM/SUDENE, o que põe a carga efetiva na
+casa de 5–10% do EBITDA. Se você mexer neste input, confira sempre se a expansão continua criando
+valor — é o melhor teste de sanidade do arquivo.
+
+**O modelo não reproduz o preço de mercado, e não se deve forçá-lo a isso — e com a NTN-B corrigida
+o gap ficou maior, não menor.** Com as premissas atuais o DCF dá R$ 11,62/unit contra R$ 32,62 de
+cotação (31-jul-2026), um gap de ~R$ 21/unit — o dobro do que era antes da correção da taxa. Mais
+revelador: a TIR real implícita no preço atual caiu para **4,75% a.a., abaixo dos 8,33% da própria
+NTN-B**. Pelo fluxo deste modelo, quem compra ALUP11 hoje aceita um retorno real menor que o do
+título público que deveria ser seu piso. As linhas "Gap a explicar" na aba `Valuation` medem essa
+diferença. Ela é a pergunta de investimento, não um defeito a calibrar: o mercado está pagando por
+renovação de concessões, leilões além de 2045, sinergias, ou usando um custo de capital menor que
+os 12,83% reais assumidos aqui — ou o modelo ainda está pessimista demais na base operacional.
 **A leitura mais robusta do arquivo é a TIR real implícita, não o preço-alvo** — ela não depende de
 escolher um Ke.
 
 ## Limitações que importam
 
-- **O cronograma de vencimentos é aproximado.** A base operacional são 31 sistemas com datas de
-  outorga distintas, e essa lista não estava disponível publicamente na coleta. O decaimento linear
-  entre 2042 e 2055 aproxima algo que deveria ser ativo a ativo. É a premissa que mais move o valor
-  no longo prazo — troque-a por um cronograma real assim que tiver a lista da ANEEL.
+- **O cronograma de vencimentos ainda é uma média, agora ancorada em datas reais.** A base
+  operacional são 31 sistemas com datas de outorga distintas, e a lista completa não está
+  disponível publicamente. O decaimento linear entre 2030 e 2047 usa as três únicas concessões da
+  Alupar com data publicada (ECTE 2030, EBTE 2038, Aimorés 2047) em vez de um intervalo inventado,
+  mas ainda aplica a média de três pontos aos 31 ativos. É a premissa que mais move o valor no longo
+  prazo — troque-a por um cronograma ativo a ativo assim que tiver a lista completa da ANEEL.
 - **O pipeline é tratado em bloco.** Treze projetos com capex, RAP e datas próprias viram um
   agregado ao yield do último leilão.
 - **A geração é premissa, não dado.** MW médio, preço e opex foram calibrados para reproduzir a

@@ -77,7 +77,7 @@ head(ws, 4, ['', 'Item', 'Valor', 'Unidade', 'Fonte'], [3, 44, 16, 12, 64])
 
 SRC_ROWS = [
     ('MERCADO', None, None, None),
-    ('Cotação ALUP11', 33.75, 'R$/unit', 'Cotação de 15-jul-2026 (agregadores de mercado). Atualize antes de usar.', 'PxUnit', PRC),
+    ('Cotação ALUP11', 32.62, 'R$/unit', 'Fechamento de 31-jul-2026 (Status Invest / Dados de Mercado). Atualize antes de usar.', 'PxUnit', PRC),
     ('Total de ações (ON + PN)', 988880601, 'ações', 'Base acionária divulgada em agregadores de mercado, 2026.', 'AcoesTot', NUM0),
     ('Ações por unit (1 ON + 2 PN)', 3, 'ações/unit', 'Composição da unit ALUP11.', 'AcoesUnit', INT),
     ('Patrimônio líquido', 9290.0, 'R$ mn', 'Balanço mais recente divulgado (2026).', 'PL', NUM),
@@ -144,8 +144,10 @@ BLOCKS = [
     ('DATA-BASE E DESCONTO', [
         ('Ano-base da avaliação', ANO0, INT, 'AnoBase',
          'Primeiro ano projetado. O fluxo desse ano é descontado a meio período (t = 0,5).'),
-        ('NTN-B 10 anos (juro real)', 0.0700, PCT, 'NTNB',
-         'Taxa livre de risco real. Como a RAP é indexada ao IPCA, o desconto é real e comparável ao título.'),
+        ('NTN-B 10 anos (juro real)', 0.0833, PCT, 'NTNB',
+         'Taxa livre de risco real. Tesouro IPCA+ 2035 (~9 anos, vértice mais líquido), IPCA+8,33% a.a. em jul/2026 — '
+         'juros longos abriram no trimestre por aversão a risco externa e preocupação fiscal doméstica. Como a RAP '
+         'é indexada ao IPCA, o desconto é real e comparável ao título.'),
         ('Prêmio de risco de equity (real)', 0.0450, PCT, 'ERP',
          'Prêmio exigido sobre a NTN-B. Transmissão é o ativo de menor beta do setor; 4–5 p.p. é a faixa usual.'),
         ('Custo real da dívida', 0.0550, PCT, 'KdReal',
@@ -162,19 +164,22 @@ BLOCKS = [
         ('Erosão real anual da RAP', 0.0050, PCT, 'Erosao',
          'Captura de forma reduzida as revisões tarifárias periódicas e o degrau de RAP na metade da concessão. '
          'Zere para uma RAP real perfeitamente plana.'),
-        ('Início dos vencimentos de concessão', 2042, INT, 'AnoIniVenc',
-         'Ano em que a RAP da base operacional começa a expirar.'),
-        ('Fim dos vencimentos de concessão', 2055, INT, 'AnoFimVenc',
+        ('Início dos vencimentos de concessão', 2030, INT, 'AnoIniVenc',
+         'Ano em que a RAP da base operacional começa a expirar. Ancorado em 3 concessões controladas pela Alupar '
+         'com data pública: ECTE vence em 2030, EBTE em 2038, Aimorés em 2047 — a mais antiga do trio abre a janela.'),
+        ('Fim dos vencimentos de concessão', 2047, INT, 'AnoFimVenc',
          'Ano em que a última concessão da base atual expira. Entre os dois anos a RAP decai linearmente até zero. '
-         'É a hipótese mais grosseira do modelo — ver Read me.'),
+         'Mesma âncora de 3 concessões (2030/2038/2047) — ainda uma aproximação linear de algo que é ativo a ativo, '
+         'mas presa a datas reais em vez de inventada. É a hipótese que mais move o valor no longo prazo — ver Read me.'),
         ('Capex de manutenção (% da RAP)', 0.0300, PCT, 'CapexMan',
          'Investimento recorrente para manter os ativos, fora do capex de expansão.'),
     ]),
     ('TRANSMISSÃO — PIPELINE', [
-        ('Eficiência de capex vs. referência ANEEL', 0.80, PCT, 'EficCapex',
+        ('Eficiência de capex vs. referência ANEEL', 0.70, PCT, 'EficCapex',
          'Quanto a companhia efetivamente gasta para cada real do capex de referência do leilão. Construir '
-         'abaixo da referência é de onde vem boa parte do retorno em transmissão. 0,80 = constrói 20% abaixo. '
-         'Em 100% o projeto rende apenas o yield nominal do leilão e a expansão vira destruição de valor.'),
+         'abaixo da referência é de onde vem boa parte do retorno em transmissão. 0,70 = constrói ~30% abaixo, '
+         'a economia de capex divulgada para o Lote 7 (ADVFN, jul/2026) — mais agressiva que a estimativa '
+         'inicial de 20%. Em 100% o projeto rende apenas o yield nominal do leilão e a expansão vira destruição de valor.'),
         ('Yield de RAP sobre o capex novo', '=YieldLeilao/EficCapex', PCT, 'YieldRAP',
          'RAP por real efetivamente investido. Sai do último leilão (RAP/capex de referência do Lote 7) '
          'corrigido pela eficiência acima. Sobrescreva com um número fixo para testar outros leilões.'),
@@ -507,7 +512,7 @@ for i in range(N + 1):
 for j, mult in enumerate([0.8, 0.9, 1.0, 1.1, 1.2, 1.3], 2):
     c = L(j)
     put(ws, r3 + 1, j, f'=PxUnit*{mult}', PRC, F_C).border = BOX
-    put(ws, r3 + 2, j, f'=IRR({c}{rf+1}:{c}{rf+N+1},Ke)', PCT, F_K).border = BOX
+    put(ws, r3 + 2, j, f'=IRR({c}{rf+1}:{c}{rf+N+1},0.03)', PCT, F_K).border = BOX
     put(ws, r3 + 3, j, f'={c}{r3+2}-NTNB', PCT, F_C).border = BOX
     put(ws, rf, j, f'={c}{r3+1}', PRC, F_H, FH)
     put(ws, rf + 1, j, f'=-{c}{r3+1}*Units/1000000', NUM, F_C)
@@ -536,7 +541,8 @@ TEXT = [
           'regulatória de transmissão do 1T26 anualizada, revertida pela alíquota de deduções. O pipeline é '
           'tratado em bloco: o capex de R$ 9,1 bi é distribuído entre 2026 e 2029, e cada real desembolsado '
           'passa a gerar RAP dois anos depois, ao yield do último leilão (RAP/capex do Lote 7 = 8,9%). A base '
-          'atual expira linearmente entre 2042 e 2055; o pipeline roda 30 anos a partir da energização.'),
+          'atual expira linearmente entre 2030 e 2047 (âncoras: ECTE, EBTE e Aimorés); o pipeline roda 30 anos a '
+          'partir da energização.'),
     ('p', '2. GERAÇÃO. Energia assegurada contratada a preço real constante até o fim das outorgas. É a parte '
           'mais frágil do modelo — a companhia não abre o MW médio consolidado nos materiais consultados, então '
           'o número é premissa, não dado.'),
@@ -548,10 +554,12 @@ TEXT = [
           'pelas units equivalentes; a TIR real implícita resolve a taxa que iguala o fluxo ao valor de mercado '
           'de hoje.'),
     ('k', 'Onde o modelo é fraco — leia antes de citar qualquer número'),
-    ('p', '• O CRONOGRAMA DE VENCIMENTOS É INVENTADO. A base operacional são 31 sistemas com datas de outorga '
-          'diferentes, e essa lista não estava disponível publicamente na coleta. O decaimento linear entre 2042 '
-          'e 2055 é uma aproximação grosseira de algo que deveria ser ativo a ativo. É a premissa que mais move '
-          'o valor no longo prazo. Substitua-a por um cronograma real assim que tiver a lista da ANEEL.'),
+    ('p', '• O CRONOGRAMA DE VENCIMENTOS É APROXIMADO, AGORA COM ÂNCORAS REAIS. A base operacional são 31 '
+          'sistemas com datas de outorga diferentes, e a lista completa não está disponível publicamente. O '
+          'decaimento linear entre 2030 e 2047 usa as únicas três datas de concessão da Alupar que encontramos '
+          'publicadas — ECTE (2030), EBTE (2038) e Aimorés (2047) — em vez de um intervalo inventado. Ainda é '
+          'uma média de três pontos aplicada a 31 ativos, não um cronograma ativo a ativo, e seguem sendo a '
+          'premissa que mais move o valor no longo prazo. Substitua-a assim que tiver a lista completa da ANEEL.'),
     ('p', '• O PIPELINE É TRATADO EM BLOCO. Treze projetos com capex, RAP e datas próprias viram um único '
           'agregado ao yield do último leilão. Projetos antigos foram arrematados em condições diferentes, e a '
           'RAP efetiva de cada um não é a do Lote 7.'),
@@ -570,13 +578,27 @@ TEXT = [
           'receita bruta) e boa parte do portfólio tem redução de IR por SUDAM/SUDENE. Daí o padrão de 10%. Se '
           'você mexer neste input, confira sempre se a expansão continua criando valor — é o melhor teste de '
           'sanidade do arquivo.'),
-    ('p', '• O MODELO NÃO REPRODUZ O PREÇO DE MERCADO, e não se deve forçá-lo a isso. Com as premissas padrão o '
-          'DCF dá cerca de R$ 21/unit contra uma cotação de R$ 33,75, e a TIR real implícita fica pouco acima '
-          'da NTN-B. As linhas "Gap a explicar" na aba Valuation medem exatamente essa diferença. Ela é a '
-          'pergunta de investimento, não um defeito a ser calibrado: o mercado está pagando por renovação de '
-          'concessões, leilões além de 2045 ou um custo de capital menor do que os 11,5% reais assumidos aqui. '
-          'A leitura mais robusta do arquivo é a TIR real implícita, não o preço-alvo — ela não depende de '
-          'escolher um Ke.'),
+    ('p', '• A ECONOMIA DE CAPEX DO LOTE 7 FOI REVISADA PARA CIMA. A versão anterior assumia que a Alupar '
+          'constrói a 80% do capex de referência da ANEEL (20% de economia), uma estimativa de trabalho. A '
+          'imprensa especializada (ADVFN, jul/2026) noticiou uma economia de ~30% para esse lote especificamente, '
+          'então o input passou para 70%. Isso melhora o retorno por real investido no pipeline e empurra o valor '
+          'na direção contrária à da NTN-B — mas é um efeito de segunda ordem perto do impacto da taxa de desconto.'),
+    ('p', '• A NTN-B ESTAVA DESATUALIZADA, E ISSO MUDA O RESULTADO MAIS DO QUE QUALQUER OUTRA CORREÇÃO. A versão '
+          'anterior usava 7,00% real (dado de meados de julho). Em 31-jul-2026 o vértice mais líquido do Tesouro '
+          'IPCA+ (2035, ~9 anos) pagava 8,33% real — juros longos abriram no trimestre por tensão geopolítica e '
+          'preocupação fiscal doméstica. Como o fluxo roda até 2080, o efeito de 133 p.p.-base a mais de desconto '
+          'composto por décadas é enorme: o Ke real vai de 11,5% para 12,83%, e o preço-alvo cai de ~R$ 21 para '
+          'R$ 11,62/unit — quase pela metade — sem que uma única premissa operacional tenha mudado.'),
+    ('p', '• O MODELO NÃO REPRODUZ O PREÇO DE MERCADO, e não se deve forçá-lo a isso. Com as premissas padrão e a '
+          'NTN-B atualizada, o DCF dá cerca de R$ 11,62/unit contra uma cotação de R$ 32,62 (31-jul-2026) — um '
+          'gap de ~R$ 21/unit, o dobro do que era antes de corrigir a taxa. Mais revelador: a TIR real implícita '
+          'no preço atual cai para 4,75% a.a., ABAIXO dos 8,33% da própria NTN-B — quem compra ALUP11 hoje, pelo '
+          'fluxo deste modelo, aceita um retorno real menor que o do título público que deveria ser seu piso. As '
+          'linhas "Gap a explicar" na aba Valuation medem essa diferença. Ela é a pergunta de investimento, não '
+          'um defeito a ser calibrado: o mercado está pagando por renovação de concessões, leilões além de 2045, '
+          'sinergias ou um custo de capital menor do que os 12,83% reais assumidos aqui — ou o modelo real ainda '
+          'está com viés pessimista demais na base operacional. A leitura mais robusta do arquivo é a TIR real '
+          'implícita, não o preço-alvo — ela não depende de escolher um Ke.'),
     ('p', '• O MODELO FOI AFERIDO CONTRA TRÊS ÂNCORAS DIVULGADAS, e o resultado está na parte de baixo da aba '
           'Consolidado: EBITDA de 2026 a 3,5% do run-rate do 1T26, receita de geração e comercialização a 0,1% '
           'da implícita no trimestre, e pico de alavancagem de 3,5x em 2027 contra guidance de 3,9–4,0x em '

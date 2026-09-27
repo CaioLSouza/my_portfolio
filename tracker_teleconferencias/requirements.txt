@@ -1,0 +1,4 @@
+anthropic>=1.8
+pandas
+pydantic>=2
+pypdf

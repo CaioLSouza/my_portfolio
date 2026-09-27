@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+tracker_teleconferencias/transcricoes/*
+!tracker_teleconferencias/transcricoes/.gitkeep
